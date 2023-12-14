@@ -4,6 +4,9 @@ import Sidebar from './Sidebar';
 import Footer from './Footer';
 import Dashboard from './Dashboard'; // Assurez-vous que le chemin d'accès est correct
 
+
+
+
 const Index_Home = () => {
   return (
     <div className="flex flex-col min-h-screen">
