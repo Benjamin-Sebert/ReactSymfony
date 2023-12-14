@@ -3,14 +3,11 @@
 @tailwind utilities;
 
 
-html, body, #root{
+html, body, #Visu{
     height: 100%;
     margin: 0;
     overflow: hidden;
-  }
-
-  body{
-    background-color: black;
+    background-color: #2C2C2C;
   }
 .App{
   width: 100vw;

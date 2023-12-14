@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ArticleClassiqueVisualisation from './Article_Classique_Visualisation'; // Assurez-vous d'importer le composant
 
 const ArticleCreator = () => {
     const [article, setArticle] = useState({
@@ -79,37 +80,48 @@ const ArticleCreator = () => {
     };
 
     return (
-        <div className="container mx-auto p-4">
-            <input
-                type="text"
-                name="title"
-                placeholder="Titre de l'article"
-                value={article.title}
-                onChange={handleInputChange}
-                className="w-full px-3 py-2 mb-4 border rounded"
-            />
-            <textarea
-                name="summary"
-                placeholder="Résumé de l'article"
-                value={article.summary}
-                onChange={handleInputChange}
-                className="w-full px-3 py-2 mb-4 border rounded"
-                rows="4"
-            />
+        <div class="flex">
 
-            {article.blocks.map((block, index) => (
-                <div key={index}>
-                    {renderBlock(block, index)}
+        <div className="flex-1">
+            <div className="w-full">
+                <input
+                    type="text"
+                    name="title"
+                    placeholder="Titre de l'article"
+                    value={article.title}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 mb-4 border rounded"
+                />
+                <textarea
+                    name="summary"
+                    placeholder="Résumé de l'article"
+                    value={article.summary}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 mb-4 border rounded"
+                    rows="4"
+                />
+
+                {article.blocks.map((block, index) => (
+                    <div key={index}>
+                        {renderBlock(block, index)}
+                    </div>
+                ))}
+
+                <div className="flex space-x-4 mb-4">
+                    <button onClick={() => addBlock('title')} className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600">Ajouter Titre</button>
+                    <button onClick={() => addBlock('text')} className="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600">Ajouter Texte</button>
+                    <button onClick={() => addBlock('image')} className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600">Ajouter Image</button>
                 </div>
-            ))}
 
-            <div className="flex space-x-4 mb-4">
-                <button onClick={() => addBlock('title')} className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600">Ajouter Titre</button>
-                <button onClick={() => addBlock('text')} className="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600">Ajouter Texte</button>
-                <button onClick={() => addBlock('image')} className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600">Ajouter Image</button>
+                <button onClick={createArticle} className="w-full px-4 py-2 text-white bg-purple-500 rounded hover:bg-purple-600">Créer mon article</button>
+            </div>
             </div>
 
-            <button onClick={createArticle} className="w-full px-4 py-2 text-white bg-purple-500 rounded hover:bg-purple-600">Créer mon article</button>
+            <div class="flex-1">
+
+                <ArticleClassiqueVisualisation article={article} />
+
+            </div>
         </div>
     );
 };
