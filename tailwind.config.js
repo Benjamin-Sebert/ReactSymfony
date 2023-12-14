@@ -11,7 +11,8 @@ module.exports = {
         'custom-green': '#38FF9C',
         'custom-black': '#2C2C2C',
         'custom-blue': '#2559DA',
-        'custom-purple': '#7F00FF'
+        'custom-purple': '#7F00FF',
+        'custom-green-logo': '#9bf0db'
         // ... autres couleurs si nécessaire
       },
     },

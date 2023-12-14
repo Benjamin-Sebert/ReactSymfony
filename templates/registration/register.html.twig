@@ -3,33 +3,65 @@
 {% block title %}register.html.twig{% endblock %}
 
 {% block body %}
-    <div class="flex justify-center items-center h-screen bg-custom-black text-white">
+    <!-- Bouton "Home" en haut à gauche, plus gros (text-2xl) -->
+    <a href="{{ path('app_home') }}" class="absolute top-0 left-0 m-4 bg-custom-purple hover:bg-custom-green-logo text-white font-bold py-2 px-4 rounded text-2xl">Home</a>
+
+    <!-- Flèche de retour vers la page de connexion -->
+    <a href="{{ path('app_login') }}" class="absolute top-14 left-0 m-4 bg-custom-purple hover:bg-custom-green-logo text-white font-bold py-2 px-4 rounded text-2xl">&#8592;</a>
+
+    <style>
+        .text-color-transition {
+            transition: color 0.5s ease;
+        }
+
+        .bold-text {
+            font-weight: bold;
+        }
+    </style>
+
+    <div class="flex justify-center items-center h-screen bg-custom-black text-white flex-col">
+        <!-- Texte "Inscription" en gras et avec une transition de couleur -->
+        <h1 id="inscription" class="text-4xl mb-6 text-center animate-pulse text-color-transition {% if form_errors(registrationForm) %}text-custom-green-logo{% else %}text-custom-purple{% endif %} bold-text">Inscription</h1>
+
         <div class="w-full max-w-xs">
-            <a href="{{ path('app_home') }}" class="btn btn-primary">home</a>
-            
             {{ form_errors(registrationForm) }}
 
+            <!-- Formulaire d'inscription -->
             {{ form_start(registrationForm, {'class': 'bg-custom-black p-6 rounded-lg shadow-lg'}) }}
-                <div class="mb-4">
-                    {{ form_row(registrationForm.prenom, {'attr': {'class': 'bg-gray-200 border border-gray-200 rounded p-3 w-full focus:outline-none focus:border-custom-blue text-custom-blue'}}) }}
+                <div class="mb-4 text-center">
+                    {{ form_row(registrationForm.prenom, {'attr': {'class': 'bg-gray-200 border border-gray-200 rounded p-2 w-full focus:outline-none focus:border-custom-blue text-custom-blue'}}) }}
                 </div>
-                <div class="mb-4">
-                    {{ form_row(registrationForm.nom, {'attr': {'class': 'bg-gray-200 border border-gray-200 rounded p-3 w-full focus:outline-none focus:border-custom-blue text-custom-blue'}}) }}
+                <div class="mb-4 text-center">
+                    {{ form_row(registrationForm.nom, {'attr': {'class': 'bg-gray-200 border border-gray-200 rounded p-2 w-full focus:outline-none focus:border-custom-blue text-custom-blue'}}) }}
                 </div>
-                <div class="mb-4">
-                    {{ form_row(registrationForm.email, {'attr': {'class': 'bg-gray-200 border border-gray-200 rounded p-3 w-full focus:outline-none focus:border-custom-blue text-custom-blue'}}) }}
+                <div class="mb-4 text-center">
+                    {{ form_row(registrationForm.email, {'attr': {'class': 'bg-gray-200 border border-gray-200 rounded p-2 w-full focus:outline-none focus:border-custom-blue text-custom-blue'}}) }}
                 </div>
-                <div class="mb-4">
+                <div class="mb-4 text-center">
                     {{ form_row(registrationForm.password, {
                         'label': 'Password',
-                        'attr': {'class': 'bg-gray-200 border border-gray-200 rounded p-3 w-full focus:outline-none focus:border-custom-blue text-custom-blue'}
+                        'attr': {'class': 'bg-gray-200 border border-gray-200 rounded p-2 w-full focus:outline-none focus:border-custom-blue text-custom-blue'}
                     }) }}
                 </div>
-                <div class="mb-4">
-                    {{ form_row(registrationForm.agreeTerms, {'attr': {'class': 'mb-2'}}) }}
+                <div class="mb-4 text-center">
+                    <!-- Modifier le texte "Agree Terms" en "J'accepte les conditions" -->
+                    {{ form_row(registrationForm.agreeTerms, {'label': 'J\'accepte les conditions', 'attr': {'class': 'mb-2 w-full'}}) }}
                 </div>
-                <button type="submit" class="bg-custom-green hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full text-custom-blue">Register</button>
+                <!-- Modifier le texte du bouton "Register" en "S'inscrire" -->
+                <button type="submit" class="bg-custom-green-logo hover:bg-custom-purple text-white font-bold py-2 px-4 rounded w-full text-custom-blue">S'inscrire</button>
             {{ form_end(registrationForm) }}
         </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var inscription = document.getElementById("inscription");
+            if (inscription) {
+                setInterval(function() {
+                    inscription.classList.toggle("text-custom-green-logo");
+                    inscription.classList.toggle("text-custom-purple");
+                }, 1000);
+            }
+        });
+    </script>
 {% endblock %}

@@ -1,17 +1,21 @@
-{# templates/security/login.html.twig #}
-
 {% extends 'base.html.twig' %}
 
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
- <div class="flex justify-center items-center h-screen flex-col">
-        <h1 class="text-custom-green text-9xl font-bold mb-6">Bienvenue sur stare-it</h1>
-       <div class="flex justify-center items-center h-screen">
+ 
+       <div class="flex justify-center items-center h-screen flex-col">
+       {# <img src="./assets/images_cms/StareIt.png" alt="Your Logo" class="mb-4 mx-auto"/> #}
+       
+       
         <div class="w-full max-w-xs">
             <form class="bg-custom-black shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                <img src="{{ asset('images_cms/stare.png') }}" alt="Your Logo" class="mx-auto max-width logo-animation"/>
+                <h1 class="text-custom-green text-7xl font-bold mb-6" id="animated-title"> stare-it</h1>
+                
+                
                 <div class="mb-4">
-                    <label class="block text-custom-green text-sm font-bold mb-2" for="email">
+                    <label class="block text-custom-green-logo text-sm font-bold mb-2" for="email">
                         Email
                     </label>
                     <input
@@ -24,7 +28,7 @@
                     />
                 </div>
                 <div class="mb-6">
-                    <label class="block text-custom-green text-sm font-bold mb-2" for="password">
+                    <label class="block text-custom-green-logo text-sm font-bold mb-2" for="password">
                         Password
                     </label>
                     <input
@@ -38,7 +42,7 @@
                 </div>
                 <div class="flex items-center justify-between">
                     <button
-                        class="bg-custom-green hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        class="bg-custom-green-logo hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                         type="submit"
                     >
                         se connecter
@@ -53,4 +57,60 @@
             </form>
         </div>
     </div>
+
+      <style>
+
+        .max-width {
+        max-width: 50%;
+        }
+         {# .logo-animation {
+            animation: zoomIn 1s ease-in-out;
+        } #}
+
+        #animated-title {
+            display: inline-block;
+            background: linear-gradient(45deg,#9bf0db,#7F00FF, #38FF9C);
+            -webkit-background-clip: text;
+            color: transparent;
+            opacity: 0;
+            animation: gradientFadeIn 2s ease-in-out forwards;
+        }
+          {# @keyframes zoomIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        } #}
+
+        @keyframes gradientFadeIn {
+            100% {
+                opacity: 0;
+            }
+            10% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 2;
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            animateTitle();
+        });
+
+        function animateTitle() {
+            const title = document.getElementById("animated-title");
+            const text = title.innerText;
+            title.innerText = "";
+
+            for (let i = 0; i < text.length; i++) {
+                setTimeout(() => {
+                    title.innerText += text[i];
+                }, i * 200);
+            }
+        }
+    </script>
 {% endblock %}
