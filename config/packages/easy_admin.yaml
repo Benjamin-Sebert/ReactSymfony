@@ -1,0 +1,33 @@
+# easy_admin.yaml
+
+easy_admin:
+    entities:
+        User:
+            class: App\Entity\User
+            list:
+                fields:
+                    - id
+                    - email
+                    - nom
+                    - prenom
+                    - roles
+            form:
+                fields:
+                    - email
+                    - nom
+                    - prenom
+                    - roles
+                    - { property: 'password', type: 'password' } # Ajoutez ce champ si vous voulez pouvoir définir le mot de passe dans EasyAdmin
+            edit:
+                fields:
+                    - email
+                    - nom
+                    - prenom
+                    - roles
+            new:
+                fields:
+                    - email
+                    - nom
+                    - prenom
+                    - roles
+                    - { property: 'password', type: 'password' } # Ajoutez ce champ si vous voulez pouvoir définir le mot de passe dans EasyAdmin

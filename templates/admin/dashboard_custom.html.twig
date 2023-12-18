@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de Bord Personnalisé{% endblock %}
+
+{% block body %}
+    <!-- Sidebar -->
+    
+        <div {{ react_component('Sidebar') }}></div>
+
+    <!-- Content -->
+    <div class="ml-64 p-6">
+        <style>
+            .text-color-transition {
+                transition: color 0.5s ease;
+            }
+
+            .bold-text {
+                font-weight: bold;
+            }
+
+            .custom-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+                color: #fff;
+            }
+
+            .custom-table th, .custom-table td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+
+            .custom-table th {
+                background-color: #4CAF50;
+                color: white;
+            }
+        </style>
+
+        <!-- Titre personnalisé avec transition de couleur -->
+        <h1 id="dashboard" class="text-4xl mb-6 mt-16 animate-pulse text-color-transition {% if users %}text-custom-green-logo{% else %}text-custom-purple{% endif %} bold-text">Tableau de Bord Personnalisé</h1>
+
+
+        <div class="w-full max-w-xs">
+            {% if users %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Email</th>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Rôles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.nom }}</td>
+                                <td>{{ user.prenom }}</td>
+                                <td>{{ user.roles|join(', ') }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Aucun utilisateur trouvé.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var dashboard = document.getElementById("dashboard");
+            if (dashboard) {
+                setInterval(function() {
+                    dashboard.classList.toggle("text-custom-green-logo");
+                    dashboard.classList.toggle("text-custom-purple");
+                }, 1000);
+            }
+        });
+    </script>
+{% endblock %}
