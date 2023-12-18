@@ -32,7 +32,7 @@ const Sidebar = () => {
                 <a href="/" className="text-white block py-2 px-4">Home</a>
                 <a href="/about" className="text-white block py-2 px-4">Thèmes</a>
                 <a href="/contact" className="text-white block py-2 px-4">Contact</a>
-                <a href="/contact" className="text-white block py-2 px-4">Deconnexion</a>
+                <a href="/logout" className="text-white block py-2 px-4">Deconnexion</a>
 
                 {/* Ajoutez d'autres liens si nécessaire */}
             </div>
