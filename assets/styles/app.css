@@ -2,11 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
 html, body, #Visu{
     height: 100%;
     margin: 0;
-    overflow: hidden;
     background-color: #2C2C2C;
   }
 .App{

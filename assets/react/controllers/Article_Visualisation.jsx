@@ -3,7 +3,7 @@ import Csv_Converter from './Csv_Converter';
 
 const ArticleClassiqueVisualisation = ({ article }) => {
     return (
-        <div className="w-full ml-4 border p-4 rounded">
+        <div className="w-full ml-4 border bg-white p-4 rounded">
             <h2 className="text-2xl font-bold">{article.title}</h2>
             <p className="text-gray-600 mb-4">{article.summary}</p>
 
