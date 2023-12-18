@@ -55,8 +55,8 @@ class AppCustomAuthenticator extends AbstractLoginFormAuthenticator
 
     protected function getLoginUrl(Request $request): string
     {
-        // return $this->urlGenerator->generate(self::LOGIN_ROUTE);
-        return new RedirectResponse($this->urlGenerator->generate('app_login'));
+        return $this->urlGenerator->generate(self::LOGIN_ROUTE);
+        // return new RedirectResponse($this->urlGenerator->generate('app_login'));
 
     }
 }
