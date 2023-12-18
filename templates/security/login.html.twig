@@ -9,7 +9,7 @@
        
        
         <div class="w-full max-w-xs">
-            <form class="bg-custom-black shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <form class="bg-custom-gray shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <img src="{{ asset('images_cms/stare.png') }}" alt="Your Logo" class="mx-auto max-width logo-animation"/>
                 <h1 class="text-custom-green text-7xl font-bold mb-6" id="animated-title"> stare-it</h1>
                 
@@ -41,24 +41,72 @@
                     />
                 </div>
                 <div class="flex items-center justify-between">
-                    <button
-                        class="bg-custom-green-logo hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                        type="submit"
-                    >
-                        se connecter
+                 <div class="btn-two">
+                    <button class="bg-custom-green-logo hover:bg-custom-light-purple text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                        Se connecter
                     </button>
+                </div>
+
                     <button
                         class="bg-custom-purple hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                         type="button"
                             >
                         s'inscrire
                     </button>
+
+                
                 </div>
             </form>
         </div>
     </div>
 
       <style>
+
+        .btn-two {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-two::before, .btn-two::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    transition: all 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.btn-two:hover::after {
+    animation-name: rotatecw;
+    animation-duration: 2s;
+}
+
+.btn-two:hover::before {
+    animation-name: rotateccw; 
+    animation-duration: 3s;
+}
+
+.btn-two:hover::after, .btn-two:hover::before {
+    left: 96px;
+    width: 64px;
+  
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes rotatecw {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+
+@keyframes rotateccw {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(-360deg);}
+}
+
 
         .max-width {
         max-width: 50%;
