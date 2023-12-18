@@ -9,56 +9,121 @@
        
        
         <div class="w-full max-w-xs">
-            <form class="bg-custom-black shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <form method="post" class="bg-custom-gray shadow-md rounded px-8 pt-6 pb-8 mb-4">
+
                 <img src="{{ asset('images_cms/stare.png') }}" alt="Your Logo" class="mx-auto max-width logo-animation"/>
                 <h1 class="text-custom-green text-7xl font-bold mb-6" id="animated-title"> stare-it</h1>
                 
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                {# {% if app.user %}
+                    <div class="mb-3">
+                        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                    </div>
+                {% endif %} #}
+
                 
                 <div class="mb-4">
-                    <label class="block text-custom-green-logo text-sm font-bold mb-2" for="email">
-                        Email
-                    </label>
-                    <input
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="email"
+                     <label class="block text-custom-green-logo text-sm font-bold mb-2" for="inputEmail">Email</label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="inputEmail"
+			            name="email" 
+			            autocomplete="email"
+			            class="form-control"
                         type="email"
                         placeholder="Email"
-                        value="{{ email ?? '' }}"
+                        value="{{ last_username  }}"
                         oninput="email = this.value"
-                    />
+                    required autofocus>
                 </div>
                 <div class="mb-6">
-                    <label class="block text-custom-green-logo text-sm font-bold mb-2" for="password">
+                     <label class="block text-custom-green-logo text-sm font-bold mb-2" for="inputPassword">
                         Password
                     </label>
                     <input
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="password"
+                        id="inputPassword"
+			            name="password"
+			            class="form-control"
                         type="password"
+			            autocomplete="current-password"
                         placeholder="Password"
                         value="{{ password ?? '' }}"
                         oninput="password = this.value"
-                    />
+                    required>
+
+                    <input type="hidden" name="_csrf_token"
+                        value="{{ csrf_token('authenticate') }}"
+                    >
                 </div>
                 <div class="flex items-center justify-between">
-                    <button
-                        class="bg-custom-green-logo hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                        type="submit"
-                    >
-                        se connecter
-                    </button>
-                    <button
-                        class="bg-custom-purple hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                        type="button"
-                            >
-                        s'inscrire
-                    </button>
+                    <div class="btn-two">
+                        <button class="bg-custom-green-logo hover:bg-custom-light-purple text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                            Se connecter
+                        </button>
+                    </div>
+                
+                    <div class="btn-two">
+                        <button type="button" class="bg-custom-purple hover:bg-custom-green-logo text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" >
+                           <a href="{{ path('app_register') }}"> S'inscrire</a>
+                            
+                            
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
 
       <style>
+
+        .btn-two {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-two::before, .btn-two::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    transition: all 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.btn-two:hover::after {
+    animation-name: rotatecw;
+    animation-duration: 2s;
+}
+
+.btn-two:hover::before {
+    animation-name: rotateccw; 
+    animation-duration: 3s;
+}
+
+.btn-two:hover::after, .btn-two:hover::before {
+    left: 96px;
+    width: 64px;
+  
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes rotatecw {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+
+@keyframes rotateccw {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(-360deg);}
+}
+
 
         .max-width {
         max-width: 50%;
