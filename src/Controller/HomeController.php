@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use App\Entity\ContactMessage;
+
 class HomeController extends AbstractController
 {
     #[Route('/home', name: 'app_home')]
@@ -15,5 +17,7 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
+
+   
 
 }
