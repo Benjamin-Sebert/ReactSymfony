@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ArticleClassiqueVisualisation from './Article_Visualisation'; // Assurez-vous d'importer le composant
+import ArticleGraphVisualisation from './Article_Graph_Visualisation'; // Assurez-vous d'importer le composant
 
 const ArticleCreator = () => {
     const [article, setArticle] = useState({
@@ -158,7 +158,7 @@ const ArticleCreator = () => {
     
                     <button onClick={createArticle} className="w-full px-4 py-2 text-white rounded bg-custom-green hover:bg-green-700 transition duration-300 ease-in-out">Créer mon article</button>
                 </div>
-                <ArticleClassiqueVisualisation article={article} />
+                <ArticleGraphVisualisation article={article} />
             </div>
         </div>
     );
