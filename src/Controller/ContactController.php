@@ -9,35 +9,51 @@ use App\Entity\ContactMessage;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\ContactMessageType;
+use App\Controller\User;
+
+
+use Symfony\Component\Security\Core\Security;
 
 class ContactController extends AbstractController
 {
-    #[Route('/contact', name: 'app_contact')]
-    public function contact(Request $request, EntityManagerInterface $entityManager): Response
-        {
-            $contactMessage = new ContactMessage();
-            $form = $this->createForm(ContactMessageType::class, $contactMessage);
-            $form->handleRequest($request);
-    
-            if ($form->isSubmitted() && $form->isValid()) {
-                // Enregistrez le message dans la base de données
-                $entityManager->persist($contactMessage);
-                $entityManager->flush();
-    
-                // Ajoutez un message Flash pour confirmer l'envoi du message
-                $this->addFlash('success', 'Votre message a été envoyé avec succès.');
-    
-                // Redirigez l'utilisateur ou faites ce que vous voulez
-                return $this->redirectToRoute('app_home');
-            }
-    
-            return $this->render('contact/index.html.twig', [
-                'form' => $form->createView(),
-            ]);
-        }
-    }
-    //     return $this->render('home/contactus.html.twig', [
-    //         'controller_name' => 'ContactController',
-    //     ]);
-    // }
 
+    
+
+    #[Route('/contact', name: 'app_contact')]
+   
+    public function index(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $message = new ContactMessage();
+        $form = $this->createForm(ContactMessageType::class, $message);
+
+         
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Récupérer l'utilisateur connecté
+            $user = $this->getUser();
+
+            
+            // $message->setMessage($user);
+
+            // Enregistrer le message en base de données
+            // $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($message);
+            $entityManager->flush();
+
+            // Rediriger vers la page de remerciement
+            return $this->redirectToRoute('app_merci');
+        }
+
+        return $this->render('contact/index.html.twig', [
+            'registrationForm' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/contact/merci', name: 'app_merci')]
+public function thankYou(): Response
+{
+    return $this->render('contact/thank_you.html.twig');
+}
+}

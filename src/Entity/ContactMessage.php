@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
+
 #[ORM\Entity(repositoryClass: ContactMessageRepository::class)]
 class ContactMessage
 {
@@ -41,6 +42,10 @@ class ContactMessage
      */
     #[ORM\Column(type: Types::TEXT)]
     private ?string $message = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    // private ?User $relation = null;
 
     public function getId(): ?int
     {
@@ -94,4 +99,16 @@ class ContactMessage
 
         return $this;
     }
+
+    // public function getRelation(): ?User
+    // {
+    //     return $this->relation;
+    // }
+
+    // public function setRelation(?User $relation): static
+    // {
+    //     $this->relation = $relation;
+
+    //     return $this;
+    // }
 }

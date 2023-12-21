@@ -1,74 +1,62 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Contact Us{% endblock %}
+{% block title %}contact.html.twig{% endblock %}
 
 {% block body %}
-    <div class="flex items-center justify-center min-h-screen bg-gray-700">
-        <div class="text-center">
-            <img src="{{ asset('images_cms/stare.png') }}" alt="Your Logo" class="mx-auto max-width logo-animation mb-6" />
+   
+    <style>
+        .text-color-transition {
+            transition: color 0.5s ease;
+        }
 
-            <h1 class="text-custom-green text-7xl font-bold mb-6" id="animated-title">stare-it</h1>
+        .bold-text {
+            font-weight: bold;
+        }
+    </style>
+     <!-- Bouton "Home" en haut à gauche, plus gros (text-2xl) -->
+    <a href="{{ path('app_articlegraph') }}" class="absolute top-0 left-0 m-4 bg-custom-purple hover:bg-custom-green-logo text-white font-bold py-2 px-4 rounded text-2xl">Home</a>
 
-            <div {{ react_component('Contactus') }}></div>
+    <!-- Flèche de retour vers la page de connexion -->
+    {# <a href="{{ path('app_login') }}" class="absolute top-14 left-0 m-4 bg-custom-purple hover:bg-custom-green-logo text-white font-bold py-2 px-4 rounded text-2xl">&#8592;</a> #}
+
+    <div class="flex justify-center items-center h-screen bg-custom-black text-white flex-col">
+        <!-- Texte "Inscription" en gras et avec une transition de couleur -->
+        <h1 id="inscription" class="text-4xl mb-6 text-center animate-pulse text-color-transition {% if form_errors(registrationForm) %}text-custom-green-logo{% else %}text-custom-purple{% endif %} bold-text">Contact</h1>
+
+        <div class="w-full max-w-xs">
+            {{ form_errors(registrationForm) }}
+
+            <!-- Formulaire d'inscription -->
+            {{ form_start(registrationForm, {'class': 'bg-custom-black p-6 rounded-lg shadow-lg'}) }}
+                <div class="mb-4 text-center">
+                    {{ form_row(registrationForm.prenom, {'attr': {'class': 'bg-gray-200 border border-gray-200 rounded p-2 w-full focus:outline-none focus:border-custom-blue text-custom-blue'}}) }}
+                </div>
+                <div class="mb-4 text-center">
+                    {{ form_row(registrationForm.nom, {'attr': {'class': 'bg-gray-200 border border-gray-200 rounded p-2 w-full focus:outline-none focus:border-custom-blue text-custom-blue'}}) }}
+                </div>
+                <div class="mb-4 text-center">
+                    {{ form_row(registrationForm.email, {'attr': {'class': 'bg-gray-200 border border-gray-200 rounded p-2 w-full focus:outline-none focus:border-custom-blue text-custom-blue'}}) }}
+                </div>
+
+                 <div class="mb-4 text-center">
+                    {{ form_row(registrationForm.message, {'attr': {'class': 'bg-gray-200 border border-gray-200 rounded p-2 w-full focus:outline-none focus:border-custom-blue text-custom-blue'}}) }}
+                </div>
+               
+                
+                <button type="submit" class="bg-custom-green-logo hover:bg-custom-purple text-white font-bold py-2 px-4 rounded w-full text-custom-blue">Envoyer</button>
+            {{ form_end(registrationForm) }}
         </div>
     </div>
 
-    <style>
-        /* Vos styles personnalisés peuvent être ajoutés ici si nécessaire */
-        .logo-animation {
-            animation: zoomIn 1s ease-in-out;
-        }
-
-        .max-width {
-            max-width: 10%;
-        }
-
-        #animated-title {
-            display: inline-block;
-            background: linear-gradient(45deg, #9bf0db, #7F00FF, #38FF9C);
-            -webkit-background-clip: text;
-            color: transparent;
-            opacity: 0;
-            animation: gradientFadeIn 2s ease-in-out forwards;
-        }
-
-        @keyframes zoomIn {
-            from {
-                transform: scale(0);
-            }
-            to {
-                transform: scale(1);
-            }
-        }
-
-        @keyframes gradientFadeIn {
-            100% {
-                opacity: 0;
-            }
-            10% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 2;
-            }
-        }
-    </style>
-
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            animateTitle();
-        });
-
-        function animateTitle() {
-            const title = document.getElementById("animated-title");
-            const text = title.innerText;
-            title.innerText = "";
-
-            for (let i = 0; i < text.length; i++) {
-                setTimeout(() => {
-                    title.innerText += text[i];
-                }, i * 200);
+        document.addEventListener("DOMContentLoaded", function() {
+            var Envoyer = document.getElementById("Envoyer");
+            if (Envoyer) {
+                setInterval(function() {
+                    Envoyer.classList.toggle("text-custom-green-logo");
+                    Envoyer.classList.toggle("text-custom-purple");
+                }, 1000);
             }
-        }
+        });
     </script>
 {% endblock %}

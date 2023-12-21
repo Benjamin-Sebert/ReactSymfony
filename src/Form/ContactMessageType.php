@@ -5,6 +5,7 @@
 namespace App\Form;
 
 use App\Entity\ContactMessage;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -41,5 +42,16 @@ class ContactMessageType extends AbstractType
             'data_class' => ContactMessage::class,
         ]);
     }
+
+    //   public function configureOptions(OptionsResolver $resolver): void
+    // {
+    //     $resolver->setDefaults([
+    //         'data_class' => User::class,
+    //     ]);
+    // }
+
 }
 
+
+
+  

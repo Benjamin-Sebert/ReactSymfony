@@ -1,6 +1,4 @@
-// ContactUs.jsx
-
-import React from 'react';
+ import React from 'react';
 
 const Contactus = () => {
   return (
@@ -12,7 +10,7 @@ const Contactus = () => {
           <input type="text" className="border rounded w-full py-2 px-3" />
         </div>
         <div className="mb-4">
-          <label className="block text-sm font-semibold text-white">Prénom</label>
+          <label className="block text-sm font-semibold text-white">Prenom</label>
           <input type="text" className="border rounded w-full py-2 px-3" />
         </div>
         <div className="mb-4">
@@ -32,3 +30,4 @@ const Contactus = () => {
 };
 
 export default Contactus;
+
