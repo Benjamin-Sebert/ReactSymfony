@@ -8,6 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use Symfony\UX\Chartjs\Model\Chart;
 
+use App\Entity\ContactMessage;
+
 class HomeController extends AbstractController
 {
     #[Route('/home', name: 'app_home')]
