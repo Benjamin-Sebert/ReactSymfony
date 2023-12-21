@@ -4,8 +4,7 @@
 
 {% block body %}
     <!-- Sidebar -->
-    
-        <div {{ react_component('Sidebar') }}></div>
+    <div {{ react_component('Sidebar') }}></div>
 
     <!-- Content -->
     <div class="ml-64 p-6">
@@ -22,7 +21,7 @@
                 width: 100%;
                 border-collapse: collapse;
                 margin-top: 20px;
-                color: #fff;
+                color: #ffblack;
             }
 
             .custom-table th, .custom-table td {
@@ -33,20 +32,21 @@
 
             .custom-table th {
                 background-color: #4CAF50;
-                color: white;
+                color: black;
             }
         </style>
 
         <!-- Titre personnalisé avec transition de couleur -->
         <h1 id="dashboard" class="text-4xl mb-6 mt-16 animate-pulse text-color-transition {% if users %}text-custom-green-logo{% else %}text-custom-purple{% endif %} bold-text">Tableau de Bord Personnalisé</h1>
 
-
         <div class="w-full max-w-xs">
-            {% if users %}
+           {% set allUsers = users | merge(admins) %}
+
+            {% if allUsers %}
                 <table class="custom-table">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            {# <th>ID</th> #}
                             <th>Email</th>
                             <th>Nom</th>
                             <th>Prénom</th>
@@ -54,9 +54,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for user in users %}
+                        {% for user in allUsers %}
                             <tr>
-                                <td>{{ user.id }}</td>
+                                {# <td>{{ user.id }}</td> #}
                                 <td>{{ user.email }}</td>
                                 <td>{{ user.nom }}</td>
                                 <td>{{ user.prenom }}</td>
@@ -68,6 +68,7 @@
             {% else %}
                 <p>Aucun utilisateur trouvé.</p>
             {% endif %}
+
         </div>
     </div>
 

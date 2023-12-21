@@ -11,8 +11,13 @@ html, body, #Visu{
   width: 100vw;
   height: 100vh;
 }
-
-
+.break-words {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+aside{
+  
+}
 
 
 

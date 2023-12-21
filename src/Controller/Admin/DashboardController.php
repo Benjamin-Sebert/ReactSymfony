@@ -4,6 +4,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use App\Entity\Admin;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,9 +24,11 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
     {
         $users = $this->entityManager->getRepository(User::class)->findAll();
+        $admins = $this->entityManager->getRepository(Admin::class)->findAll();
 
         return $this->render('admin/dashboard_custom.html.twig', [
             'users' => $users,
+            'admins' => $admins,
         ]);
     }
 
