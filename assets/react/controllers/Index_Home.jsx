@@ -1,6 +1,6 @@
 // assets/react/App.js
 import React from 'react';
-import Sidebar from './Sidebar';
+import Navbar from './Navbar';
 import Footer from './Footer';
 import Dashboard from './Dashboard'; 
 
@@ -9,7 +9,7 @@ import Dashboard from './Dashboard';
 const Index_Home = () => {
   return (
     <div className="flex flex-col">
-      <Sidebar />
+      <Navbar />
       <div className="bg-white">
       <Dashboard />
      
