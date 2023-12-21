@@ -118,44 +118,51 @@ const ArticleCreator = () => {
     };
 
     return (
-        <div className="w-full mx-auto p-4 bg-grey shadow-lg rounded-lg">
-            <div className="container mx-auto p-4 flex">
-                <div className="w-1/2">
+        <div className="max-w-full mx-auto p-4 bg-grey-200 shadow-md rounded-lg">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label htmlFor="title" className="block text-sm font-medium text-gray-700">Titre de l'article</label>
                     <input
+                        id="title"
                         type="text"
                         name="title"
-                        placeholder="Titre de l'article"
+                        placeholder="Entrez le titre ici"
                         value={article.title}
                         onChange={handleInputChange}
-                        className="w-full px-3 py-2 mb-4 border rounded"
+                        className="mt-1 block w-full px-3 py-2 mb-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-custom-purple focus:border-custom-purple"
                     />
+    
+                    <label htmlFor="summary" className="block text-sm font-medium text-gray-700">Résumé de l'article</label>
                     <textarea
+                        id="summary"
                         name="summary"
-                        placeholder="Résumé de l'article"
+                        placeholder="Entrez le résumé ici"
                         value={article.summary}
                         onChange={handleInputChange}
-                        className="w-full px-3 py-2 mb-4 border rounded"
+                        className="mt-1 block w-full px-3 py-2 mb-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-custom-purple focus:border-custom-purple"
                         rows="4"
                     />
-
+    
                     {article.blocks.map((block, index) => (
-                        <div key={index}>
+                        <div key={index} className="mb-4">
                             {renderBlock(block, index)}
                         </div>
                     ))}
+    
                     <div className="flex space-x-4 mb-4">
-                        <button onClick={() => addBlock('title')} className="px-4 py-2 text-white rounded bg-custom-purple">+ Titre</button>
-                        <button onClick={() => addBlock('text')} className="px-4 py-2 text-white rounded bg-custom-purple">+ Texte</button>
-                        <button onClick={() => addBlock('image')} className="px-4 py-2 text-white rounded bg-custom-purple">+ Image</button>
-                        <button onClick={() => addBlock('csv')} className="px-4 py-2 text-white rounded bg-custom-purple">+ Graph</button>
+                        <button onClick={() => addBlock('title')} className="px-4 py-2 text-white rounded bg-custom-purple hover:bg-purple-700 transition duration-300 ease-in-out">+ Titre</button>
+                        <button onClick={() => addBlock('text')} className="px-4 py-2 text-white rounded bg-custom-purple hover:bg-purple-700 transition duration-300 ease-in-out">+ Texte</button>
+                        <button onClick={() => addBlock('image')} className="px-4 py-2 text-white rounded bg-custom-purple hover:bg-purple-700 transition duration-300 ease-in-out">+ Image</button>
+                        <button onClick={() => addBlock('csv')} className="px-4 py-2 text-white rounded bg-custom-purple hover:bg-purple-700 transition duration-300 ease-in-out">+ Graph</button>
                     </div>
-
-                    <button onClick={createArticle} className="w-full px-4 py-2 text-custom-black rounded bg-custom-green">Créer mon article</button>
+    
+                    <button onClick={createArticle} className="w-full px-4 py-2 text-white rounded bg-custom-green hover:bg-green-700 transition duration-300 ease-in-out">Créer mon article</button>
                 </div>
                 <ArticleClassiqueVisualisation article={article} />
             </div>
         </div>
     );
+    
 };
 
 export default ArticleCreator;

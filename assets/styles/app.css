@@ -5,7 +5,7 @@
 html, body, #Visu{
     height: 100%;
     margin: 0;
-    background-color: #2C2C2C;
+    background-color: white;
   }
 .App{
   width: 100vw;

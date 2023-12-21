@@ -17,4 +17,12 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
+
+    #[Route('/ArticleGraph', name: 'app_ArticleGraph')]
+    public function ArticleGraph(): Response
+    {
+        return $this->render('home/ArticleGraph.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
 }

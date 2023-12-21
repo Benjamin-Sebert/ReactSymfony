@@ -82,39 +82,39 @@ const ArticleCreator = () => {
     return (
         <div class="flex">
 
-        <div className="flex-1">
-            <div className="w-full">
-                <input
-                    type="text"
-                    name="title"
-                    placeholder="Titre de l'article"
-                    value={article.title}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2 mb-4 border rounded"
-                />
-                <textarea
-                    name="summary"
-                    placeholder="Résumé de l'article"
-                    value={article.summary}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2 mb-4 border rounded"
-                    rows="4"
-                />
+            <div className="flex-1">
+                <div className="w-full">
+                    <input
+                        type="text"
+                        name="title"
+                        placeholder="Titre de l'article"
+                        value={article.title}
+                        onChange={handleInputChange}
+                        className="w-full px-3 py-2 mb-4 border rounded"
+                    />
+                    <textarea
+                        name="summary"
+                        placeholder="Résumé de l'article"
+                        value={article.summary}
+                        onChange={handleInputChange}
+                        className="w-full px-3 py-2 mb-4 border rounded"
+                        rows="4"
+                    />
 
-                {article.blocks.map((block, index) => (
-                    <div key={index}>
-                        {renderBlock(block, index)}
+                    {article.blocks.map((block, index) => (
+                        <div key={index}>
+                            {renderBlock(block, index)}
+                        </div>
+                    ))}
+
+                    <div className="flex space-x-4 mb-4">
+                        <button onClick={() => addBlock('title')} className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600">Ajouter Titre</button>
+                        <button onClick={() => addBlock('text')} className="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600">Ajouter Texte</button>
+                        <button onClick={() => addBlock('image')} className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600">Ajouter Image</button>
                     </div>
-                ))}
 
-                <div className="flex space-x-4 mb-4">
-                    <button onClick={() => addBlock('title')} className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600">Ajouter Titre</button>
-                    <button onClick={() => addBlock('text')} className="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600">Ajouter Texte</button>
-                    <button onClick={() => addBlock('image')} className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600">Ajouter Image</button>
+                    <button onClick={createArticle} className="w-full px-4 py-2 text-white bg-purple-500 rounded hover:bg-purple-600">Créer mon article</button>
                 </div>
-
-                <button onClick={createArticle} className="w-full px-4 py-2 text-white bg-purple-500 rounded hover:bg-purple-600">Créer mon article</button>
-            </div>
             </div>
 
             <div class="flex-1">

@@ -1,5 +1,5 @@
 import React from 'react';
-import Csv_Converter from './Csv_Converter';
+import GraphAffichage from './GraphAffichage';
 
 const ArticleClassiqueVisualisation = ({ article }) => {
     return (
@@ -10,16 +10,16 @@ const ArticleClassiqueVisualisation = ({ article }) => {
             {article.blocks.map((block, index) => (
                 <div key={index} className="mb-4">
                     {block.type === 'title' && (
-                        <h3 className="text-xl font-semibold text-white">{block.content}</h3>
+                        <h3 className="text-xl font-semibold text-black">{block.content}</h3>
                     )}
                     {block.type === 'text' && (
-                        <p className="mb-2 text-white">{block.content}</p>
+                        <p className="mb-2 text-black">{block.content}</p>
                     )}
                     {block.type === 'image' && (
                         <img src={block.content} alt="Image" className="max-w-full" />
                     )}
                     {block.type === 'csv' && (
-                        <Csv_Converter onJsonDataChange={block.content} />
+                        <GraphAffichage onJsonDataChange={block.content} />
                     )}
                 </div>
             ))}

@@ -1,6 +1,6 @@
 // Dashboard.jsx
 import React, { useState } from 'react';
-import Article_Creation from './Article_Visualisation_Creation'; // Assurez-vous que le chemin d'accès est correct
+import Article_Visualisation_Creation from './Article_Visualisation_Creation';
 
 const Dashboard = () => {
     const [articles, setArticles] = useState([]);
@@ -16,9 +16,9 @@ const Dashboard = () => {
     };
 
     return (
-        <div className="p-40 w-full" id="Visu">
+        <div className="gap-8 mt-6" id="Visu">
             
-            <Article_Creation/>
+            <Article_Visualisation_Creation/>
             
         </div>
 
