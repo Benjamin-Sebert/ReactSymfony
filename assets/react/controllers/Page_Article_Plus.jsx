@@ -8,10 +8,9 @@ const avcreation = () => {
       <aside className="w-full md:w-2/12 bg-blue-600 p-4 shadow-xl md:shadow-none">
         <ul className="space-y-2 text-white">
           <li><a href="#" className="block font-semibold hover:underline">Accueil</a></li>
-          <li><a href="#" className="block font-semibold hover:underline">Backpacks</a></li>
-          <li><a href="#" className="block font-semibold hover:underline">Travel Bags</a></li>
-          <li><a href="#" className="block font-semibold hover:underline">Hip Bags</a></li>
-          <li><a href="#" className="block font-semibold hover:underline">Laptop Sleeves</a></li>
+          <li><a href="/theme" className="block font-semibold hover:underline">Theme</a></li>
+          <li><a href="/contact" className="block font-semibold hover:underline">Contact</a></li>
+
         </ul>
       </aside>
 
