@@ -11,49 +11,39 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Form\ContactMessageType;
 use App\Controller\User;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 use Symfony\Component\Security\Core\Security;
 
 class ContactController extends AbstractController
 {
-
-    
-
-    #[Route('/contact', name: 'app_contact')]
-   
-    public function index(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/contact', name: 'app_contact_1', methods: ['GET'])]
+    public function contact()
     {
-        $message = new ContactMessage();
-        $form = $this->createForm(ContactMessageType::class, $message);
+        return $this->render('contact/index.html.twig');
+    }
 
-         
+    #[Route('/contact', name: 'app_contact', methods: ['POST'])]
+    public function contact_post(Request $request, EntityManagerInterface $entityManager): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
 
-        $form->handleRequest($request);
+        $contactMessage = new ContactMessage();
+        $contactMessage->setNom($data['nom'] ?? '');  // Assurez-vous que $data['nom'] n'est pas null
+        $contactMessage->setPrenom($data['prenom'] ?? '');
+        $contactMessage->setEmail($data['email'] ?? '');
+        $contactMessage->setMessage($data['message'] ?? '');
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Récupérer l'utilisateur connecté
-            $user = $this->getUser();
+        $entityManager->persist($contactMessage);
+        $entityManager->flush();
 
-            
-            // $message->setMessage($user);
-
-            // Enregistrer le message en base de données
-            // $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($message);
-            $entityManager->flush();
-
-            // Rediriger vers la page de remerciement
-            return $this->redirectToRoute('app_merci');
-        }
-
-        return $this->render('contact/index.html.twig', [
-            'registrationForm' => $form->createView(),
-        ]);
+        return new JsonResponse(['message' => 'Form submitted successfully!'], JsonResponse::HTTP_OK);
     }
 
     #[Route('/contact/merci', name: 'app_merci')]
-public function thankYou(): Response
-{
-    return $this->render('contact/thank_you.html.twig');
-}
+    public function thankYou(): Response
+    {
+        return $this->render('contact/thank_you.html.twig');
+    }
 }

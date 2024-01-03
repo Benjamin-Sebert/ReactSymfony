@@ -1,62 +1,32 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %}
 
-{% block title %}contact.html.twig{% endblock %}
+{% block title %}home.html.twig{% endblock %}
 
 {% block body %}
-   
-    <style>
-        .text-color-transition {
-            transition: color 0.5s ease;
-        }
+                <div {{ react_component('Page_Contact') }}></div>
+{% endblock %} #}
 
-        .bold-text {
-            font-weight: bold;
-        }
-    </style>
-     <!-- Bouton "Home" en haut à gauche, plus gros (text-2xl) -->
-    <a href="{{ path('app_articlegraph') }}" class="absolute top-0 left-0 m-4 bg-custom-purple hover:bg-custom-green-logo text-white font-bold py-2 px-4 rounded text-2xl">Home</a>
+{% extends 'base.html.twig' %} 
+{% block title %}Contact{% endblock %}
 
-    <!-- Flèche de retour vers la page de connexion -->
-    {# <a href="{{ path('app_login') }}" class="absolute top-14 left-0 m-4 bg-custom-purple hover:bg-custom-green-logo text-white font-bold py-2 px-4 rounded text-2xl">&#8592;</a> #}
-
-    <div class="flex justify-center items-center h-screen bg-custom-black text-white flex-col">
-        <!-- Texte "Inscription" en gras et avec une transition de couleur -->
-        <h1 id="inscription" class="text-4xl mb-6 text-center animate-pulse text-color-transition {% if form_errors(registrationForm) %}text-custom-green-logo{% else %}text-custom-purple{% endif %} bold-text">Contact</h1>
-
-        <div class="w-full max-w-xs">
-            {{ form_errors(registrationForm) }}
-
-            <!-- Formulaire d'inscription -->
-            {{ form_start(registrationForm, {'class': 'bg-custom-black p-6 rounded-lg shadow-lg'}) }}
-                <div class="mb-4 text-center">
-                    {{ form_row(registrationForm.prenom, {'attr': {'class': 'bg-gray-200 border border-gray-200 rounded p-2 w-full focus:outline-none focus:border-custom-blue text-custom-blue'}}) }}
-                </div>
-                <div class="mb-4 text-center">
-                    {{ form_row(registrationForm.nom, {'attr': {'class': 'bg-gray-200 border border-gray-200 rounded p-2 w-full focus:outline-none focus:border-custom-blue text-custom-blue'}}) }}
-                </div>
-                <div class="mb-4 text-center">
-                    {{ form_row(registrationForm.email, {'attr': {'class': 'bg-gray-200 border border-gray-200 rounded p-2 w-full focus:outline-none focus:border-custom-blue text-custom-blue'}}) }}
-                </div>
-
-                 <div class="mb-4 text-center">
-                    {{ form_row(registrationForm.message, {'attr': {'class': 'bg-gray-200 border border-gray-200 rounded p-2 w-full focus:outline-none focus:border-custom-blue text-custom-blue'}}) }}
-                </div>
-               
-                
-                <button type="submit" class="bg-custom-green-logo hover:bg-custom-purple text-white font-bold py-2 px-4 rounded w-full text-custom-blue">Envoyer</button>
-            {{ form_end(registrationForm) }}
-        </div>
+{% block body %}
+    <div {{ react_component('Page_Contact') }}>
+         {# <div class="container">
+        <h1>Contactez-nous</h1>
+        
+        <form method="post" action="{{ path('app_contact') }}">
+            {{ form_start(form) }}
+            
+            {{ form_row(form.nom) }}
+            {{ form_row(form.prenom) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.message) }}
+            
+            <button type="submit">Envoyer le message</button>
+            
+            {{ form_end(form) }}
+        </form>
+    </div> #}
     </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var Envoyer = document.getElementById("Envoyer");
-            if (Envoyer) {
-                setInterval(function() {
-                    Envoyer.classList.toggle("text-custom-green-logo");
-                    Envoyer.classList.toggle("text-custom-purple");
-                }, 1000);
-            }
-        });
-    </script>
+   
 {% endblock %}
