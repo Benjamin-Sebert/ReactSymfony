@@ -8,10 +8,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'custom-green': '#38FF9C',
+        'custom-green': '#000000',
         'custom-black': '#2C2C2C',
-        'custom-blue': '#2559DA',
-        'custom-purple': '#7F00FF',
+        'custom-blue': '#FF4225',
+        'custom-red': '#F08080',
         'custom-green-logo': '#9bf0db',
         'custom-light-purple':'#835bbc'
         // ... autres couleurs si nécessaire

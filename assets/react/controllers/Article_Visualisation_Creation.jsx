@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ArticleGraphVisualisation from './Article_Graph_Visualisation'; // Make sure to import the component
+import GraphAffichage from './GraphAffichage'; // Make sure to import the component
 
 const ArticleCreator = () => {
     const [article, setArticle] = useState({
@@ -91,6 +92,11 @@ const ArticleCreator = () => {
                     </div>
                 );
                 break;
+            case 'graphique':
+                blockContent = (
+                    <GraphAffichage />
+                );
+                break;
             default:
                 blockContent = null;
         }
@@ -104,24 +110,26 @@ const ArticleCreator = () => {
     };
 
     const createArticle = async () => {
-        const formData = new FormData();
-        formData.append('Titre', article.title);
-        formData.append('Résumé', article.summary);
-
-        console.log(formData); 
-
         try {
-            const response = await fetch('/api/articles', {
+            const requestBody = JSON.stringify({
+                titre: article.title,
+                résumé: article.summary,
+                // Ajoutez d'autres propriétés nécessaires ici
+            });
+
+            const response = await fetch('http://localhost:8000/api/articles', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: formData
+                headers: {
+                    'Accept': 'application/ld+json',
+                    'Content-Type': 'application/ld+json'
+                },
+                body: requestBody
             });
             const responseData = await response.json();
-            console.log(responseData); 
+            console.log(responseData);
         } catch (error) {
             console.error('Erreur lors de l\'envoi de l\'article:', error);
         }
-        
     };
 
     return (
@@ -136,7 +144,7 @@ const ArticleCreator = () => {
                         placeholder="Entrez le titre ici"
                         value={article.title}
                         onChange={handleInputChange}
-                        className="mt-1 block w-full px-3 py-2 mb-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-custom-purple focus:border-custom-purple"
+                        className="mt-1 block w-full px-3 py-2 mb-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-custom-red focus:border-custom-red"
                     />
 
                     <label htmlFor="summary" className="block text-sm font-medium text-gray-700">Résumé de l'article</label>
@@ -146,7 +154,7 @@ const ArticleCreator = () => {
                         placeholder="Entrez le résumé ici"
                         value={article.summary}
                         onChange={handleInputChange}
-                        className="mt-1 block w-full px-3 py-2 mb-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-custom-purple focus:border-custom-purple"
+                        className="mt-1 block w-full px-3 py-2 mb-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-custom-red focus:border-custom-red"
                         rows="4"
                     />
 
@@ -157,12 +165,13 @@ const ArticleCreator = () => {
                     ))}
 
                     <div className="flex space-x-4 mb-4">
-                        <button onClick={() => addBlock('title')} className="px-4 py-2 text-white rounded bg-custom-purple hover:bg-purple-700 transition duration-300 ease-in-out">+ Titre</button>
-                        <button onClick={() => addBlock('text')} className="px-4 py-2 text-white rounded bg-custom-purple hover:bg-purple-700 transition duration-300 ease-in-out">+ Texte</button>
-                        <button onClick={() => addBlock('image')} className="px-4 py-2 text-white rounded bg-custom-purple hover:bg-purple-700 transition duration-300 ease-in-out">+ Image</button>
+                        <button onClick={() => addBlock('title')} className="px-4 py-2 text-white rounded bg-custom-red hover:bg-red-700 transition duration-300 ease-in-out">+ Titre</button>
+                        <button onClick={() => addBlock('text')} className="px-4 py-2 text-white rounded bg-custom-red hover:bg-red-700 transition duration-300 ease-in-out">+ Texte</button>
+                        <button onClick={() => addBlock('image')} className="px-4 py-2 text-white rounded bg-custom-red hover:bg-red-700 transition duration-300 ease-in-out">+ Image</button>
+                        <button onClick={() => addBlock('graphique')} className="px-4 py-2 text-white rounded bg-custom-red hover:bg-red-700 transition duration-300 ease-in-out">+ Graphique</button>
                     </div>
 
-                    <button onClick={createArticle} className="w-full px-4 py-2 text-white rounded bg-custom-green hover:bg-green-700 transition duration-300 ease-in-out">Créer mon article</button>
+                    <button onClick={createArticle} className="w-full px-4 py-2 text-white rounded bg-custom-green hover:bg-grey-700 transition duration-300 ease-in-out border-custom-purples">Créer mon article</button>
                 </div>
 
                 {<ArticleGraphVisualisation article={article} />}

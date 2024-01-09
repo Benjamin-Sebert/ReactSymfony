@@ -33,6 +33,7 @@
     "dependencies": {
         "@headlessui/react": "^1.7.17",
         "@heroicons/react": "^2.0.18",
-        "@vscode/codicons": "^0.0.35"
+        "@vscode/codicons": "^0.0.35",
+        "aframe": "^1.5.0"
     }
 }
