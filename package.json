@@ -33,10 +33,7 @@
     "dependencies": {
         "@headlessui/react": "^1.7.17",
         "@heroicons/react": "^2.0.18",
-        "@vscode/codicons": "^0.0.35",
-        "axios": "^1.6.5",
-        "react-hook-form": "^7.49.3",
-        "react-redux": "^9.0.4",
-        "redux": "^5.0.1"
+        "@vscode/codicons": "^0.0.35"
+
     }
 }

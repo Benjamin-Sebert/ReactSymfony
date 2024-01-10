@@ -29,17 +29,4 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
-    #[Route('/api/articles', name: 'app_apiarticles', methods: ['POST'])]
-    public function createArticle(Request $request, EntityManagerInterface $entityManager): Response
-    {
-
-        $article = new Article();
-        $article->setTitre($request->request->get('title'));
-        $article->setRésumé($request->request->get('summary'));
-
-        $entityManager->persist($article);
-        $entityManager->flush();
-
-        return new Response('Article saved with id '.$article->getId());
-    }
 }

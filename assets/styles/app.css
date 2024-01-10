@@ -6,6 +6,7 @@ html, body, #Visu{
     height: 100%;
     margin: 0;
     background-color: white;
+    font-family: 'Montserrat', sans-serif;
   }
 .App{
   width: 100vw;
@@ -15,9 +16,8 @@ html, body, #Visu{
   overflow-wrap: break-word;
   word-wrap: break-word;
 }
-aside{
-  
+h1{
+  font-family: 'Righteous', sans-serif;  font-size: 57px;
 }
-
 
 

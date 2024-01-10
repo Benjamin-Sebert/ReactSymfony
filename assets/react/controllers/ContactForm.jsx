@@ -81,7 +81,7 @@ const Contactus = () => {
             className="border rounded w-full py-2 px-3"
           ></textarea>
         </div>
-        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">
+        <button type="submit" className="bg-custom-red text-white py-2 px-4 rounded">
           Envoyer le message
         </button>
       </form>
