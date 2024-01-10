@@ -7,6 +7,13 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+<<<<<<< HEAD
+=======
+        app_admin_provider:
+            entity:
+                class: App\Entity\Admin
+                property: email
+>>>>>>> 9efcea744876ffe07419b49a20e494901a031782
 
     firewalls:
         dev:
@@ -18,7 +25,26 @@ security:
             provider: app_user_provider # Specify the default provider
             custom_authenticators:
                 - App\Security\AppCustomAuthenticator
-            target: app_login
+
+<<<<<<< HEAD
+        api:
+            pattern: ^/api
+            stateless: true
+            # Autres configurations pour le firewall api ici
+
+    # Ajoutez d'autres configurations de sécurité ici si nécessaire
+
+             
+          
+
+            logout:
+                path: /logout
+                # where to redirect after logout
+=======
+            logout:
+                path: app_logout
+>>>>>>> 9efcea744876ffe07419b49a20e494901a031782
+                target: app_login
 
             remember_me:
                 secret: '%kernel.secret%'
