@@ -28,6 +28,15 @@ class Admin extends User implements PasswordAuthenticatedUserInterface
      */
     protected array $roles = [];
 
+
+    /**
+     * @ORM\Column(type="string", length=180, unique=true)
+     */
+    protected $email;
+
+    // #[ORM\Column]
+    protected $password;
+
     /**
      * @ORM\Column(length: 255)
      */
@@ -56,6 +65,8 @@ class Admin extends User implements PasswordAuthenticatedUserInterface
 
     //     return $this;
     // }
+
+
 
     public function getRoles(): array
     {
