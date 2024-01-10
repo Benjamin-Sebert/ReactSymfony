@@ -15,24 +15,10 @@ security:
 
         main:
             lazy: true
-            provider: app_user_provider
-            custom_authenticator:
+            provider: app_user_provider # Specify the default provider
+            custom_authenticators:
                 - App\Security\AppCustomAuthenticator
-
-        api:
-            pattern: ^/api
-            stateless: true
-            # Autres configurations pour le firewall api ici
-
-    # Ajoutez d'autres configurations de sécurité ici si nécessaire
-
-             
-          
-
-            logout:
-                path: /logout
-                # where to redirect after logout
-                target: app_login
+            target: app_login
 
             remember_me:
                 secret: '%kernel.secret%'
@@ -49,7 +35,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/article, roles: ROLE_ADMIN }
+         - { path: ^/main, roles: [ROLE_USER, ROLE_ADMIN] }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
