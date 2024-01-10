@@ -24,11 +24,11 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
     {
         $users = $this->entityManager->getRepository(User::class)->findAll();
-        $admins = $this->entityManager->getRepository(Admin::class)->findAll();
+        // $admins = $this->entityManager->getRepository(Admin::class)->findAll();
 
         return $this->render('admin/dashboard_custom.html.twig', [
             'users' => $users,
-            'admins' => $admins,
+            // 'admins' => $admins,
         ]);
     }
 
