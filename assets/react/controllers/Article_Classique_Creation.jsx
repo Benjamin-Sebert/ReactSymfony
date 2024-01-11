@@ -80,7 +80,7 @@ const ArticleCreator = () => {
     };
 
     return (
-        <div class="flex">
+        <div className="flex">
 
             <div className="flex-1">
                 <div className="w-full">
@@ -117,7 +117,7 @@ const ArticleCreator = () => {
                 </div>
             </div>
 
-            <div class="flex-1">
+            <div className="flex-1">
 
                 <ArticleClassiqueVisualisation article={article} />
 

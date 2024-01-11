@@ -68,12 +68,12 @@ const BarChart = () => {
     }, [chartData, chartType]);
 
     return (
-        <div class="w-full mx-auto p-4 bg-white shadow-lg rounded-lg">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">Graphique des données</h2>
+        <div className="w-full mx-auto p-4 bg-white shadow-lg rounded-lg">
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">Graphique des données</h2>
             <input
                 type="file"
                 onChange={handleFileChange}
-                class="block w-full text-sm text-gray-500
+                className="block w-full text-sm text-gray-500
                file:mr-4 file:py-2 file:px-4
                file:rounded-full file:border-0
                file:text-sm file:font-semibold
@@ -83,14 +83,14 @@ const BarChart = () => {
             <select
                 value={chartType}
                 onChange={handleChartTypeChange}
-                class="block w-full mt-3 mb-4 p-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-violet-500 focus:border-violet-500"
+                className="block w-full mt-3 mb-4 p-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-violet-500 focus:border-violet-500"
             >
                 <option value="bar">Barre</option>
                 <option value="line">Ligne</option>
                 <option value="pie">Camembert</option>
                 <option value="scatter">Scatter</option>
             </select>
-            <canvas ref={chartRef} class="mt-4" />
+            <canvas ref={chartRef} className="mt-4" />
         </div>
 
     );
