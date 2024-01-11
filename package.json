@@ -33,7 +33,11 @@
     "dependencies": {
         "@headlessui/react": "^1.7.17",
         "@heroicons/react": "^2.0.18",
-        "@vscode/codicons": "^0.0.35"
-
+        "@react-three/cannon": "^6.6.0",
+        "@react-three/drei": "^9.93.0",
+        "@react-three/fiber": "^8.15.13",
+        "@types/three": "^0.160.0",
+        "@vscode/codicons": "^0.0.35",
+        "three": "^0.160.0"
     }
 }
