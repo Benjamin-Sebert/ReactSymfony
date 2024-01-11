@@ -18,7 +18,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% set allUsers = users | merge(admins) %}
+                        {% set allUsers = users %}
                         {% if allUsers %}
                             {% for user in allUsers %}
                                 <tr>

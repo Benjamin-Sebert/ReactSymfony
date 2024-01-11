@@ -19,20 +19,16 @@ security:
             custom_authenticator:
                 - App\Security\AppCustomAuthenticator
 
+            logout:
+                path: /logout
+                target: app_login
+
         api:
             pattern: ^/api
             stateless: true
             # Autres configurations pour le firewall api ici
 
     # Ajoutez d'autres configurations de sécurité ici si nécessaire
-
-             
-          
-
-            logout:
-                path: /logout
-                # where to redirect after logout
-                target: app_login
 
             remember_me:
                 secret: '%kernel.secret%'

@@ -3,8 +3,7 @@
 
 namespace App\Command;
 
-use App\Entity\Admin;
-
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -34,10 +33,12 @@ class CreateAdminCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         // Créer un nouvel utilisateur administrateur
-        $admin = new Admin();
+        $admin = new User();
         $admin->setEmail('admin@example.com');
         $admin->setNom('Admin');
         $admin->setPrenom('Admin');
+
+        // Ajouter le rôle ROLE_USER (obligatoire) et ROLE_ADMIN
         $admin->setRoles(['ROLE_ADMIN']);
 
         // Générer le mot de passe (changez "password" par le mot de passe souhaité)
