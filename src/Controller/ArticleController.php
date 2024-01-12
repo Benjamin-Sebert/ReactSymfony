@@ -22,4 +22,11 @@ final class ArticleController extends AbstractController
 
         return $mediaObject;
     }
+    #[Route('/Media', name: 'app_media')]
+    public function view_media(): Response
+    {
+        return $this->render('home/media.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
 }

@@ -14,18 +14,17 @@ use App\Entity\Article;
 
 class HomeController extends AbstractController
 {
-    #[Route('/home', name: 'app_home')]
-    public function home(): Response
-    {
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
-
     #[Route('/ArticleGraph', name: 'app_articlegraph')]
     public function ArticleGraph(): Response
     {
         return $this->render('home/ArticleGraph.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
+    #[Route('/Media', name: 'app_media')]
+    public function Media(): Response
+    {
+        return $this->render('home/Media.html.twig', [
             'controller_name' => 'HomeController',
         ]);
     }

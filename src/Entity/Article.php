@@ -57,13 +57,24 @@ class Article
 
     #[Vich\UploadableField(mapping: "media_object", fileNameProperty: "filePath")]
     #[Assert\NotNull(groups: ['media_object_create'])]
-    public ?File $file = null;
+    public ?File $image = null;
 
     #[ORM\Column(nullable: true)] 
-    public ?string $filePath = null;
+    public ?string $filePath_image = null;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    #[Vich\UploadableField(mapping: "media_object", fileNameProperty: "filePath")]
+    #[Assert\NotNull(groups: ['media_object_create'])]
+    public ?File $excel = null;
+
+    #[ORM\Column(nullable: true)] 
+    public ?string $filePath_excel = null;
+
+    #[ORM\Column(nullable: false)] 
+    public ?string $titre = null;
+
+    #[ORM\Column(nullable: false)] 
+    public ?string $resume = null;
+
+    #[ORM\Column(nullable: false)] 
+    public ?string $texte = null;
 }
