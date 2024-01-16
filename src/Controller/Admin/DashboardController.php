@@ -26,7 +26,7 @@ class DashboardController extends AbstractDashboardController
         $users = $this->entityManager->getRepository(User::class)->findAll();
         // $admins = $this->entityManager->getRepository(Admin::class)->findAll();
 
-        return $this->render('admin/dashboard_custom.html.twig', [
+        return $this->render('admin/test_dashboard_custom.html.twig', [
             'users' => $users,
             // 'admins' => $admins,
         ]);
