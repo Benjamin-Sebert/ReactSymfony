@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Sidebar from './Sidebar';
 import AvatarButton from './Avatar';
+import ThemeToggle from './ThemeToggle';
 import axios from 'axios';
 
 const Theme = (props) => {
@@ -52,7 +53,7 @@ const Theme = (props) => {
             const data = await response.json();
             console.log('File uploaded successfully:', data);
 
-            // Handle any additional logic after successful upload, if needed.
+            
         } catch (error) {
             console.error('Error uploading file:', error);
         }
@@ -62,15 +63,18 @@ const Theme = (props) => {
         <div className="w-screen h-screen">
             <div className="flex flex-col md:flex-row h-screen">
                 <Sidebar />
-
-                <main className="flex-1 bg-gray-100 p-6">
+                
+                <main className="flex-1 p-6">
                     <div className="flex items-center justify-between border-b border-custom-black pb-4">
                         <h1 className="font-bold text-black">Stare<span className="font-bold text-custom-red">It</span></h1>
                         <div className="flex items-center space-x-4">
 
                             <AvatarButton />
+                            <ThemeToggle />
+                            
 
                         </div>
+                        
                     </div>
 
                     <div className="gap-8 mt-6">

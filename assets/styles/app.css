@@ -1,23 +1,98 @@
+/* src/Resources/assets/css/app.css */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html, body, #Visu{
-    height: 100%;
-    margin: 0;
-    background-color: white;
-    font-family: 'Montserrat', sans-serif;
-  }
-.App{
+html, body, #Visu {
+  height: 100%;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+:root {
+  --font-family: 'Montserrat', sans-serif;
+
+  /* Styles pour le thème clair */
+  --background-light: #f0f4f8;   /* Couleur de fond pour le thème clair */
+  --text-light: #1a202c;         /* Couleur du texte pour le thème clair */
+  --sidebar-background-light: #f08080; /* Couleur de fond de la barre latérale pour le thème clair */
+  --body-background-light: #f8f9fa;  /* Couleur de fond du corps pour le thème clair */
+  --hover-color-light: #f8f9fa;   /* Couleur de survol pour le thème clair */
+  --sidebar-text-light: rgb(0, 0, 0);  
+  --hover-background-color-light: #38bdf8;
+  
+
+  /* Styles pour le thème sombre */
+  --background-dark: #2d3748;   /* Couleur de fond pour le thème sombre */
+  --text-dark: #edf2f7;         /* Couleur du texte pour le thème sombre */
+  --sidebar-background-dark: #000000; /* Couleur de fond de la barre latérale pour le thème sombre */
+  --body-background-dark: #343a40;    /* Couleur de fond du corps pour le thème sombre */
+  --hover-color-dark: #000000;
+  --sidebar-text-dark: #fafafa; 
+  --hover-background-color-dark: #F08080;
+}
+
+html, body, main #Visu {
+  height: 100%;
+  margin: 0;
+  background-color: var(--background-light);
+  color: var(--text-light);
+  font-family: var(--font-family);
+
+}
+
+.App {
   width: 100vw;
   height: 100vh;
 }
+
 .break-words {
   overflow-wrap: break-word;
   word-wrap: break-word;
 }
-h1{
-  font-family: 'Righteous', sans-serif;  font-size: 57px;
+
+h1 {
+  font-family: 'Righteous', sans-serif;
+  font-size: 57px;
+  color: var(--text-light);
+}
+
+body.light-theme {
+  --background: var(--background-light);
+  --text: var(--text-light);
+  --sidebar-background: var(--sidebar-background-light);
+  --body-background: var(--body-background-light);
+  --hover-color: var(--hover-color-light);
+  --sidebar-text: var(--sidebar-text-light);
+  --hover-background-color: var(--hover-background-color-light);
+  
+}
+
+body.dark-theme {
+  --background: var(--background-dark);
+  --text: var(--text-dark);
+  --sidebar-background: var(--sidebar-background-dark);
+  --body-background: var(--body-background-dark);
+  --hover-color: var(--hover-color-dark);
+  --sidebar-text: var(--sidebar-text-dark);
+  --hover-background-color: var(--hover-background-color-dark);
+}
+
+body {
+  background-color: var(--body-background);
+  color: var(--text);
+}
+
+/* Styles spécifiques à la barre latérale en fonction du thème */
+aside {
+  background-color: var(--sidebar-background);
+  
+}
+
+aside a:hover {
+  color: var(--hover-color);
+  background-color: var(--hover-background-color);
 }
 
 

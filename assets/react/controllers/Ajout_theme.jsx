@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import Sidebar from './Sidebar';
+
 import AvatarButton from './Avatar';
+
 
 const Theme = (props) => {
     const [selectedFile, setSelectedFile] = useState(null);

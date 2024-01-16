@@ -1,27 +1,23 @@
 <?php
-// api/src/Controller/CreateMediaObjectAction.php
 
+// src/Controller/ThemeController.php
 namespace App\Controller;
 
-use App\Entity\Theme;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Attribute\AsController;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-#[AsController]
-final class ThemeController extends AbstractController
+class ThemeController extends AbstractController
 {
-    public function __invoke(Request $request): Theme
+    #[Route('/theme', name: 'app_theme')]
+    public function toggleTheme(SessionInterface $session)
     {
-        $uploadedFile = $request->files->get('file');
-        if (!$uploadedFile) {
-            throw new BadRequestHttpException('"file" is required');
-        }
+        $currentTheme = $session->get('theme', 'light');
+        $newTheme = ($currentTheme === 'light') ? 'dark' : 'light';
 
-        $mediaObject = new Theme();
-        $mediaObject->file = $uploadedFile;
+        $session->set('theme', $newTheme);
 
-        return $mediaObject;
+        return new JsonResponse(['theme' => $newTheme]);
     }
 }
