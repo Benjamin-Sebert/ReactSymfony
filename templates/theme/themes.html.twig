@@ -1,0 +1,19 @@
+{# templates/theme/list.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block theme_css %}
+    {# Inclure le lien vers le fichier CSS du thème sélectionné #}
+    <link rel="stylesheet" href="{{ asset('build/css/themes/theme1.css') }}">
+{% endblock %}
+
+{% block body %}
+    <h1>Choisir un Thème</h1>
+    <div id="theme-list">
+        {% for theme in themes %}
+            <div class="theme-block">
+                <h2>{{ theme.name }}</h2>
+                <a href="{{ path('apply_theme', {'cssFile': theme.cssFile}) }}">Sélectionner</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
