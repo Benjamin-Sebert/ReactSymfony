@@ -39,6 +39,8 @@
         "@types/three": "^0.160.0",
         "@vscode/codicons": "^0.0.35",
         "axios": "^1.6.5",
+        "react-dropzone": "^14.2.3",
+        "react-papaparse": "^4.4.0",
         "three": "^0.160.0"
     }
 }
