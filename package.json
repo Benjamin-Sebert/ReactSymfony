@@ -35,12 +35,16 @@
         "@heroicons/react": "^2.0.18",
         "@react-three/cannon": "^6.6.0",
         "@react-three/drei": "^9.93.0",
-        "@react-three/fiber": "^8.15.13",
+        "@react-three/fiber": "^8.15.14",
         "@types/three": "^0.160.0",
         "@vscode/codicons": "^0.0.35",
         "axios": "^1.6.5",
         "react-dropzone": "^14.2.3",
         "react-papaparse": "^4.4.0",
-        "three": "^0.160.0"
+        "react-router-dom": "^6.21.2",
+        "react-spring": "^9.7.3",
+        "react-three-fiber": "^6.0.13",
+        "three": "^0.160.0",
+        "troika-three-text": "^0.49.0"
     }
 }

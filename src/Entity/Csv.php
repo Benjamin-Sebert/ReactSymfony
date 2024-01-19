@@ -9,7 +9,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Model;
-use App\Controller\MediaController;
+use App\Controller\CsvController;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -19,15 +19,15 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[Vich\Uploadable]
 #[ORM\Entity]
 #[ApiResource(
-    normalizationContext: ['groups' => ['media_object:read']], 
+    normalizationContext: ['groups' => ['csv_object:read']], 
     types: ['https://schema.org/MediaObject'],
     operations: [
         new Get(),
         new GetCollection(),
         new Post(
-            controller: MediaController::class, 
+            controller: CsvController::class, 
             deserialize: false, 
-            validationContext: ['groups' => ['Default', 'media_object_create']], 
+            validationContext: ['groups' => ['Default', 'csv_object_create']], 
             openapi: new Model\Operation(
                 requestBody: new Model\RequestBody(
                     content: new \ArrayObject([
@@ -48,17 +48,17 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
         )
     ]
 )]
-class Media
+class Csv
 {
     #[ORM\Id, ORM\Column, ORM\GeneratedValue]
     private ?int $id = null;
 
     #[ApiProperty(types: ['https://schema.org/contentUrl'])]
-    #[Groups(['media_object:read'])]
+    #[Groups(['csv_object:read'])]
     public ?string $contentUrl = null;
 
-    #[Vich\UploadableField(mapping: 'media_object', fileNameProperty: 'filePath')]
-    #[Assert\NotNull(groups: ['media_create'])]
+    #[Vich\UploadableField(mapping: 'csv_object', fileNameProperty: 'filePath')]
+    #[Assert\NotNull(groups: ['csv_create'])]
     public ?File $file = null;
 
     #[ORM\Column(nullable: true)] 
@@ -78,8 +78,20 @@ class Media
     {
         return $this->nom_ressource;
     }
+    public function setNom_ressource(string $nom_ressource): static
+    {
+        $this->nom_ressource = $nom_ressource;
+
+        return $this;
+    }
     public function getUser(): ?string
     {
         return $this->user;
+    }
+    public function setUser(string $user): static
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }

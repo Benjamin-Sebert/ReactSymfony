@@ -3,11 +3,11 @@ import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import axios from 'axios';
 
-const images = (props) => {
+const csv = (props) => {
     const [email, setEmail] = useState(null);
     const [resourceName, setResourceName] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
-    const [imagesResources, setimagesResources] = useState([]);
+    const [csvResources, setCsvResources] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -16,9 +16,9 @@ const images = (props) => {
                 const userEmail = response.data['hydra:member'][0].email;
                 setEmail(userEmail);*/
 
-                const imagesResponse = await axios.get('http://localhost:8000/api/medias');
-                setimagesResources(imagesResponse.data['hydra:member']);
-                console.log(imagesResources);
+                const csvResponse = await axios.get('http://localhost:8000/api/csvs');
+                setCsvResources(csvResponse.data['hydra:member']);
+                console.log(csvResources);
             } catch (error) {
                 console.error('Erreur lors de la récupération des données:', error);
             }
@@ -49,7 +49,7 @@ const images = (props) => {
         formData.append('nom_ressource', resourceName);
 
         try {
-            const response = await fetch('http://localhost:8000/api/medias', {
+            const response = await fetch('http://localhost:8000/api/csvs', {
                 method: 'POST',
                 body: formData,
             });
@@ -82,7 +82,7 @@ const images = (props) => {
                                         <label className="block text-sm font-medium text-gray-600">Sélectionner un fichier</label>
                                         <input
                                             type="file"
-                                            accept=".images, image/*"
+                                            accept=".csv, image/*"
                                             onChange={handleFileChange}
                                             className="mt-1 p-2 block w-full border rounded-md"
                                         />
@@ -119,13 +119,13 @@ const images = (props) => {
                         </div>
                     </div>
 
-                    {/* images resources section */}
+                    {/* CSV resources section */}
                     <div className="mt-8">
-                        <h2 className="text-xl font-semibold mb-4">Ressources images disponibles</h2>
+                        <h2 className="text-xl font-semibold mb-4">Ressources CSV disponibles</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {imagesResources.map((imagesResource) => (
-                                <div key={imagesResource.id} className="p-4 bg-white rounded-md shadow-md">
-                                    <p className="text-gray-600">{imagesResource.contentUrl}</p>
+                            {csvResources.map((csvResource) => (
+                                <div key={csvResource.id} className="p-4 bg-white rounded-md shadow-md">
+                                    <p className="text-gray-600">{csvResource.contentUrl}</p>
                                     {/* Add more details as needed */}
                                 </div>
                             ))}
@@ -137,4 +137,4 @@ const images = (props) => {
     );
 };
 
-export default images;
+export default csv;

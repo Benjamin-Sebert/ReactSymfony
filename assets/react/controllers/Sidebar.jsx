@@ -1,9 +1,6 @@
 // Footer.js
 import React from 'react';
 
-
-
-
 const Sidebar = () => {
     return (
 <aside className="w-full md:w-2/12  p-4 shadow-xl md:shadow-none">
@@ -35,7 +32,7 @@ const Sidebar = () => {
         <path d="M18.066 2H11v5a2 2 0 0 1-2 2H4v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 20 20V4a1.97 1.97 0 0 0-1.934-2ZM10 18a1 1 0 1 1-2 0v-2a1 1 0 1 1 2 0v2Zm3 0a1 1 0 0 1-2 0v-6a1 1 0 1 1 2 0v6Zm3 0a1 1 0 0 1-2 0v-4a1 1 0 1 1 2 0v4Z" />
       </svg>
 
-      <span className="mx-4 font-medium ">Afficher mes articles</span>
+      <span className="mx-4 font-medium ">Afficher les articles</span>
     </a>
   </li>
 
@@ -47,6 +44,17 @@ const Sidebar = () => {
       </svg>
 
       <span className="mx-4 font-medium ">Médias</span>
+    </a>
+  </li>
+
+  <li>
+    <a className="flex items-center px-4 py-2 mt-5  rounded-md " href="ajout_csv">
+      <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 20">
+        <path fill="currentColor" d="M11.045 7.514a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Zm-4.572 3.072L3.857 15.92h7.949l-1.811-3.37-1.61 2.716-1.912-4.679Z" />
+        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 1v4a1 1 0 0 1-1 1H1m14 12a.97.97 0 0 1-.933 1H1.933A.97.97 0 0 1 1 18V5.828a2 2 0 0 1 .586-1.414l2.828-2.828A2 2 0 0 1 5.828 1h8.239A.97.97 0 0 1 15 2v16ZM11.045 7.514a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0ZM3.857 15.92l2.616-5.333 1.912 4.68 1.61-2.717 1.81 3.37H3.858Z" />
+      </svg>
+
+      <span className="mx-4 font-medium ">CSV</span>
     </a>
   </li>
 
@@ -75,6 +83,7 @@ const Sidebar = () => {
 </ul>
 
 </aside>
+
 );
 };
 
