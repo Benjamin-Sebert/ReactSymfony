@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import axios from 'axios';
+import UserEmailFetcher from './UserEmailFetcher'; // Assurez-vous d'ajuster le chemin du fichier si nécessaire
 
 const csv = (props) => {
-    const [email, setEmail] = useState(null);
+    const userEmail = UserEmailFetcher();
     const [resourceName, setResourceName] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
     const [csvResources, setCsvResources] = useState([]);
@@ -12,13 +13,9 @@ const csv = (props) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                /*const response = await axios.get('http://localhost:8000/api/users');
-                const userEmail = response.data['hydra:member'][0].email;
-                setEmail(userEmail);*/
-
                 const csvResponse = await axios.get('http://localhost:8000/api/csvs');
                 setCsvResources(csvResponse.data['hydra:member']);
-                console.log(csvResources);
+                console.log(csvResponse);
             } catch (error) {
                 console.error('Erreur lors de la récupération des données:', error);
             }
@@ -41,11 +38,11 @@ const csv = (props) => {
             console.error('Veuillez sélectionner un fichier et ajouter un nom à la ressource.');
             return;
         }
-
+        
         const formData = new FormData();
         formData.append('file', selectedFile);
         formData.append('file_type', selectedFile.type);
-        formData.append('user', email);
+        formData.append('user', userEmail);
         formData.append('nom_ressource', resourceName);
 
         try {
@@ -62,12 +59,23 @@ const csv = (props) => {
         }
     };
 
+    const deleteCsv = async (id) => {
+        try {
+            // Delete CSV resource
+            await axios.delete(`http://localhost:8000/api/csvs/${id}`);
+            // Update state to reflect the removal
+            setCsvResources(csvResources.filter(csvResource => csvResource.id !== id));
+        } catch (error) {
+            console.error('Error deleting CSV resource:', error);
+        }
+    };
+
     return (
         <div className="w-screen h-screen">
             <div className="flex flex-col md:flex-row h-screen">
                 <Sidebar />
                 <main className="flex-1 p-6">
-                    <Navbar />
+                    <Navbar/>
 
                     <div className="gap-8 mt-6">
                         <div className="w-full h-full flex items-center justify-center">
@@ -119,14 +127,20 @@ const csv = (props) => {
                         </div>
                     </div>
 
-                    {/* CSV resources section */}
                     <div className="mt-8">
                         <h2 className="text-xl font-semibold mb-4">Ressources CSV disponibles</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {csvResources.map((csvResource) => (
                                 <div key={csvResource.id} className="p-4 bg-white rounded-md shadow-md">
-                                    <p className="text-gray-600">{csvResource.contentUrl}</p>
-                                    {/* Add more details as needed */}
+                                    <p className="text-gray-700 font-semibold">Nom de la ressource : {csvResource.nom_ressource}</p>
+                                    <p className="text-gray-600">Upload par : {csvResource.user}</p>
+                                    <button
+                                        type="button"
+                                        onClick={() => deleteCsv(csvResource.id)}
+                                        className="mt-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
+                                    >
+                                        Supprimer
+                                    </button>
                                 </div>
                             ))}
                         </div>

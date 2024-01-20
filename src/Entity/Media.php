@@ -19,24 +19,25 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[Vich\Uploadable]
 #[ORM\Entity]
 #[ApiResource(
-    normalizationContext: ['groups' => ['media_object:read']], 
+    normalizationContext: ['groups' => ['media_object:read']],
     types: ['https://schema.org/MediaObject'],
     operations: [
-        new Get(),
+        new Get(normalizationContext: ['groups' => 'media:item']),
+        new GetCollection(normalizationContext: ['groups' => 'media:list']),
         new GetCollection(),
         new Post(
-            controller: MediaController::class, 
-            deserialize: false, 
-            validationContext: ['groups' => ['Default', 'media_object_create']], 
+            controller: MediaController::class,
+            deserialize: false,
+            validationContext: ['groups' => ['Default', 'media_object_create']],
             openapi: new Model\Operation(
                 requestBody: new Model\RequestBody(
                     content: new \ArrayObject([
                         'multipart/form-data' => [
                             'schema' => [
-                                'type' => 'object', 
+                                'type' => 'object',
                                 'properties' => [
                                     'file' => [
-                                        'type' => 'string', 
+                                        'type' => 'string',
                                         'format' => 'binary'
                                     ]
                                 ]
@@ -51,6 +52,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 class Media
 {
     #[ORM\Id, ORM\Column, ORM\GeneratedValue]
+    #[Groups(['media_object:read'])]
     private ?int $id = null;
 
     #[ApiProperty(types: ['https://schema.org/contentUrl'])]
@@ -59,15 +61,19 @@ class Media
 
     #[Vich\UploadableField(mapping: 'media_object', fileNameProperty: 'filePath')]
     #[Assert\NotNull(groups: ['media_create'])]
+    #[Groups(['media_object:read'])]
     public ?File $file = null;
 
-    #[ORM\Column(nullable: true)] 
+    #[ORM\Column(nullable: true)]
+    #[Groups(['media_object:read'])]
     public ?string $filePath = null;
 
-    #[ORM\Column(nullable: true)] 
+    #[ORM\Column(nullable: true)]
+    #[Groups(['media_object:read'])]
     public ?string $nom_ressource = null;
 
-    #[ORM\Column(nullable: true)] 
+    #[ORM\Column(nullable: true)]
+    #[Groups(['media_object:read'])]
     public ?string $user = null;
 
     public function getId(): ?int
@@ -78,8 +84,20 @@ class Media
     {
         return $this->nom_ressource;
     }
+    public function setNom_ressource(string $nom_ressource): static
+    {
+        $this->nom_ressource = $nom_ressource;
+
+        return $this;
+    }
     public function getUser(): ?string
     {
         return $this->user;
+    }
+    public function setUser(string $user): static
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }

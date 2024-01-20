@@ -19,24 +19,25 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[Vich\Uploadable]
 #[ORM\Entity]
 #[ApiResource(
-    normalizationContext: ['groups' => ['csv_object:read']], 
+    normalizationContext: ['groups' => ['csv_object:read']],
     types: ['https://schema.org/MediaObject'],
     operations: [
-        new Get(),
+        new Get(normalizationContext: ['groups' => 'Csv:item']),
+        new GetCollection(normalizationContext: ['groups' => 'Csv:list']),
         new GetCollection(),
         new Post(
-            controller: CsvController::class, 
-            deserialize: false, 
-            validationContext: ['groups' => ['Default', 'csv_object_create']], 
+            controller: CsvController::class,
+            deserialize: false,
+            validationContext: ['groups' => ['Default', 'csv_object_create']],
             openapi: new Model\Operation(
                 requestBody: new Model\RequestBody(
                     content: new \ArrayObject([
                         'multipart/form-data' => [
                             'schema' => [
-                                'type' => 'object', 
+                                'type' => 'object',
                                 'properties' => [
                                     'file' => [
-                                        'type' => 'string', 
+                                        'type' => 'string',
                                         'format' => 'binary'
                                     ]
                                 ]
@@ -51,6 +52,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 class Csv
 {
     #[ORM\Id, ORM\Column, ORM\GeneratedValue]
+    #[Groups(['csv_object:read'])]
     private ?int $id = null;
 
     #[ApiProperty(types: ['https://schema.org/contentUrl'])]
@@ -59,15 +61,19 @@ class Csv
 
     #[Vich\UploadableField(mapping: 'csv_object', fileNameProperty: 'filePath')]
     #[Assert\NotNull(groups: ['csv_create'])]
+    #[Groups(['csv_object:read'])]
     public ?File $file = null;
 
-    #[ORM\Column(nullable: true)] 
+    #[ORM\Column(nullable: true)]
+    #[Groups(['csv_object:read'])]
     public ?string $filePath = null;
 
-    #[ORM\Column(nullable: true)] 
+    #[ORM\Column(nullable: true)]
+    #[Groups(['csv_object:read'])]
     public ?string $nom_ressource = null;
 
-    #[ORM\Column(nullable: true)] 
+    #[ORM\Column(nullable: true)]
+    #[Groups(['csv_object:read'])]
     public ?string $user = null;
 
     public function getId(): ?int

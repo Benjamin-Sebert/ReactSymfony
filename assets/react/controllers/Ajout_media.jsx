@@ -2,23 +2,20 @@ import React, { useEffect, useState } from 'react';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import axios from 'axios';
+import UserEmailFetcher from './UserEmailFetcher'; // Assurez-vous d'ajuster le chemin du fichier si nécessaire
 
-const images = (props) => {
-    const [email, setEmail] = useState(null);
+const media = (props) => {
+    const userEmail = UserEmailFetcher();
     const [resourceName, setResourceName] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
-    const [imagesResources, setimagesResources] = useState([]);
+    const [mediaResources, setmediaResources] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                /*const response = await axios.get('http://localhost:8000/api/users');
-                const userEmail = response.data['hydra:member'][0].email;
-                setEmail(userEmail);*/
-
-                const imagesResponse = await axios.get('http://localhost:8000/api/medias');
-                setimagesResources(imagesResponse.data['hydra:member']);
-                console.log(imagesResources);
+                const mediaResponse = await axios.get('http://localhost:8000/api/medias');
+                setmediaResources(mediaResponse.data['hydra:member']);
+                console.log(mediaResponse);
             } catch (error) {
                 console.error('Erreur lors de la récupération des données:', error);
             }
@@ -41,11 +38,11 @@ const images = (props) => {
             console.error('Veuillez sélectionner un fichier et ajouter un nom à la ressource.');
             return;
         }
-
+        
         const formData = new FormData();
         formData.append('file', selectedFile);
         formData.append('file_type', selectedFile.type);
-        formData.append('user', email);
+        formData.append('user', userEmail);
         formData.append('nom_ressource', resourceName);
 
         try {
@@ -62,12 +59,23 @@ const images = (props) => {
         }
     };
 
+    const deletemedia = async (id) => {
+        try {
+            // Delete media resource
+            await axios.delete(`http://localhost:8000/api/medias/${id}`);
+            // Update state to reflect the removal
+            setmediaResources(mediaResources.filter(mediaResource => mediaResource.id !== id));
+        } catch (error) {
+            console.error('Error deleting media resource:', error);
+        }
+    };
+
     return (
         <div className="w-screen h-screen">
             <div className="flex flex-col md:flex-row h-screen">
                 <Sidebar />
                 <main className="flex-1 p-6">
-                    <Navbar />
+                    <Navbar/>
 
                     <div className="gap-8 mt-6">
                         <div className="w-full h-full flex items-center justify-center">
@@ -82,7 +90,7 @@ const images = (props) => {
                                         <label className="block text-sm font-medium text-gray-600">Sélectionner un fichier</label>
                                         <input
                                             type="file"
-                                            accept=".images, image/*"
+                                            accept=".media, image/*"
                                             onChange={handleFileChange}
                                             className="mt-1 p-2 block w-full border rounded-md"
                                         />
@@ -119,14 +127,20 @@ const images = (props) => {
                         </div>
                     </div>
 
-                    {/* images resources section */}
                     <div className="mt-8">
-                        <h2 className="text-xl font-semibold mb-4">Ressources images disponibles</h2>
+                        <h2 className="text-xl font-semibold mb-4">Ressources media disponibles</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {imagesResources.map((imagesResource) => (
-                                <div key={imagesResource.id} className="p-4 bg-white rounded-md shadow-md">
-                                    <p className="text-gray-600">{imagesResource.contentUrl}</p>
-                                    {/* Add more details as needed */}
+                            {mediaResources.map((mediaResource) => (
+                                <div key={mediaResource.id} className="p-4 bg-white rounded-md shadow-md">
+                                    <p className="text-gray-700 font-semibold">Nom de la ressource : {mediaResource.nom_ressource}</p>
+                                    <p className="text-gray-600">Upload par : {mediaResource.user}</p>
+                                    <button
+                                        type="button"
+                                        onClick={() => deletemedia(mediaResource.id)}
+                                        className="mt-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
+                                    >
+                                        Supprimer
+                                    </button>
                                 </div>
                             ))}
                         </div>
@@ -137,4 +151,4 @@ const images = (props) => {
     );
 };
 
-export default images;
+export default media;

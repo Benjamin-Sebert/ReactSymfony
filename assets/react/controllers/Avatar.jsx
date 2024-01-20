@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import UserEmailFetcher from './UserEmailFetcher'; // Assurez-vous d'ajuster le chemin du fichier si nécessaire
 
 const AvatarButton = () => {
-
-  const email = "test";
-
   const [menuOpen, setMenuOpen] = useState(false);
+  const userEmail = UserEmailFetcher();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -23,7 +22,7 @@ const AvatarButton = () => {
         >
           <path d="M7 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm2 1H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
         </svg>
-        <span className="ml-2 text-gray-700">{email}</span>
+        <span className="ml-2 text-gray-700">{userEmail}</span>
         <svg
           className="ml-2 w-4 h-4 text-gray-600"
           fill="none"

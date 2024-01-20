@@ -4,45 +4,7 @@ import ArticleBlock from './Bloc_article';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 
-const MovingText = () => {
-    const textRef = useRef();
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-    const handleMouseMove = (e) => {
-        const { clientX, clientY } = e;
-        setMousePosition({ x: clientX, y: clientY });
-    };
-
-    useFrame(() => {
-        if (textRef.current) {
-            const scaleFactor = 0.01; // Adjust this value based on the desired movement sensitivity
-            const { x, y } = mousePosition;
-            textRef.current.position.x = (x / window.innerWidth - 0.5) * scaleFactor;
-            textRef.current.position.y = -(y / window.innerHeight - 0.5) * scaleFactor;
-        }
-    });
-
-    return (
-        <Canvas
-            onPointerMove={handleMouseMove}
-            style={{ width: '100%', height: '100vh', backgroundColor: 'lightgray' }}
-        >
-            <ambientLight />
-            <pointLight position={[10, 10, 10]} />
-            <Text
-                ref={textRef}
-                color="black"
-                fontSize={3}
-                position={[0, 0, 0]}
-                children="StareIt"
-            />
-        </Canvas>
-    );
-};
-
-
 const ArticleForm = () => {
-    const email = "test";
     let articleId = ""; // Change const to let for articleId
 
     const [article, setArticle] = useState({
@@ -54,17 +16,17 @@ const ArticleForm = () => {
     const addBlock = () => {
         setArticle((prevArticle) => ({
             ...prevArticle,
-            blocks: [...prevArticle.blocks, { Titre: '', Texte: '' }],
+            blocks: [...prevArticle.blocks, { type: 'default', data: { Titre: '', Texte: '' } }],
         }));
     };
-
+    
     const updateBlock = (index, updatedBlock) => {
         setArticle((prevArticle) => {
             const updatedBlocks = [...prevArticle.blocks];
             updatedBlocks[index] = updatedBlock;
             return { ...prevArticle, blocks: updatedBlocks };
         });
-    };
+    };    
 
     const removeBlock = (index) => {
         setArticle((prevArticle) => {
@@ -76,39 +38,40 @@ const ArticleForm = () => {
 
     const submitBlocksToServer = async (article) => {
         try {
-            const blocData = article.blocks.map((block, index) => ({ // Added index parameter
-                Titre: block.Titre,
-                Texte: block.Texte,
-                Idarticle: articleId,
-                Position: "" + index,
-            }));
+    
+            const blocData = article.blocks.map((block, index) => {
+                const formData = new FormData();
 
+                formData.append('Titre', block.Titre);  // Correction ici
+                formData.append('Texte', block.Texte);  // Correction ici
+                formData.append('id_article', articleId);
+                formData.append('position_bloc', index);
+                formData.append('Urlimg', block.imagePath);  // Correction ici
+                formData.append('Urlcsv', block.csvPath);  // Correction ici
+    
+                return formData; // Retourner l'objet FormData dans chaque itération
+            });
+    
             await Promise.all(
-                blocData.map(async (blocData) => {
+                blocData.map(async (formData) => {
                     try {
-                        const jsonData_bloc = JSON.stringify(blocData);
-                        console.log(jsonData_bloc);
-                        const response_bloc = await fetch('http://localhost:8000/api/blocs', {
+                        const response = await fetch('http://localhost:8000/api/blocs', {
                             method: 'POST',
-                            headers: {
-                                'Accept': 'application/ld+json',
-                                'Content-Type': 'application/ld+json'
-                            },
-                            body: jsonData_bloc,
+                            body: formData,
                         });
-                        console.log('Réponse du serveur:', jsonData_bloc);
-
-                        const responseData2 = await response_bloc.json();
-                        console.log('Réponse du serveur:', responseData2);
+    
+                        const data = await response.json();
+                        console.log('Bloc uploaded successfully:', data);
+    
                     } catch (error) {
-                        console.error('Erreur lors de l\'envoi d\'un bloc:', error);
+                        console.error('Error uploading block:', error);
                     }
                 })
             );
         } catch (error) {
             console.error('Erreur lors de l\'envoi des blocs:', error);
         }
-    };
+    };    
 
     const handleArticleSubmit = async () => {
         try {

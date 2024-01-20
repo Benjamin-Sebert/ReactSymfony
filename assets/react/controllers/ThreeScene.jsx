@@ -16,27 +16,26 @@ const ThreeScene = () => {
     const scene = new THREE.Scene();
 
     loader.load(
-      'https://unpkg.com/three@0.77.0/examples/fonts/helvetiker_bold.typeface.json',
+      'https://unpkg.com/three@0.77.0/examples/fonts/droid/droid_serif_bold.typeface.json',
       (font) => {
         const textGeometry = new TextGeometry('Stare iT', {
           font: font,
           size: 10,
-          height: 1,
-          curveSegments: 10,
+          height: 1.5,
+          curveSegments: 30,
           bevelEnabled: true,
           bevelThickness: 0.5,
           bevelSize: 0.1,
-          bevelSegments: 14,
+          bevelSegments: 20,
         });
 
         const material = new THREE.MeshStandardMaterial({
-          color: '#f08080',
-          roughness: 0.373,
-          metalness: 0.473,
-          transparent: true,
-          opacity: 1,
-          fog: true,
-        });
+          color: '#4d4dff', // Couleur du plastique
+          roughness: 0.5, // Rugosité du plastique
+          metalness: 0.1, // Métallique du plastique
+          emissive: '#000000', // Couleur émissive (noire pour simuler le plastique non lumineux)
+          side: THREE.DoubleSide, // Double face pour voir à l'intérieur
+        });        
 
         textMesh = new THREE.Mesh(textGeometry, material);
         textMesh.position.set(-30, -5, 2);

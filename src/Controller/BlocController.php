@@ -3,27 +3,30 @@
 namespace App\Controller;
 
 use App\Entity\Bloc;
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpKernel\Attribute\AsController;
 
-class BlocController extends AbstractController
+#[AsController]
+final class BlocController extends AbstractController
 {
-    public function create(Request $request): Response
+    public function __invoke(Request $request): Bloc
     {
-        $entityManager = $this->getDoctrine()->getManager();
+        $Titre=$request->get('Titre');
+        $Texte=$request->get('Texte');
+        $position_bloc=$request->get('position_bloc');
+        $id_article=$request->get('id_article');
+        $Urlimg=$request->get('Urlimg');
+        $Urlcsv=$request->get('Urlcsv');
 
-        $bloc = new Bloc();
-        $bloc->setTitre($request->request->get('Titre'));
-        $bloc->setTexte($request->request->get('Texte'));
-        $bloc->setid_article($request->request->get('position_bloc'));
-        $bloc->setposition_bloc($request->request->get('id_article'));
-
-        $entityManager->persist($bloc);
-        $entityManager->flush();
-
-        return $this->json(['message' => 'Cloc créé avec succès'], 201);
+        $mediaObject = new Bloc();
+        $mediaObject->setTitre($Titre);
+        $mediaObject->setTexte($Texte);
+        $mediaObject->setIdarticle($id_article);
+        $mediaObject->setPosition($position_bloc);
+        $mediaObject->setUrlimg($Urlimg);
+        $mediaObject->setUrlcsv($Urlcsv);
+    
+        return $mediaObject;    
     }
 }
