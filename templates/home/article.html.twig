@@ -3,5 +3,5 @@
 {% block title %}home.html.twig{% endblock %}
 
 {% block body %}
-                <div {{ react_component('bloc_creation') }}></div>
+    <div {{ react_component('articleid', {'id': article_id}) }}></div>
 {% endblock %}

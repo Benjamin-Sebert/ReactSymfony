@@ -14,10 +14,10 @@ use App\Entity\Article;
 
 class HomeController extends AbstractController
 {
-    #[Route('/article_creation', name: 'app_article_creation')]
-    public function Article_creation(): Response
+    #[Route('/Creation_article', name: 'app_creation_article')]
+    public function creationarticle(): Response
     {
-        return $this->render('home/article_creation.html.twig', [
+        return $this->render('home/Creation_article.html.twig', [
             'controller_name' => 'HomeController',
         ]);
     }
@@ -28,10 +28,10 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
-    #[Route('/view_media', name: 'app_media')]
-    public function Media(): Response
+    #[Route('/ajout_csv', name: 'app_csv')]
+    public function ajoutcsv(): Response
     {
-        return $this->render('home/Media.html.twig', [
+        return $this->render('home/Ajout_csv.html.twig', [
             'controller_name' => 'HomeController',
         ]);
     }
@@ -39,6 +39,22 @@ class HomeController extends AbstractController
     public function Acceuil(): Response
     {
         return $this->render('home/acceuil.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
+    #[Route('/articles/{id}', name: 'app_articleid')]
+    public function article($id): Response
+    {
+        return $this->render('home/article.html.twig', [
+            'controller_name' => 'HomeController',
+            'article_id' => $id,
+        ]);
+    }
+
+    #[Route('/lesarticles', name: 'app_lesarticles')]
+    public function lesarticles(): Response
+    {
+        return $this->render('home/les_articles.html.twig', [
             'controller_name' => 'HomeController',
         ]);
     }

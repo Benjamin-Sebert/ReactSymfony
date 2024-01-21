@@ -4,18 +4,18 @@ import Navbar from './Navbar';
 import axios from 'axios';
 import UserEmailFetcher from './UserEmailFetcher'; // Assurez-vous d'ajuster le chemin du fichier si nécessaire
 
-const media = (props) => {
+const csv = (props) => {
     const userEmail = UserEmailFetcher();
     const [resourceName, setResourceName] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
-    const [mediaResources, setmediaResources] = useState([]);
+    const [csvResources, setCsvResources] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const mediaResponse = await axios.get('http://localhost:8000/api/medias');
-                setmediaResources(mediaResponse.data['hydra:member']);
-                console.log(mediaResponse);
+                const csvResponse = await axios.get('http://localhost:8000/api/csvs');
+                setCsvResources(csvResponse.data['hydra:member']);
+                console.log(csvResponse);
             } catch (error) {
                 console.error('Erreur lors de la récupération des données:', error);
             }
@@ -46,7 +46,7 @@ const media = (props) => {
         formData.append('nom_ressource', resourceName);
 
         try {
-            const response = await fetch('http://localhost:8000/api/medias', {
+            const response = await fetch('http://localhost:8000/api/csvs', {
                 method: 'POST',
                 body: formData,
             });
@@ -59,14 +59,14 @@ const media = (props) => {
         }
     };
 
-    const deletemedia = async (id) => {
+    const deleteCsv = async (id) => {
         try {
-            // Delete media resource
-            await axios.delete(`http://localhost:8000/api/medias/${id}`);
+            // Delete CSV resource
+            await axios.delete(`http://localhost:8000/api/csvs/${id}`);
             // Update state to reflect the removal
-            setmediaResources(mediaResources.filter(mediaResource => mediaResource.id !== id));
+            setCsvResources(csvResources.filter(csvResource => csvResource.id !== id));
         } catch (error) {
-            console.error('Error deleting media resource:', error);
+            console.error('Error deleting CSV resource:', error);
         }
     };
 
@@ -90,7 +90,7 @@ const media = (props) => {
                                         <label className="block text-sm font-medium text-gray-600">Sélectionner un fichier</label>
                                         <input
                                             type="file"
-                                            accept=".media, image/*"
+                                            accept=".csv, image/*"
                                             onChange={handleFileChange}
                                             className="mt-1 p-2 block w-full border rounded-md"
                                         />
@@ -128,15 +128,15 @@ const media = (props) => {
                     </div>
 
                     <div className="mt-8">
-                        <h2 className="text-xl font-semibold mb-4">Ressources media disponibles</h2>
+                        <h2 className="text-xl font-semibold mb-4">Ressources CSV disponibles</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {mediaResources.map((mediaResource) => (
-                                <div key={mediaResource.id} className="p-4 bg-white rounded-md shadow-md">
-                                    <p className="text-gray-700 font-semibold">Nom de la ressource : {mediaResource.nom_ressource}</p>
-                                    <p className="text-gray-600">Upload par : {mediaResource.user}</p>
+                            {csvResources.map((csvResource) => (
+                                <div key={csvResource.id} className="p-4 bg-white rounded-md shadow-md">
+                                    <p className="text-gray-700 font-semibold">Nom de la ressource : {csvResource.nom_ressource}</p>
+                                    <p className="text-gray-600">Upload par : {csvResource.user}</p>
                                     <button
                                         type="button"
-                                        onClick={() => deletemedia(mediaResource.id)}
+                                        onClick={() => deleteCsv(csvResource.id)}
                                         className="mt-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
                                     >
                                         Supprimer
@@ -151,4 +151,4 @@ const media = (props) => {
     );
 };
 
-export default media;
+export default csv;

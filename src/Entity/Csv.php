@@ -9,7 +9,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Model;
-use App\Controller\MediaController;
+use App\Controller\CsvController;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -19,16 +19,16 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[Vich\Uploadable]
 #[ORM\Entity]
 #[ApiResource(
-    normalizationContext: ['groups' => ['media_object:read']],
+    normalizationContext: ['groups' => ['csv_object:read']],
     types: ['https://schema.org/MediaObject'],
     operations: [
-        new Get(normalizationContext: ['groups' => 'media:item']),
-        new GetCollection(normalizationContext: ['groups' => 'media:list']),
+        new Get(normalizationContext: ['groups' => 'Csv:item']),
+        new GetCollection(normalizationContext: ['groups' => 'Csv:list']),
         new GetCollection(),
         new Post(
-            controller: MediaController::class,
+            controller: CsvController::class,
             deserialize: false,
-            validationContext: ['groups' => ['Default', 'media_object_create']],
+            validationContext: ['groups' => ['Default', 'csv_object_create']],
             openapi: new Model\Operation(
                 requestBody: new Model\RequestBody(
                     content: new \ArrayObject([
@@ -49,31 +49,31 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
         )
     ]
 )]
-class Media
+class Csv
 {
     #[ORM\Id, ORM\Column, ORM\GeneratedValue]
-    #[Groups(['media_object:read'])]
+    #[Groups(['csv_object:read'])]
     private ?int $id = null;
 
     #[ApiProperty(types: ['https://schema.org/contentUrl'])]
-    #[Groups(['media_object:read'])]
+    #[Groups(['csv_object:read'])]
     public ?string $contentUrl = null;
 
-    #[Vich\UploadableField(mapping: 'media_object', fileNameProperty: 'filePath')]
-    #[Assert\NotNull(groups: ['media_create'])]
-    #[Groups(['media_object:read'])]
+    #[Vich\UploadableField(mapping: 'csv_object', fileNameProperty: 'filePath')]
+    #[Assert\NotNull(groups: ['csv_create'])]
+    #[Groups(['csv_object:read'])]
     public ?File $file = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['media_object:read'])]
+    #[Groups(['csv_object:read'])]
     public ?string $filePath = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['media_object:read'])]
+    #[Groups(['csv_object:read'])]
     public ?string $nom_ressource = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['media_object:read'])]
+    #[Groups(['csv_object:read'])]
     public ?string $user = null;
 
     public function getId(): ?int
