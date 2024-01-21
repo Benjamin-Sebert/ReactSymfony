@@ -30,8 +30,13 @@
             </div>
 
             <div class="mb-4">
-                {{ form_label(form.password, 'Mot de passe', {'label_attr': {'class': 'block text-gray-700 text-sm font-bold mb-2'}}) }}
-                {{ form_widget(form.password, {'attr': {'class': 'w-full p-2 border rounded'}}) }}
+                {{ form_label(form.password.first, 'Mot de passe', {'label_attr': {'class': 'block text-gray-700 text-sm font-bold mb-2'}}) }}
+                {{ form_widget(form.password.first, {'attr': {'class': 'w-full p-2 border rounded'}}) }}
+            </div>
+
+            <div class="mb-4">
+                {{ form_label(form.password.second, 'Répéter le mot de passe', {'label_attr': {'class': 'block text-gray-700 text-sm font-bold mb-2'}}) }}
+                {{ form_widget(form.password.second, {'attr': {'class': 'w-full p-2 border rounded'}}) }}
             </div>
 
             <div class="flex items-center justify-between">
