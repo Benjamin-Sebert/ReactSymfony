@@ -32,20 +32,17 @@ class CreateAdminCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        // Créer un nouvel utilisateur administrateur
+
         $admin = new User();
         $admin->setEmail('admin@example.com');
         $admin->setNom('Admin');
         $admin->setPrenom('Admin');
 
-        // Ajouter le rôle ROLE_USER (obligatoire) et ROLE_ADMIN
         $admin->setRoles(['ROLE_ADMIN']);
 
-        // Générer le mot de passe (changez "password" par le mot de passe souhaité)
         $encodedPassword = $this->passwordEncoder->hashPassword($admin, 'pass_1234');
         $admin->setPassword($encodedPassword);
 
-        // Enregistrer l'administrateur dans la base de données
         $this->entityManager->persist($admin);
         $this->entityManager->flush();
 
