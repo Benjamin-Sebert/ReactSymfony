@@ -107,78 +107,83 @@ const ArticleForm = () => {
     };
 
     return (
-        <div className="w-screen h-screen">
-            <div className="flex flex-col md:flex-row h-screen">
-                <Sidebar />
-
-                <main className="flex-1 bg-gray-100 p-6">
-                <Navbar />
-
-                    <div className="gap-8 mt-6">
-                        <div className="container mx-auto mt-8">
-                            <h1 className="text-2xl font-bold mb-4">Création d'article</h1>
-                            <form>
-                                <div className="mb-4">
-                                    <label htmlFor="Titre" className="block text-sm font-medium text-gray-600">
-                                        Titre de l'article
-                                    </label>
-                                    <input
-                                        type="text"
-                                        id="Titre"
-                                        name="Titre"
-                                        value={article.Titre}
-                                        onChange={(e) => setArticle({ ...article, Titre: e.target.value })}
-                                        className="mt-1 p-2 border rounded-md w-full"
-                                        required
-                                    />
-                                </div>
-
-                                <div className="mb-4">
-                                    <label htmlFor="Resume" className="block text-sm font-medium text-gray-600">
-                                        Résumé de l'article
-                                    </label>
-                                    <textarea
-                                        id="Resume"
-                                        name="Resume"
-                                        value={article.Resume}
-                                        onChange={(e) => setArticle({ ...article, Resume: e.target.value })}
-                                        className="mt-1 p-2 border rounded-md w-full"
-                                        required
-                                    ></textarea>
-                                </div>
-
-                                {article.blocks.map((block, index) => (
-                                    <ArticleBlock
-                                        key={index}
-                                        index={index}
-                                        block={block}
-                                        updateBlock={updateBlock}
-                                        removeBlock={removeBlock}
-                                    />
-                                ))}
-
-                                <button
-                                    type="button"
-                                    onClick={addBlock}
-                                    className="bg-blue-500 text-white px-4 py-2 rounded-md"
-                                >
-                                    Ajouter un bloc
-                                </button>
-
-                                <button
-                                    type="button"
-                                    onClick={handleArticleSubmit}
-                                    className="mt-4 bg-green-500 text-white px-4 py-2 rounded-md"
-                                >
-                                    Créer l'article
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </main>
+        <div className="min-h-screen flex">
+          {/* Sidebar */}
+          <Sidebar />
+      
+          {/* Main Content */}
+          <main className="flex-1 bg-gray-100 p-6">
+            {/* Navbar */}
+            <Navbar />
+      
+            {/* Article Creation Form */}
+            <div className="container mx-auto mt-8">
+              <h1 className="text-4xl font-bold mb-8">Création d'article</h1>
+              <form className="max-w-2xl mx-auto">
+                {/* Article Title */}
+                <div className="mb-6">
+                  <label htmlFor="Titre" className="block text-sm font-medium text-gray-600">
+                    Titre de l'article
+                  </label>
+                  <input
+                    type="text"
+                    id="Titre"
+                    name="Titre"
+                    value={article.Titre}
+                    onChange={(e) => setArticle({ ...article, Titre: e.target.value })}
+                    className="mt-1 p-3 border rounded-md w-full focus:outline-none focus:ring focus:border-blue-300"
+                    required
+                  />
+                </div>
+      
+                {/* Article Summary */}
+                <div className="mb-6">
+                  <label htmlFor="Resume" className="block text-sm font-medium text-gray-600">
+                    Résumé de l'article
+                  </label>
+                  <textarea
+                    id="Resume"
+                    name="Resume"
+                    value={article.Resume}
+                    onChange={(e) => setArticle({ ...article, Resume: e.target.value })}
+                    className="mt-1 p-3 border rounded-md w-full h-32 focus:outline-none focus:ring focus:border-blue-300"
+                    required
+                  ></textarea>
+                </div>
+      
+                {/* Article Blocks */}
+                {article.blocks.map((block, index) => (
+                  <ArticleBlock
+                    key={index}
+                    index={index}
+                    block={block}
+                    updateBlock={updateBlock}
+                    removeBlock={removeBlock}
+                  />
+                ))}
+      
+                {/* Add Block Button */}
+                <button
+                  type="button"
+                  onClick={addBlock}
+                  className="bg-red-400	 text-white px-4 py-2 rounded-md mr-4 hover:bg-red-600 focus:outline-none focus:ring focus:border-black-300"
+                >
+                  Ajouter un bloc
+                </button>
+      
+                {/* Create Article Button */}
+                <button
+                  type="button"
+                  onClick={handleArticleSubmit}
+                  className="bg-red-400	 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:border-black-300"
+                >
+                  Créer l'article
+                </button>
+              </form>
             </div>
+          </main>
         </div>
-    );
+      );
 };
 
 export default ArticleForm;
