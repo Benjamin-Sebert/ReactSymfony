@@ -1,7 +1,6 @@
 // Footer.js
 import React from 'react';
 import AvatarButton from './Avatar';
-import ThemeToggle from './ThemeToggle';
 import ThreeScene from './ThreeScene';
 
 const Navbar = () => {
@@ -10,7 +9,6 @@ const Navbar = () => {
             <ThreeScene />
             <div className="flex items-center space-x-4">
                 <AvatarButton />
-                <ThemeToggle />
             </div>
         </div>
     );

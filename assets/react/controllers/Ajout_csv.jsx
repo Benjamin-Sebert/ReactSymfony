@@ -3,12 +3,14 @@ import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import axios from 'axios';
 import UserEmailFetcher from './UserEmailFetcher'; // Assurez-vous d'ajuster le chemin du fichier si nécessaire
+import { ThemeProvider } from './ThemeContext';
 
-const csv = (props) => {
+const Csv = (props) => {
     const userEmail = UserEmailFetcher();
     const [resourceName, setResourceName] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
     const [csvResources, setCsvResources] = useState([]);
+    const [confirmationMessage, setConfirmationMessage] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -38,7 +40,7 @@ const csv = (props) => {
             console.error('Veuillez sélectionner un fichier et ajouter un nom à la ressource.');
             return;
         }
-        
+
         const formData = new FormData();
         formData.append('file', selectedFile);
         formData.append('file_type', selectedFile.type);
@@ -54,8 +56,20 @@ const csv = (props) => {
             const data = await response.json();
             console.log('File uploaded successfully:', data);
 
+            // Définir le message de confirmation
+            setConfirmationMessage('Le fichier CSV a été téléchargé avec succès.');
+
+            // Réinitialiser les champs après le téléchargement réussi
+            setSelectedFile(null);
+            setResourceName('');
+
+            // Actualiser la page après 1 seconde (vous pouvez ajuster cela selon vos besoins)
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+
         } catch (error) {
-            console.error('Error uploading file:', error);
+            console.error('Error uploading CSV file:', error);
         }
     };
 
@@ -73,21 +87,27 @@ const csv = (props) => {
     return (
         <div className="w-screen h-screen">
             <div className="flex flex-col md:flex-row h-screen">
-                <Sidebar />
+                <ThemeProvider>
+                    <Sidebar />
+                </ThemeProvider>
                 <main className="flex-1 p-6">
-                    <Navbar/>
+                    <Navbar />
 
                     <div className="gap-8 mt-6">
                         <div className="w-full h-full flex items-center justify-center">
                             <div className="w-full">
                                 <div className="mb-6">
-                                    <h1 className="text-2xl font-semibold mb-2">Formulaire de Ressource</h1>
-                                    <p className="text-gray-600">Ajoutez une nouvelle ressource à Stare It</p>
+                                    <h1 className="text-2xl font-semibold mb-2">Formulaire de Ressource CSV</h1>
+                                    <p className="text-gray-600">Ajoutez une nouvelle ressource CSV à Stare It</p>
                                 </div>
+
+                                {confirmationMessage && (
+                                    <div className="text-green-500">{confirmationMessage}</div>
+                                )}
 
                                 <form className="space-y-4">
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-600">Sélectionner un fichier</label>
+                                        <label className="block text-sm font-medium text-gray-600">Sélectionner un fichier CSV</label>
                                         <input
                                             type="file"
                                             accept=".csv, image/*"
@@ -151,4 +171,4 @@ const csv = (props) => {
     );
 };
 
-export default csv;
+export default Csv;

@@ -58,4 +58,11 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
+    #[Route('/themes', name: 'app_lesthemes')]
+    public function themes(): Response
+    {
+        return $this->render('home/themes.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
 }
