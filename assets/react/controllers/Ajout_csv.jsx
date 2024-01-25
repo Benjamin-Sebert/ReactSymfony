@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import axios from 'axios';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
-import axios from 'axios';
-import UserEmailFetcher from './UserEmailFetcher'; // Assurez-vous d'ajuster le chemin du fichier si nécessaire
+import UserEmailFetcher from './UserEmailFetcher';
 import { ThemeProvider } from './ThemeContext';
 
 const Csv = (props) => {
@@ -17,7 +17,6 @@ const Csv = (props) => {
             try {
                 const csvResponse = await axios.get('http://localhost:8000/api/csvs');
                 setCsvResources(csvResponse.data['hydra:member']);
-                console.log(csvResponse);
             } catch (error) {
                 console.error('Erreur lors de la récupération des données:', error);
             }
@@ -26,16 +25,14 @@ const Csv = (props) => {
         fetchData();
     }, []);
 
-    const handleFileChange = (event) => {
+    const handleFileChange = useCallback((event) => {
         const file = event.target.files[0];
-
         if (file) {
             setSelectedFile(file);
-            console.log('Selected file:', file.name);
         }
-    };
+    }, []);
 
-    const handleUpload = async () => {
+    const handleUpload = useCallback(async () => {
         if (!selectedFile || !resourceName) {
             console.error('Veuillez sélectionner un fichier et ajouter un nom à la ressource.');
             return;
@@ -48,41 +45,24 @@ const Csv = (props) => {
         formData.append('nom_ressource', resourceName);
 
         try {
-            const response = await fetch('http://localhost:8000/api/csvs', {
-                method: 'POST',
-                body: formData,
-            });
-
-            const data = await response.json();
-            console.log('File uploaded successfully:', data);
-
-            // Définir le message de confirmation
+            const response = await axios.post('http://localhost:8000/api/csvs', formData);
             setConfirmationMessage('Le fichier CSV a été téléchargé avec succès.');
-
-            // Réinitialiser les champs après le téléchargement réussi
+            setCsvResources([...csvResources, response.data]);
             setSelectedFile(null);
             setResourceName('');
-
-            // Actualiser la page après 1 seconde (vous pouvez ajuster cela selon vos besoins)
-            setTimeout(() => {
-                window.location.reload();
-            }, 1000);
-
         } catch (error) {
             console.error('Error uploading CSV file:', error);
         }
-    };
+    }, [selectedFile, resourceName, csvResources, userEmail]);
 
-    const deleteCsv = async (id) => {
+    const deleteCsv = useCallback(async (id) => {
         try {
-            // Delete CSV resource
             await axios.delete(`http://localhost:8000/api/csvs/${id}`);
-            // Update state to reflect the removal
             setCsvResources(csvResources.filter(csvResource => csvResource.id !== id));
         } catch (error) {
             console.error('Error deleting CSV resource:', error);
         }
-    };
+    }, [csvResources]);
 
     return (
         <div className="w-screen h-screen">
@@ -110,7 +90,7 @@ const Csv = (props) => {
                                         <label className="block text-sm font-medium text-gray-600">Sélectionner un fichier CSV</label>
                                         <input
                                             type="file"
-                                            accept=".csv, image/*"
+                                            accept=".csv"
                                             onChange={handleFileChange}
                                             className="mt-1 p-2 block w-full border rounded-md"
                                         />

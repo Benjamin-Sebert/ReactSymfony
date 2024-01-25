@@ -5,7 +5,7 @@ import axios from 'axios';
 import UserEmailFetcher from './UserEmailFetcher'; // Assurez-vous d'ajuster le chemin du fichier si nécessaire
 import { ThemeProvider } from './ThemeContext';
 
-const media = (props) => {
+const images = (props) => {
     const userEmail = UserEmailFetcher();
     const [resourceName, setResourceName] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
@@ -15,7 +15,7 @@ const media = (props) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const mediaResponse = await axios.get('http://localhost:8000/api/medias');
+                const mediaResponse = await axios.get('http://localhost:8000/api/images');
                 setmediaResources(mediaResponse.data['hydra:member']);
                 console.log(mediaResponse);
             } catch (error) {
@@ -48,7 +48,7 @@ const media = (props) => {
         formData.append('nom_ressource', resourceName);
 
         try {
-            const response = await fetch('http://localhost:8000/api/medias', {
+            const response = await fetch('http://localhost:8000/api/images', {
                 method: 'POST',
                 body: formData,
             });
@@ -75,12 +75,12 @@ const media = (props) => {
 
     const deletemedia = async (id) => {
         try {
-            // Delete media resource
-            await axios.delete(`http://localhost:8000/api/medias/${id}`);
+            // Delete images resource
+            await axios.delete(`http://localhost:8000/api/images/${id}`);
             // Update state to reflect the removal
             setmediaResources(mediaResources.filter(mediaResource => mediaResource.id !== id));
         } catch (error) {
-            console.error('Error deleting media resource:', error);
+            console.error('Error deleting images resource:', error);
         }
     };
 
@@ -110,7 +110,7 @@ const media = (props) => {
                                         <label className="block text-sm font-medium text-gray-600">Sélectionner un fichier</label>
                                         <input
                                             type="file"
-                                            accept=".media, image/*"
+                                            accept=".images, image/*"
                                             onChange={handleFileChange}
                                             className="mt-1 p-2 block w-full border rounded-md"
                                         />
@@ -148,10 +148,18 @@ const media = (props) => {
                     </div>
 
                     <div className="mt-8">
-                        <h2 className="text-xl font-semibold mb-4">Ressources media disponibles</h2>
+                        <h2 className="text-xl font-semibold mb-4">Ressources images disponibles</h2>
+
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {mediaResources.map((mediaResource) => (
                                 <div key={mediaResource.id} className="p-4 bg-white rounded-md shadow-md">
+                                    {/* Afficher la miniature de l'image */}
+                                        <img
+                                            src={`http://localhost:8000/images/${mediaResource.filePath}`}
+                                            alt={`Miniature de ${mediaResource.nom_ressource}`}
+                                            className="w-full h-40 object-cover mb-2 rounded-md"
+                                        />
+                                    
                                     <p className="text-gray-700 font-semibold">Nom de la ressource : {mediaResource.nom_ressource}</p>
                                     <p className="text-gray-600">Upload par : {mediaResource.user}</p>
                                     <button
@@ -171,4 +179,4 @@ const media = (props) => {
     );
 };
 
-export default media;
+export default images;

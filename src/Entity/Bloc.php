@@ -72,8 +72,22 @@ class Bloc
 
     #[ORM\Column(nullable: true)]
     #[Groups(['bloc_object:read'])]
+    private ?string $ColonneCsv = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Groups(['bloc_object:read'])]
     private ?string $Idarticle = null;
 
+    public function getColonneCsv(): string
+    {
+        return $this->ColonneCsv;
+    }
+    public function setColonneCsv(string $ColonneCsv): static
+    {
+        $this->ColonneCsv = $ColonneCsv;
+
+        return $this;
+    }
     public function getUrlimg(): string
     {
         return $this->Urlimg;

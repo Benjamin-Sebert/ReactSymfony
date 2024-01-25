@@ -9,7 +9,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Model;
-use App\Controller\MediaController;
+use App\Controller\ImageController;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -26,7 +26,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
         new GetCollection(normalizationContext: ['groups' => 'media:list']),
         new GetCollection(),
         new Post(
-            controller: MediaController::class,
+            controller: ImageController::class,
             deserialize: false,
             validationContext: ['groups' => ['Default', 'media_object_create']],
             openapi: new Model\Operation(
@@ -49,7 +49,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
         )
     ]
 )]
-class Media
+class Image
 {
     #[ORM\Id, ORM\Column, ORM\GeneratedValue]
     #[Groups(['media_object:read'])]

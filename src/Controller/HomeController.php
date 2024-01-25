@@ -28,6 +28,13 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
+    #[Route('/test', name: 'app_stat')]
+    public function stat(): Response
+    {
+        return $this->render('home/stat.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
     #[Route('/ajout_csv', name: 'app_csv')]
     public function ajoutcsv(): Response
     {

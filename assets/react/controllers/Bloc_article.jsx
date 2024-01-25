@@ -1,29 +1,64 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Papa from 'papaparse'; // Assurez-vous d'avoir importé PapaParse
 
 const ArticleBlock = ({ index, block, updateBlock, removeBlock }) => {
     const [csvOptions, setCsvOptions] = useState([]);
     const [imageOptions, setImageOptions] = useState([]);
+    const [csvColumns, setCsvColumns] = useState([]);
+    const [selectedImagePath, setSelectedImagePath] = useState(null);
+    const [selectedColumn, setSelectedColumn] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const csvResponse = await axios.get('http://localhost:8000/api/csvs');
+                const [csvResponse, mediaResponse] = await Promise.all([
+                    axios.get('http://localhost:8000/api/csvs'),
+                    axios.get('http://localhost:8000/api/images')
+                ]);
                 setCsvOptions(csvResponse.data['hydra:member']);
-
-                const mediaResponse = await axios.get('http://localhost:8000/api/medias');
                 setImageOptions(mediaResponse.data['hydra:member']);
             } catch (error) {
                 console.error('Erreur lors de la récupération des données', error.message);
+                // Afficher un message d'erreur à l'utilisateur ici si nécessaire
             }
         };
 
         fetchData();
     }, []);
 
-    const handleInputChange = (field, value) => {
-        updateBlock(index, { ...block, [field]: value });
+    const handleCsvColumnChange = (value) => {
+        setSelectedColumn(value);
+        handleInputChange('ColonneCsv', value);
     };
+
+    const handleInputChange = (name, value) => {
+        // Mettre à jour le bloc avec la nouvelle valeur
+        updateBlock(index, { ...block, [name]: value });
+    };
+
+    const handleCsvChange = async (filePath) => {
+        handleInputChange('csvPath', filePath);
+
+        Papa.parse(`http://localhost:8000/csv/${filePath}`, {
+            download: true,
+            complete: (results) => {
+                if (results.data.length > 0) {
+                    // La première ligne contient les noms de colonne
+                    setCsvColumns(results.data[0]);
+                    setSelectedColumns([]); // Réinitialiser les colonnes sélectionnées
+                }
+            },
+            header: false,
+            error: (error) => console.error('Erreur lors du chargement du CSV', error.message)
+        });
+    };
+
+    const handleImageClick = (imagePath) => {
+        setSelectedImagePath(imagePath);
+        handleInputChange('imagePath', imagePath);
+    };
+
 
     return (
         <div className="mb-4">
@@ -40,23 +75,24 @@ const ArticleBlock = ({ index, block, updateBlock, removeBlock }) => {
                 onChange={(e) => handleInputChange('Titre', e.target.value)}
                 className="mt-1 p-2 border rounded-md w-full"
             />
-
             {/* Choisir un fichier image */}
-            <label htmlFor={`imagePath${index}`} className="block text-sm font-medium text-gray-600 mt-2">
-                Choisir un fichier image
-            </label>
-            <select
-                id={`imagePath${index}`}
-                name={`imagePath${index}`}
-                value={block.imagePath}
-                onChange={(e) => handleInputChange('imagePath', e.target.value)}
-                className="mt-1 p-2 border rounded-md w-full"
-            >
-                <option value="">Sélectionner un fichier image</option>
-                {imageOptions.map(option => (
-                    <option key={option.id} value={option.filePath}>{option.nom_ressource}</option>
-                ))}
-            </select>
+
+            <div>
+                <label htmlFor={`imagePath${index}`} className="block text-sm font-medium text-gray-600 mt-2">
+                    Choisir un fichier image
+                </label>
+                <div className="flex items-center mt-1">
+                    {imageOptions.map((option, index) => (
+                        <img
+                            key={index}
+                            src={`http://localhost:8000/images/${option.filePath}`}
+                            alt="Miniature de l'image"
+                            className={`max-w-24 h-auto ${selectedImagePath === option.filePath ? 'border-2 border-red-500' : ''}`}
+                            onClick={() => handleImageClick(option.filePath)}
+                        />
+                    ))}
+                </div>
+            </div>
 
             {/* Texte du bloc */}
             <label htmlFor={`blockTexte${index}`} className="block text-sm font-medium text-gray-600 mt-2">
@@ -78,12 +114,27 @@ const ArticleBlock = ({ index, block, updateBlock, removeBlock }) => {
                 id={`csvPath${index}`}
                 name={`csvPath${index}`}
                 value={block.csvPath}
-                onChange={(e) => handleInputChange('csvPath', e.target.value)}
+                onChange={(e) => handleCsvChange(e.target.value)}
                 className="mt-1 p-2 border rounded-md w-full"
             >
                 <option value="">Sélectionner un fichier CSV</option>
                 {csvOptions.map(option => (
                     <option key={option.id} value={option.filePath}>{option.nom_ressource}</option>
+                ))}
+            </select>
+
+            <label htmlFor={`csvColumns${index}`} className="block text-sm font-medium text-gray-600 mt-2">
+                Choisir la colonne à afficher
+            </label>
+            <select
+                id={`csvColumns${index}`}
+                name={`csvColumns${index}`}
+                value={selectedColumn}
+                onChange={(e) => handleCsvColumnChange(e.target.value)}
+                className="mt-1 p-2 border rounded-md w-full"
+            >
+                {csvColumns.map((column, idx) => (
+                    <option key={idx} value={column}>{column}</option>
                 ))}
             </select>
 

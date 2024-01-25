@@ -52,9 +52,8 @@ const BarChart = ({ csvUrl }) => {
         <div>
             <h2>Graphique des Données</h2>
             <select value={chartType} onChange={(event) => setChartType(event.target.value)}>
-                <option value="bar">Barre</option>
-                <option value="line">Ligne</option>
-                <option value="pie">Camembert</option>
+                <option value="pie">pie</option>
+                <option value="boxplot">boxplot</option>
             </select>
             <canvas ref={chartRef} />
         </div>
