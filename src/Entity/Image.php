@@ -8,6 +8,7 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Delete;
 use ApiPlatform\OpenApi\Model;
 use App\Controller\ImageController;
 use Doctrine\ORM\Mapping as ORM;
@@ -25,6 +26,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
         new Get(normalizationContext: ['groups' => 'media:item']),
         new GetCollection(normalizationContext: ['groups' => 'media:list']),
         new GetCollection(),
+        new Delete(),
         new Post(
             controller: ImageController::class,
             deserialize: false,

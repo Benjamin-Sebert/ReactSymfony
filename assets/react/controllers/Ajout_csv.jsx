@@ -11,6 +11,8 @@ const Csv = (props) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [csvResources, setCsvResources] = useState([]);
     const [confirmationMessage, setConfirmationMessage] = useState('');
+    const [csvToDeleteId, setCsvToDeleteId] = useState(null); // Ajout de l'ID du CSV à supprimer
+    const [showConfirmationDialog, setShowConfirmationDialog] = useState(false); // Pour afficher la boîte de dialogue de confirmation
 
     useEffect(() => {
         const fetchData = async () => {
@@ -56,13 +58,24 @@ const Csv = (props) => {
     }, [selectedFile, resourceName, csvResources, userEmail]);
 
     const deleteCsv = useCallback(async (id) => {
+        setCsvToDeleteId(id); // Stocker l'ID du fichier CSV à supprimer
+        setShowConfirmationDialog(true); // Afficher la boîte de dialogue de confirmation
+    }, []);
+
+    const confirmDeleteCsv = useCallback(async () => {
         try {
-            await axios.delete(`http://localhost:8000/api/csvs/${id}`);
-            setCsvResources(csvResources.filter(csvResource => csvResource.id !== id));
+            await axios.delete(`http://localhost:8000/api/csvs/${csvToDeleteId}`);
+            setCsvResources(csvResources.filter(csvResource => csvResource.id !== csvToDeleteId));
+            setConfirmationMessage('Le fichier CSV a été supprimé avec succès.');
+            setShowConfirmationDialog(false); // Cacher la boîte de dialogue après suppression
         } catch (error) {
             console.error('Error deleting CSV resource:', error);
         }
-    }, [csvResources]);
+    }, [csvResources, csvToDeleteId]);
+
+    const cancelDeleteCsv = useCallback(() => {
+        setShowConfirmationDialog(false); // Cacher la boîte de dialogue d'annulation
+    }, []);
 
     return (
         <div className="w-screen h-screen">
@@ -147,6 +160,27 @@ const Csv = (props) => {
                     </div>
                 </main>
             </div>
+            {showConfirmationDialog && (
+                <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+                    <div className="bg-white p-4 rounded shadow-md">
+                        <p className="text-lg font-semibold">Confirmez la suppression du fichier CSV ?</p>
+                        <div className="mt-4 flex justify-between">
+                            <button
+                                onClick={confirmDeleteCsv}
+                                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full mr-2"
+                            >
+                                Confirmer
+                            </button>
+                            <button
+                                onClick={cancelDeleteCsv}
+                                className="bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full"
+                            >
+                                Annuler
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

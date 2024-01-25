@@ -4,15 +4,12 @@
 
 {% block body %}
  
-       <div class="flex justify-center items-center h-screen flex-col">
-       {# <img src="./assets/images_cms/StareIt.png" alt="Your Logo" class="mb-4 mx-auto"/> #}
-       
+       <div class="flex justify-center items-center h-screen flex-col bg-custom-black">       
        
         <div class="w-full max-w-xs">
-            <form method="post" class="bg-custom-gray shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <form method="post" class="bg-black shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
 
-                <img src="{{ asset('images_cms/stare.png') }}" alt="Your Logo" class="mx-auto max-width logo-animation"/>
-                <h1 class="text-custom-green text-7xl font-bold mb-6" id="animated-title"> stare-it</h1>
+                <h1 class="text-custom-blue text-6xl font-bold mb-6" id="animated-title">Stare it</h1>
                 
                 {% if error %}
                     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -24,9 +21,8 @@
                     </div>
                 {% endif %} #}
 
-                
                 <div class="mb-4">
-                     <label class="block text-custom-green-logo text-sm font-bold mb-2" for="inputEmail">Email</label>
+                     <label class="block text-custom-blue text-sm font-bold mb-2" for="inputEmail">Email</label>
                     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="inputEmail"
 			            name="email" 
@@ -39,8 +35,8 @@
                     required autofocus>
                 </div>
                 <div class="mb-6">
-                     <label class="block text-custom-green-logo text-sm font-bold mb-2" for="inputPassword">
-                        Password
+                     <label class="block text-custom-blue text-sm font-bold mb-2" for="inputPassword">
+                        Mot de passe
                     </label>
                     <input
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -49,7 +45,7 @@
 			            class="form-control"
                         type="password"
 			            autocomplete="current-password"
-                        placeholder="Password"
+                        placeholder="Mot de passe"
                         value="{{ password ?? '' }}"
                         oninput="password = this.value"
                     required>
@@ -60,122 +56,18 @@
                 </div>
                 <div class="flex items-center justify-between">
                     <div class="btn-two">
-                        <button class="bg-custom-green-logo hover:bg-custom-light-purple text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                        <button class="bg-custom-blue hover:bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                             Se connecter
                         </button>
                     </div>
                 
                     <div class="btn-two">
-                        <button type="button" class="bg-custom-purple hover:bg-custom-green-logo text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" >
-                           <a href="{{ path('app_register') }}"> S'inscrire</a>
-                            
-                            
+                        <button type="button" class="bg-custom-purple hover:bg-custom-blue text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" >
+                           <a href="{{ path('app_register') }}"> S'inscrire</a>   
                         </button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-
-      <style>
-
-        .btn-two {
-    position: relative;
-    overflow: hidden;
-}
-
-.btn-two::before, .btn-two::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    transition: all 0.3s;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-}
-
-.btn-two:hover::after {
-    animation-name: rotatecw;
-    animation-duration: 2s;
-}
-
-.btn-two:hover::before {
-    animation-name: rotateccw; 
-    animation-duration: 3s;
-}
-
-.btn-two:hover::after, .btn-two:hover::before {
-    left: 96px;
-    width: 64px;
-  
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-}
-
-@keyframes rotatecw {
-    from {transform: rotate(0deg);}
-    to {transform: rotate(360deg);}
-}
-
-@keyframes rotateccw {
-    from {transform: rotate(0deg);}
-    to {transform: rotate(-360deg);}
-}
-
-
-        .max-width {
-        max-width: 50%;
-        }
-         {# .logo-animation {
-            animation: zoomIn 1s ease-in-out;
-        } #}
-
-        #animated-title {
-            display: inline-block;
-            background: linear-gradient(45deg,#9bf0db,#7F00FF, #38FF9C);
-            -webkit-background-clip: text;
-            color: transparent;
-            opacity: 0;
-            animation: gradientFadeIn 2s ease-in-out forwards;
-        }
-          {# @keyframes zoomIn {
-            from {
-                transform: scale(0);
-            }
-            to {
-                transform: scale(1);
-            }
-        } #}
-
-        @keyframes gradientFadeIn {
-            100% {
-                opacity: 0;
-            }
-            10% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 2;
-            }
-        }
-    </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            animateTitle();
-        });
-
-        function animateTitle() {
-            const title = document.getElementById("animated-title");
-            const text = title.innerText;
-            title.innerText = "";
-
-            for (let i = 0; i < text.length; i++) {
-                setTimeout(() => {
-                    title.innerText += text[i];
-                }, i * 200);
-            }
-        }
-    </script>
 {% endblock %}

@@ -42,10 +42,17 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
-    #[Route('/acceuil', name: 'app_acceuil')]
+    #[Route('/Accueil', name: 'Accueil')]
     public function Acceuil(): Response
     {
-        return $this->render('home/acceuil.html.twig', [
+        return $this->render('home/Accueil.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
+    #[Route('/', name: 'Welcome')]
+    public function Welcome(): Response
+    {
+        return $this->render('home/Accueil.html.twig', [
             'controller_name' => 'HomeController',
         ]);
     }

@@ -9,10 +9,11 @@ const Sidebar = () => {
   return (
     <aside className={`w-full md:w-2/12 p-5 ${theme === 'dark' ? 'bg-gray-800' : theme === 'theme1' ? 'bg-blue-500' : 'bg-green-500'} md:shadow-lg`}>
       <ul className="space-y-4">
-        <li>
-          <a className="flex items-center px-4 py-2 text-white hover:bg-gray-700 rounded-md transition" href="#">
-            <Home className="text-red-500" size={30} />
-            <span className="mx-4 font-medium">Accueil</span>
+
+      <li>
+          <a className="flex items-center px-4 py-2 text-white hover:bg-gray-700 rounded-md transition" href="lesarticles">
+            <View className="text-white" size={30} />
+            <span className="mx-4 font-medium">Afficher les articles</span>
           </a>
         </li>
 
@@ -20,13 +21,6 @@ const Sidebar = () => {
           <a className="flex items-center px-4 py-2 text-white hover:bg-gray-700 rounded-md transition" href="Creation_article">
             <Newspaper className="text-white" size={30} />
             <span className="mx-4 font-medium">Créer mon article</span>
-          </a>
-        </li>
-
-        <li>
-          <a className="flex items-center px-4 py-2 text-white hover:bg-gray-700 rounded-md transition" href="lesarticles">
-            <View className="text-white" size={30} />
-            <span className="mx-4 font-medium">Afficher les articles</span>
           </a>
         </li>
 

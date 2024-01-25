@@ -6,6 +6,7 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Delete;
 use ApiPlatform\OpenApi\Model;
 use App\Controller\BlocController;
 use Doctrine\ORM\Mapping as ORM;
@@ -20,6 +21,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
         new Get(normalizationContext: ['groups' => 'Bloc:item']),
         new GetCollection(normalizationContext: ['groups' => 'Bloc:list']),
         new GetCollection(),
+        new Delete(),
         new Post(
         controller: BlocController::class,
         deserialize: false,
