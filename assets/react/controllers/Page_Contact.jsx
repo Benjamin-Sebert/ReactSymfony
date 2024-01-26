@@ -17,13 +17,13 @@ const AvCreationContent = () => {
   const { theme } = useTheme();  // Assurez-vous que useTheme est correctement importé
 
   return (
-    <div className={`w-screen h-screen ${theme} md:shadow-lg`}>
+    <div className={`w-screen h-screen ${theme} `}>
     
       <div className="flex flex-col md:flex-row h-screen">
         <Sidebar />
         <main className={`flex-1 p-6 ${theme} md:shadow-lg`}>
           <Navbar />
-          <div className={` ${theme} md:shadow-lg flex justify-center items-center `}>
+          <div className={` ${theme} flex justify-center items-center `}>
             <ContactForm />
           </div>
         </main>

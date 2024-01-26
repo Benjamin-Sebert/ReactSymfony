@@ -2,11 +2,12 @@ import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
-import axios from 'axios';
 import UserEmailFetcher from './UserEmailFetcher'; // Assurez-vous d'ajuster le chemin du fichier si nécessaire
-import { ThemeProvider } from './ThemeContext';
+import { ThemeProvider,useTheme } from './ThemeContext';
 
-const media = (props) => {
+const Media = (props) => {
+    const { theme } = useTheme();
+
     const userEmail = UserEmailFetcher();
     const [resourceName, setResourceName] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
@@ -194,4 +195,12 @@ const media = (props) => {
     );
 };
 
-export default media;
+const AvCreation = () => {
+    return (
+      <ThemeProvider>
+        <Media />
+      </ThemeProvider>
+    );
+  };
+
+export default AvCreation;

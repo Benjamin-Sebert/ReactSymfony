@@ -144,16 +144,11 @@ const ArticleForm = () => {
     }
   };
   return (
-    <div className={`w-screen h-screen ${theme === 'dark' ? 'bg-gray-800' : theme === 'theme1' ? 'bg-blue-500' : 'bg-green-500'} md:shadow-lg`}>
-    <div className="min-h-screen flex">
-      {/* Sidebar */}
-      
+    <div className={`w-screen ${theme} md:shadow-lg`}>
+    <div className="min-h-screen flex">      
 
       <Sidebar/>
 
-      
-
-      {/* Main Content */}
       <main className="flex-1 p-6">
         {/* Navbar */}
         <Navbar />

@@ -9,24 +9,18 @@ const Sidebar = () => {
   return (
     <aside className={`w-full md:w-2/12 p-5 ${theme} md:shadow-lg`}>
       <ul className="space-y-4">
-        <li>
-          <a className="flex items-center px-4 py-2 text-white hover:bg-gray-700 rounded-md transition" href="#">
-            <Home className="text-red-500" size={30} />
-            <span className="mx-4 font-medium">Accueil</span>
+
+      <li>
+          <a className="flex items-center px-4 py-2 text-white hover:bg-gray-700 rounded-md transition" href="lesarticles">
+            <View className="text-white" size={30} />
+            <span className="mx-4 font-medium">Afficher les articles</span>
           </a>
         </li>
-
+        
         <li>
           <a className="flex items-center px-4 py-2 text-white hover:bg-gray-700 rounded-md transition" href="Creation_article">
             <Newspaper className="sidebar-icon" size={30} />
             <span className="mx-4 font-medium">Créer mon article</span>
-          </a>
-        </li>
-
-        <li>
-          <a className="flex items-center px-4 py-2 text-white hover:bg-gray-700 rounded-md transition" href="lesarticles">
-            <View className="text-white" size={30} />
-            <span className="mx-4 font-medium">Afficher les articles</span>
           </a>
         </li>
 

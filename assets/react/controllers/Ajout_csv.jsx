@@ -2,9 +2,8 @@ import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
-import axios from 'axios';
 import UserEmailFetcher from './UserEmailFetcher'; // Assurez-vous d'ajuster le chemin du fichier si nécessaire
-import { ThemeProvider } from './ThemeContext';
+import { ThemeProvider,useTheme } from './ThemeContext';
 
 const Csv = (props) => {
     const { theme } = useTheme();
@@ -108,7 +107,7 @@ const Csv = (props) => {
                                         <label className="block text-sm font-medium text-gray-600">Sélectionner un fichier CSV</label>
                                         <input
                                             type="file"
-                                            accept=".csv, image/*"
+                                            accept=".csv"
                                             onChange={handleFileChange}
                                             className="mt-1 p-2 block w-full border rounded-md"
                                         />
@@ -168,5 +167,13 @@ const Csv = (props) => {
         </div>
     );
 };
+
+const AvCreation = () => {
+    return (
+      <ThemeProvider>
+        <Csv />
+      </ThemeProvider>
+    );
+  };
 
 export default AvCreation;
