@@ -1,5 +1,4 @@
 <?php
-// src/Command/CreateAdminCommand.php
 
 namespace App\Command;
 
@@ -27,7 +26,7 @@ class CreateAdminCommand extends Command
     {
         $this
             ->setName('app:create-admin')
-            ->setDescription('Create a new admin user');
+            ->setDescription('Créer un nouvel admin');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -46,7 +45,7 @@ class CreateAdminCommand extends Command
         $this->entityManager->persist($admin);
         $this->entityManager->flush();
 
-        $output->writeln('Admin user created successfully.');
+        $output->writeln('Admin a bien été créer');
 
         return Command::SUCCESS;
     }

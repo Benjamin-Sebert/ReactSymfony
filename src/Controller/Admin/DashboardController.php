@@ -7,7 +7,7 @@ use App\Entity\User;
 use App\Form\EditUserType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
-use Symfony\Component\HttpFoundation\Request; // Ajoutez cette ligne
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -34,8 +34,6 @@ class DashboardController extends AbstractDashboardController
             $this->addFlash('error', 'Vous n\'avez pas la permission d\'accéder à cette page.');
             return $this->redirectToRoute('app_login');
         }
-
-        // Utilisez le gestionnaire d'entités injecté pour récupérer les utilisateurs
         $users = $this->entityManager->getRepository(User::class)->findAll();
 
         return $this->render('admin/test_dashboard_custom.html.twig', [
@@ -56,7 +54,7 @@ class DashboardController extends AbstractDashboardController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Encodez le nouveau mot de passe si le champ de mot de passe est rempli
+
             if ($form->get('password')->getData()) {
                 $encodedPassword = $this->passwordHasher->hashPassword($user, $form->get('password')->getData());
                 $user->setPassword($encodedPassword);
@@ -64,7 +62,7 @@ class DashboardController extends AbstractDashboardController
 
             $this->entityManager->flush();
 
-            // Redirigez l'utilisateur vers une page de confirmation ou ailleurs
+
             return $this->redirectToRoute('admin');
         }
 
