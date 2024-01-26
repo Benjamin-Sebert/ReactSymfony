@@ -5,9 +5,7 @@ import Papa from 'papaparse'; // Assurez-vous d'avoir importé PapaParse
 const ArticleBlock = ({ index, block, updateBlock, removeBlock }) => {
     const [csvOptions, setCsvOptions] = useState([]);
     const [imageOptions, setImageOptions] = useState([]);
-    const [csvColumns, setCsvColumns] = useState([]);
     const [selectedImagePath, setSelectedImagePath] = useState(null);
-    const [selectedColumn, setSelectedColumn] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,10 +25,6 @@ const ArticleBlock = ({ index, block, updateBlock, removeBlock }) => {
         fetchData();
     }, []);
 
-    const handleCsvColumnChange = (value) => {
-        setSelectedColumn(value);
-        handleInputChange('ColonneCsv', value);
-    };
 
     const handleInputChange = (name, value) => {
         // Mettre à jour le bloc avec la nouvelle valeur
@@ -39,19 +33,6 @@ const ArticleBlock = ({ index, block, updateBlock, removeBlock }) => {
 
     const handleCsvChange = async (filePath) => {
         handleInputChange('csvPath', filePath);
-
-        Papa.parse(`http://localhost:8000/csv/${filePath}`, {
-            download: true,
-            complete: (results) => {
-                if (results.data.length > 0) {
-                    // La première ligne contient les noms de colonne
-                    setCsvColumns(results.data[0]);
-                    setSelectedColumns([]); // Réinitialiser les colonnes sélectionnées
-                }
-            },
-            header: false,
-            error: (error) => console.error('Erreur lors du chargement du CSV', error.message)
-        });
     };
 
     const handleImageClick = (imagePath) => {
@@ -64,7 +45,7 @@ const ArticleBlock = ({ index, block, updateBlock, removeBlock }) => {
         <div className="mb-4">
             <h2 className="text-lg font-semibold mb-2">Bloc {index + 1}</h2>
 
-            <label htmlFor={`blockTitre${index}`} className="block text-sm font-medium">
+            <label htmlFor={`blockTitre${index}`} className="block text-xl">
                 Titre du bloc
             </label>
             <input
@@ -74,9 +55,10 @@ const ArticleBlock = ({ index, block, updateBlock, removeBlock }) => {
                 value={block.Titre}
                 onChange={(e) => handleInputChange('Titre', e.target.value)}
                 className="mt-1 p-2 border rounded-md w-full"
+                style={{ color: 'black' }}
             />
             {/* Choisir un fichier image */}
-            <label htmlFor={`imagePath${index}`} className="block text-sm font-medium text-gray-600 mt-2">
+            <label htmlFor={`imagePath${index}`} className="block text-xl mt-2">
                 Choisir un fichier image
             </label>
             <select
@@ -85,6 +67,7 @@ const ArticleBlock = ({ index, block, updateBlock, removeBlock }) => {
                 value={block.imagePath}
                 onChange={(e) => handleInputChange('imagePath', e.target.value)}
                 className="mt-1 p-2 border rounded-md w-full"
+                style={{ color: 'black' }}
             >
                 <option value="">Sélectionner un fichier image</option>
                 {imageOptions.map(option => (
@@ -93,7 +76,7 @@ const ArticleBlock = ({ index, block, updateBlock, removeBlock }) => {
             </select>
 
             {/* Texte du bloc */}
-            <label htmlFor={`blockTexte${index}`} className="block text-sm font-medium  mt-2">
+            <label htmlFor={`blockTexte${index}`} className="block text-xl mt-2">
                 Texte du bloc
             </label>
             <textarea
@@ -102,10 +85,11 @@ const ArticleBlock = ({ index, block, updateBlock, removeBlock }) => {
                 value={block.Texte}
                 onChange={(e) => handleInputChange('Texte', e.target.value)}
                 className="mt-1 p-2 border rounded-md w-full"
+                style={{ color: 'black' }}
             ></textarea>
 
             {/* Choisir un fichier CSV */}
-            <label htmlFor={`csvPath${index}`} className="block text-sm font-medium  mt-2">
+            <label htmlFor={`csvPath${index}`} className="block text-xl mt-2">
                 Choisir un fichier CSV
             </label>
             <select
@@ -114,25 +98,11 @@ const ArticleBlock = ({ index, block, updateBlock, removeBlock }) => {
                 value={block.csvPath}
                 onChange={(e) => handleCsvChange(e.target.value)}
                 className="mt-1 p-2 border rounded-md w-full"
+                style={{ color: 'black' }}
             >
                 <option value="">Sélectionner un fichier CSV</option>
                 {csvOptions.map(option => (
                     <option key={option.id} value={option.filePath}>{option.nom_ressource}</option>
-                ))}
-            </select>
-
-            <label htmlFor={`csvColumns${index}`} className="block text-sm font-medium text-gray-600 mt-2">
-                Choisir la colonne à afficher
-            </label>
-            <select
-                id={`csvColumns${index}`}
-                name={`csvColumns${index}`}
-                value={selectedColumn}
-                onChange={(e) => handleCsvColumnChange(e.target.value)}
-                className="mt-1 p-2 border rounded-md w-full"
-            >
-                {csvColumns.map((column, idx) => (
-                    <option key={idx} value={column}>{column}</option>
                 ))}
             </select>
 

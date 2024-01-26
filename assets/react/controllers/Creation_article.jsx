@@ -17,22 +17,6 @@ const AvCreation = () => {
 
 const ArticleForm = () => {
   const { theme } = useTheme();
-  const [selectedTheme, setSelectedTheme] = useState('default'); // Default theme
-  const themeKey = 'selectedTheme';
-
-  useEffect(() => {
-    // Retrieve the theme from localStorage on component mount
-    const storedTheme = localStorage.getItem(themeKey);
-    if (storedTheme) {
-      setSelectedTheme(storedTheme);
-    }
-  }, []);
-
-  const changeTheme = (theme) => {
-    setSelectedTheme(theme);
-    // Save the selected theme to localStorage
-    localStorage.setItem(themeKey, theme);
-  };
 
   let articleId = "";
   const [article, setArticle] = useState({
@@ -155,10 +139,10 @@ const ArticleForm = () => {
         {/* Article Creation Form */}
         <div className="container mx-auto mt-8">
           <form className="max-w-2xl mx-auto">
-            <h1 className="text-4xl font-bold mb-8">Création d'article</h1>
+            <h1 className="text-4xl font-bold mb-8 text-white">Création d'article</h1>
             {/* Article Title */}
             <div className="mb-6">
-              <label htmlFor="Titre" className="block text-sm font-medium ">
+              <label htmlFor="Titre" className="block text-xl font-medium ">
                 Titre de l'article
               </label>
               <input
@@ -168,13 +152,14 @@ const ArticleForm = () => {
                 value={article.Titre}
                 onChange={(e) => setArticle({ ...article, Titre: e.target.value })}
                 className="mt-1 p-3 border rounded-md w-full focus:outline-none focus:ring focus:border-blue-300"
+                style={{ color: 'black' }}
                 required
               />
             </div>
 
             {/* Article Summary */}
             <div className="mb-6">
-              <label htmlFor="Resume" className="block text-sm font-medium ">
+              <label htmlFor="Resume" className="block text-xl font-medium ">
                 Résumé de l'article
               </label>
               <textarea
@@ -183,6 +168,7 @@ const ArticleForm = () => {
                 value={article.Resume}
                 onChange={(e) => setArticle({ ...article, Resume: e.target.value })}
                 className="mt-1 p-3 border rounded-md w-full h-32 focus:outline-none focus:ring focus:border-blue-300"
+                style={{ color: 'black' }}
                 required
               ></textarea>
             </div>

@@ -23,7 +23,6 @@ const Themes = (props) => {
             text: 'text-gray-800',
             card: 'bg-yellow-300',
         },
-        // ... Add more themes as needed
     };
 
     const changeTheme = (theme) => {

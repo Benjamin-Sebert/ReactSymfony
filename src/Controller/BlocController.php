@@ -18,7 +18,6 @@ final class BlocController extends AbstractController
         $id_article=$request->get('id_article');
         $Urlimg=$request->get('Urlimg');
         $Urlcsv=$request->get('Urlcsv');
-        $ColonneCsv=$request->get('ColonneCsv');
 
         $mediaObject = new Bloc();
         $mediaObject->setTitre($Titre);
@@ -27,7 +26,6 @@ final class BlocController extends AbstractController
         $mediaObject->setPosition($position_bloc);
         $mediaObject->setUrlimg($Urlimg);
         $mediaObject->setUrlcsv($Urlcsv);
-        $mediaObject->ColonneCsv($ColonneCsv);
 
         return $mediaObject;    
     }

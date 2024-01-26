@@ -92,8 +92,8 @@ const Media = (props) => {
                         <div className="w-full h-full flex items-center justify-center">
                             <div className="w-full">
                                 <div className="mb-6">
-                                    <h1 className="text-2xl font-semibold mb-2">Formulaire de Ressource</h1>
-                                    <p className="text-gray-600">Ajoutez une nouvelle ressource à Stare It</p>
+                                <h1 className="text-2xl font-semibold mb-2 text-white">Formulaire de Ressource (images)</h1>
+                                <p>Ajoutez une nouvelle ressource CSV à Stare It</p>
                                 </div>
 
                                 {confirmationMessage && (
@@ -102,7 +102,7 @@ const Media = (props) => {
 
                                 <form className="space-y-4">
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-600">Sélectionner un fichier</label>
+                                        <label className="block text-sm font-xl">Sélectionner un fichier</label>
                                         <input
                                             type="file"
                                             accept=".images, image/*"
@@ -112,7 +112,7 @@ const Media = (props) => {
                                     </div>
 
                                     <div>
-                                        <label className="block text-sm font-medium">Nom de la ressource</label>
+                                    <label className="block text-xl font-semibold">Nom de la ressource</label>
                                         <input
                                             type="text"
                                             placeholder="Nom de la ressource"
@@ -173,7 +173,7 @@ const Media = (props) => {
             {showConfirmationDialog && (
                 <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
                     <div className="bg-white p-4 rounded shadow-md">
-                        <p className="text-lg font-semibold">Confirmez la suppression du fichier image ?</p>
+                        <p className="text-lg text-black font-semibold">Confirmez la suppression du fichier image ?</p>
                         <div className="mt-4 flex justify-between">
                             <button
                                 onClick={confirmDeleteimage}

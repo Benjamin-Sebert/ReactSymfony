@@ -14,7 +14,7 @@ const AvatarButton = () => {
     <div className="relative inline-block text-left">
       <button type="button" onClick={toggleMenu} className="flex items-center focus:outline-none">
         <svg
-          className="w-6 h-6 text-gray-800 dark:text-custom-red"
+          className="w-6 h-6 text-gray-800 dark:text-custom-blue"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="currentColor"

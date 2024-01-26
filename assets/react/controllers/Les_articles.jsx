@@ -52,7 +52,7 @@ const Article = (props) => {
                                     <p>Résumé: {article.resume}</p>
                                     <p>Créateur: {article.createur}</p>
                                     <a 
-                                        className="flex items-center justify-center bg-blue-500 text-white hover:bg-blue-700 rounded-md transition mt-2 p-2"
+                                        className="flex items-center justify-center bg-black text-white hover:bg-white hover:text-black rounded-md transition mt-2 p-2"
                                         href={`articles/${article.id}`}
                                     >
                                         Voir plus

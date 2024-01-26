@@ -94,7 +94,7 @@ const Csv = (props) => {
                             <div className="w-full h-full flex items-center justify-center">
                                 <div className="w-full">
                                     <div className="mb-6">
-                                        <h1 className="text-2xl font-semibold mb-2">Formulaire de Ressource CSV</h1>
+                                        <h1 className="text-2xl font-semibold mb-2 text-white">Formulaire de Ressource CSV</h1>
                                         <p>Ajoutez une nouvelle ressource CSV à Stare It</p>
                                     </div>
 
@@ -104,7 +104,7 @@ const Csv = (props) => {
 
                                 <form className="space-y-4">
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-600">Sélectionner un fichier CSV</label>
+                                        <label className="block text-xl font-semibold">Sélectionner un fichier CSV</label>
                                         <input
                                             type="file"
                                             accept=".csv"
@@ -114,7 +114,7 @@ const Csv = (props) => {
                                     </div>
 
                                         <div>
-                                            <label className="block text-sm font-medium">Nom de la ressource</label>
+                                            <label className="block text-xl font-semibold">Nom de la ressource</label>
                                             <input
                                                 type="text"
                                                 placeholder="Nom de la ressource"
@@ -164,6 +164,27 @@ const Csv = (props) => {
                     </div>
                 </main>
             </div>
+            {showConfirmationDialog && (
+                <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+                    <div className="bg-white p-4 rounded shadow-md">
+                        <p className="text-lg text-black font-semibold">Confirmez la suppression du fichier csv ?</p>
+                        <div className="mt-4 flex justify-between">
+                            <button
+                                onClick={confirmDeleteCsv}
+                                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full mr-2"
+                            >
+                                Confirmer
+                            </button>
+                            <button
+                                onClick={cancelDeleteCsv}
+                                className="bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full"
+                            >
+                                Annuler
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

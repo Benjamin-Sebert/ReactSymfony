@@ -6,28 +6,47 @@ import UserEmailFetcher from './UserEmailFetcher';
 import ChartComponent from './Chart';
 import { ThemeProvider, useTheme } from './ThemeContext';
 
-const ArticleInfo = ({ article }) => (
-  <div className="p-6 rounded-lg shadow-md mb-8">
-    <h2 className="text-2xl font-bold mb-4">Article :</h2>
-    <ul>
-      <li className="mb-2">
-        <strong>Titre:</strong> {article.Titre}
-      </li>
-      <li className="mb-2">
-        <strong>Résumé:</strong> {article.Resume}
-      </li>
-      <li>
-        <strong>Créé par :</strong> {article.Createur}
-      </li>
-    </ul>
+const ArticleInfo = ({ article, blocs }) => (
+<div className="bg-transparent py-12 px-4 sm:px-6 lg:px-8 rounded-lg">
+  <div className="w-full">
+    <div className="">
+      <div className="px-6 py-8">
+        <h2 className="text-4xl font-semibold text-white mb-8">Article : </h2>
+        
+        <div className="mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="mb-4">
+              <strong className="">Titre :</strong> {article.Titre}
+            </div>
+            <div className="mb-4">
+              <strong className="">Résumé :</strong> {article.Resume}
+            </div>
+            <div className="mb-4">
+              <strong className="">Créé par :</strong> {article.Createur}
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {blocs.map((bloc) => (
+              <li key={bloc.id} className="">
+                <BlocItem bloc={bloc} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
 );
 
 const BlocItem = ({ bloc }) => (
-  <li key={bloc.id} className="mb-8 p-6 rounded-lg shadow-md">
-    <h3 className="text-xl font-bold mb-4">{bloc.Titre}</h3>
+  <li key={bloc.id} className="mb-8 bg-white text-black p-6 rounded-lg shadow-md">
+    <h2 className="text-3xl font-bold mb-4">{bloc.Titre}</h2>
     {bloc.Urlimg && (
-      <img className="mb-4 max-w-full h-auto" src={`/media/${bloc.Urlimg}`} alt="Description de l'image" />
+      <img className="mb-4 max-w-full h-auto border-double border-4 border-black rounded-lg" src={`/images/${bloc.Urlimg}`} alt="Description de l'image" />
     )}
     <p className="mb-4">{bloc.Texte}</p>
     <ChartComponent csvUrl={`/csv/${bloc.Urlcsv}`} className="w-full max-w-full" />
@@ -38,7 +57,7 @@ const ArticleIdComponent = ({ id }) => {
   const userEmail = UserEmailFetcher();
   const [article, setArticle] = useState({});
   const [blocs, setBlocs] = useState([]);
-  const { theme }= useTheme();
+  const { theme } = useTheme();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,8 +84,8 @@ const ArticleIdComponent = ({ id }) => {
   }, [id]);
 
   return (
-    <div className={`w-screen ${theme} md:shadow-lg`}>
-      <div className="flex flex-col md:flex-row h-screen">
+    <div className={`w-full h-full ${theme} md:shadow-lg`}>
+      <div className="flex flex-col md:flex-row">
 
         <Sidebar />
 
@@ -74,11 +93,7 @@ const ArticleIdComponent = ({ id }) => {
           <Navbar />
 
           <div className={`mt-8 ${theme}`}>
-            <ArticleInfo article={article} />
-            <div>
-              <h2 className="text-2xl font-bold mb-4">Blocs :</h2>
-              <ul>{blocs.map((bloc) => <BlocItem key={bloc.id} bloc={bloc} />)}</ul>
-            </div>
+            <ArticleInfo article={article} blocs={blocs} />
           </div>
         </main>
       </div>
