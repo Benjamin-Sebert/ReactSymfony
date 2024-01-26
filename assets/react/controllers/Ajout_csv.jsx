@@ -2,10 +2,13 @@ import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
-import UserEmailFetcher from './UserEmailFetcher';
+import axios from 'axios';
+import UserEmailFetcher from './UserEmailFetcher'; // Assurez-vous d'ajuster le chemin du fichier si nécessaire
 import { ThemeProvider } from './ThemeContext';
 
 const Csv = (props) => {
+    const { theme } = useTheme();
+
     const userEmail = UserEmailFetcher();
     const [resourceName, setResourceName] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
@@ -78,67 +81,69 @@ const Csv = (props) => {
     }, []);
 
     return (
-        <div className="w-screen h-screen">
-            <div className="flex flex-col md:flex-row h-screen">
-                <ThemeProvider>
+            <div className={`w-screen h-screen ${theme} md:shadow-lg`}>
+                <div className="flex flex-col md:flex-row h-screen">
+
                     <Sidebar />
-                </ThemeProvider>
-                <main className="flex-1 p-6">
-                    <Navbar />
 
-                    <div className="gap-8 mt-6">
-                        <div className="w-full h-full flex items-center justify-center">
-                            <div className="w-full">
-                                <div className="mb-6">
-                                    <h1 className="text-2xl font-semibold mb-2">Formulaire de Ressource CSV</h1>
-                                    <p className="text-gray-600">Ajoutez une nouvelle ressource CSV à Stare It</p>
-                                </div>
+                    <main className="flex-1 p-6">
 
-                                {confirmationMessage && (
-                                    <div className="text-green-500">{confirmationMessage}</div>
-                                )}
+                        <Navbar />
+
+
+                        <div className="gap-8 mt-6">
+                            <div className="w-full h-full flex items-center justify-center">
+                                <div className="w-full">
+                                    <div className="mb-6">
+                                        <h1 className="text-2xl font-semibold mb-2">Formulaire de Ressource CSV</h1>
+                                        <p>Ajoutez une nouvelle ressource CSV à Stare It</p>
+                                    </div>
+
+                                    {confirmationMessage && (
+                                        <div className="text-green-500">{confirmationMessage}</div>
+                                    )}
 
                                 <form className="space-y-4">
                                     <div>
                                         <label className="block text-sm font-medium text-gray-600">Sélectionner un fichier CSV</label>
                                         <input
                                             type="file"
-                                            accept=".csv"
+                                            accept=".csv, image/*"
                                             onChange={handleFileChange}
                                             className="mt-1 p-2 block w-full border rounded-md"
                                         />
                                     </div>
 
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-600">Nom de la ressource</label>
-                                        <input
-                                            type="text"
-                                            placeholder="Nom de la ressource"
-                                            value={resourceName}
-                                            onChange={(e) => setResourceName(e.target.value)}
-                                            className="mt-1 p-2 block w-full border rounded-md"
-                                        />
-                                    </div>
-
-                                    {selectedFile && (
                                         <div>
-                                            <p className="text-gray-700">{selectedFile.name}</p>
+                                            <label className="block text-sm font-medium">Nom de la ressource</label>
+                                            <input
+                                                type="text"
+                                                placeholder="Nom de la ressource"
+                                                value={resourceName}
+                                                onChange={(e) => setResourceName(e.target.value)}
+                                                className="mt-1 p-2 block w-full border rounded-md"
+                                            />
                                         </div>
-                                    )}
 
-                                    <div className="flex justify-between">
-                                        <button
-                                            type="button"
-                                            onClick={handleUpload}
-                                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                                        >
-                                            Upload
-                                        </button>
-                                    </div>
-                                </form>
+                                        {selectedFile && (
+                                            <div>
+                                                <p className="text-gray-700">{selectedFile.name}</p>
+                                            </div>
+                                        )}
+
+                                        <div className="flex justify-between">
+                                            <button
+                                                type="button"
+                                                onClick={handleUpload}
+                                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                            >
+                                                Upload
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
                     <div className="mt-8">
                         <h2 className="text-xl font-semibold mb-4">Ressources CSV disponibles</h2>
@@ -160,29 +165,8 @@ const Csv = (props) => {
                     </div>
                 </main>
             </div>
-            {showConfirmationDialog && (
-                <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-                    <div className="bg-white p-4 rounded shadow-md">
-                        <p className="text-lg font-semibold">Confirmez la suppression du fichier CSV ?</p>
-                        <div className="mt-4 flex justify-between">
-                            <button
-                                onClick={confirmDeleteCsv}
-                                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full mr-2"
-                            >
-                                Confirmer
-                            </button>
-                            <button
-                                onClick={cancelDeleteCsv}
-                                className="bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full"
-                            >
-                                Annuler
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
         </div>
     );
 };
 
-export default Csv;
+export default AvCreation;

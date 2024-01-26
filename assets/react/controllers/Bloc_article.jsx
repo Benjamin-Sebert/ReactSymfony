@@ -64,7 +64,7 @@ const ArticleBlock = ({ index, block, updateBlock, removeBlock }) => {
         <div className="mb-4">
             <h2 className="text-lg font-semibold mb-2">Bloc {index + 1}</h2>
 
-            <label htmlFor={`blockTitre${index}`} className="block text-sm font-medium text-gray-600">
+            <label htmlFor={`blockTitre${index}`} className="block text-sm font-medium">
                 Titre du bloc
             </label>
             <input
@@ -76,26 +76,24 @@ const ArticleBlock = ({ index, block, updateBlock, removeBlock }) => {
                 className="mt-1 p-2 border rounded-md w-full"
             />
             {/* Choisir un fichier image */}
-
-            <div>
-                <label htmlFor={`imagePath${index}`} className="block text-sm font-medium text-gray-600 mt-2">
-                    Choisir un fichier image
-                </label>
-                <div className="flex items-center mt-1">
-                    {imageOptions.map((option, index) => (
-                        <img
-                            key={index}
-                            src={`http://localhost:8000/images/${option.filePath}`}
-                            alt="Miniature de l'image"
-                            className={`max-w-24 h-auto ${selectedImagePath === option.filePath ? 'border-2 border-red-500' : ''}`}
-                            onClick={() => handleImageClick(option.filePath)}
-                        />
-                    ))}
-                </div>
-            </div>
+            <label htmlFor={`imagePath${index}`} className="block text-sm font-medium text-gray-600 mt-2">
+                Choisir un fichier image
+            </label>
+            <select
+                id={`imagePath${index}`}
+                name={`imagePath${index}`}
+                value={block.imagePath}
+                onChange={(e) => handleInputChange('imagePath', e.target.value)}
+                className="mt-1 p-2 border rounded-md w-full"
+            >
+                <option value="">Sélectionner un fichier image</option>
+                {imageOptions.map(option => (
+                    <option key={option.id} value={option.filePath}>{option.nom_ressource}</option>
+                ))}
+            </select>
 
             {/* Texte du bloc */}
-            <label htmlFor={`blockTexte${index}`} className="block text-sm font-medium text-gray-600 mt-2">
+            <label htmlFor={`blockTexte${index}`} className="block text-sm font-medium  mt-2">
                 Texte du bloc
             </label>
             <textarea
@@ -107,7 +105,7 @@ const ArticleBlock = ({ index, block, updateBlock, removeBlock }) => {
             ></textarea>
 
             {/* Choisir un fichier CSV */}
-            <label htmlFor={`csvPath${index}`} className="block text-sm font-medium text-gray-600 mt-2">
+            <label htmlFor={`csvPath${index}`} className="block text-sm font-medium  mt-2">
                 Choisir un fichier CSV
             </label>
             <select

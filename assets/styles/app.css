@@ -23,15 +23,17 @@ body,
   --hover-color-light: #f8f9fa; /* Couleur de survol pour le thème clair */
   --sidebar-text-light: rgb(0, 0, 0);
   --hover-background-color-light: #38bdf8;
+  --font-family-light: "Proxima Nova", system-ui, sans-serif;
 
   /* Styles pour le thème sombre */
   --background-dark: #2d3748; /* Couleur de fond pour le thème sombre */
-  --text-dark: #edf2f7; /* Couleur du texte pour le thème sombre */
+  --text-dark: #ffffff; /* Couleur du texte pour le thème sombre */
   --sidebar-background-dark: #000000; /* Couleur de fond de la barre latérale pour le thème sombre */
   --body-background-dark: #343a40; /* Couleur de fond du corps pour le thème sombre */
   --hover-color-dark: #000000;
   --sidebar-text-dark: #fafafa;
   --hover-background-color-dark: #f08080;
+ 
 }
 
 html,
@@ -95,4 +97,67 @@ aside {
 aside a:hover {
   color: var(--hover-color);
   background-color: var(--hover-background-color);
+}
+
+/* styles.css */
+
+
+
+
+.dark{
+  --background: var(--background-dark);
+  --text: var(--text-dark);
+  --sidebar-background: var(--sidebar-background-dark);
+  --body-background: var(--body-background-dark);
+  --hover-color: var(--hover-color-dark);
+  --sidebar-text: var(--sidebar-text-dark);
+  --hover-background-color: var(--hover-background-color-dark);
+  --font-family: "Montserrat", sans-serif;
+  --text: var(--text-dark);
+ 
+}
+.dark{
+  color: #f4f5fb;
+  background-color: #1a202c;
+}
+
+
+.theme1 {
+  --background: var(--background-light);
+  --text: var(--text-light);
+  --sidebar-background: var(--sidebar-background-light);
+  --body-background: var(--body-background-light);
+  --hover-color: var(--hover-color-light);
+  --sidebar-text: var(--sidebar-text-light);
+  --hover-background-color: var(--hover-background-color-light);
+  font-family: "SFMono-Regular", system-ui, sans-serif;
+}
+
+/* .theme1:hover {
+  background-color: #8075f8; 
+} */
+
+
+.theme2 {
+  
+  background-color: #0cd29d;
+  color: #0225ee;
+  font-family: 'Georgia', serif; /* Police pour le thème 2 */
+  /* Ajoutez d'autres styles pour le thème 2 */
+}
+
+/* .theme2:hover {
+  background-color: #f0f34d; 
+} */
+
+
+
+
+
+
+
+.sidebar-icon {
+  width: 1.5em; /* ou n'importe quelle valeur que vous préférez */
+  height: 1.5em; /* ou n'importe quelle valeur que vous préférez */
+  flex-shrink: 0;
 }

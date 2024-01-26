@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { ThemeProvider } from './ThemeContext';
-
+import { useTheme, ThemeProvider } from './ThemeContext';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import UserEmailFetcher from './UserEmailFetcher';
@@ -10,7 +9,7 @@ import ChartComponent from './Chart';
 const API_URL = 'http://localhost:8000/api';
 
 const ArticleInfo = ({ article }) => (
-  <div className="bg-white p-6 rounded-lg shadow-md mb-8">
+  <div className="p-6 rounded-lg shadow-md mb-8">
     <h2 className="text-2xl font-bold mb-4">Article :</h2>
     <ul>
       <li className="mb-2">
@@ -27,7 +26,7 @@ const ArticleInfo = ({ article }) => (
 );
 
 const BlocItem = ({ bloc }) => (
-  <li className="mb-8 bg-white p-6 rounded-lg shadow-md" key={bloc.id}>
+  <li className="mb-8 p-6 rounded-lg shadow-md" key={bloc.id}>
     <h3 className="text-xl font-bold mb-4">{bloc.Titre}</h3>
     {bloc.Urlimg && (
       <img className="mb-4 max-w-full h-auto" src={`/media/${bloc.Urlimg}`} alt="Description de l'image" />
@@ -37,7 +36,16 @@ const BlocItem = ({ bloc }) => (
   </li>
 );
 
+const AvCreation = () => {
+  return (
+    <ThemeProvider>
+      <ArticleIdComponent />
+    </ThemeProvider>
+  );
+};
+
 const ArticleIdComponent = ({ id }) => {
+   const { theme } = useTheme();
   const userEmail = UserEmailFetcher();
   const [article, setArticle] = useState({});
   const [blocs, setBlocs] = useState([]);
@@ -71,11 +79,12 @@ const ArticleIdComponent = ({ id }) => {
   }, [id]);
 
   return (
-    <div className="flex">
-      <ThemeProvider>
+    <div className={`w-screen h-screen ${theme} md:shadow-lg`}>
+        <div className="flex flex-col md:flex-row h-screen">
+     
         <Sidebar />
-      </ThemeProvider>
-      <main className="flex-1 p-6 bg-gray-100">
+      
+      <main className="flex-1 p-6">
         <Navbar />
         <div className="mt-8">
           {loading ? (
@@ -92,7 +101,8 @@ const ArticleIdComponent = ({ id }) => {
         </div>
       </main>
     </div>
+    </div>
   );
 };
 
-export default ArticleIdComponent;
+export default AvCreation;

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { ThemeProvider } from './ThemeContext';
+import { useTheme } from './ThemeContext';
 
-const Contactus = () => {
+const ContactForm = () => {
+  const { theme } = useTheme();
   const [formData, setFormData] = useState({
     nom: '',
     prenom: '',
@@ -40,46 +41,47 @@ const Contactus = () => {
   };
 
   return (
-    <div className="flex-col flex bg-grey-200 p-8 rounded shadow-md w-full">
-      <h3 className="text-4xl font-bold mb-4 ">Contactez nous</h3>
-      <form action="http://localhost:8000/contact" onSubmit={handleSubmit} className="message">
+    <div className={` ${theme} max-w-sm mx-auto`}>
+      
+      <h3 className="text-4xl font-bold mb-4">Contactez nous</h3>
+      <form action="http://localhost:8000/contact" onSubmit={handleSubmit} className="message max-w-md"> {/* Réduction de la largeur avec max-w-md */}
         <div className="mb-4">
-          <label className="block text-sm font-semibold ">Nom</label>
+          <label className="block text-sm font-semibold">Nom</label>
           <input
             type="text"
             name="nom"
             value={formData.nom}
             onChange={handleChange}
-            className="border text-black rounded w-full py-2 px-3"
+            className="border text-black rounded w-full py-2 px-3 bg-gray-800 text-white" // Utilisation de bg-gray-800 et ajout de text-white
           />
         </div>
         <div className="mb-4">
-          <label className="block text-sm font-semibold ">Prenom</label>
+          <label className="block text-sm font-semibold">Prenom</label>
           <input
             type="text"
             name="prenom"
             value={formData.prenom}
             onChange={handleChange}
-            className="border text-black rounded w-full py-2 px-3"
+            className="border text-black rounded w-full py-2 px-3 bg-gray-800 text-white" // Utilisation de bg-gray-800 et ajout de text-white
           />
         </div>
         <div className="mb-4">
-          <label className="block text-sm font-semibold ">Email</label>
+          <label className="block text-sm font-semibold">Email</label>
           <input
             type="text"
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className="border text-black rounded w-full py-2 px-3"
+            className="border text-black rounded w-full py-2 px-3 bg-gray-800 text-white" // Utilisation de bg-gray-800 et ajout de text-white
           />
         </div>
         <div className="mb-4">
-          <label className="block text-sm font-semibold ">Votre message</label>
+          <label className="block text-sm font-semibold">Votre message</label>
           <textarea
             name="message"
             value={formData.message}
             onChange={handleChange}
-            className="border text-black rounded w-full py-2 px-3"
+            className="border text-black rounded w-full py-2 px-3 bg-gray-800 text-white" // Utilisation de bg-gray-800 et ajout de text-white
           ></textarea>
         </div>
         <button type="submit" className="bg-custom-red py-2 px-4 rounded">
@@ -90,4 +92,4 @@ const Contactus = () => {
   );
 };
 
-export default Contactus;
+export default ContactForm;

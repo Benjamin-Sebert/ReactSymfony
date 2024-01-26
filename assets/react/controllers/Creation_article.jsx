@@ -3,9 +3,20 @@ import React, { useRef, useEffect, useState } from 'react';
 import ArticleBlock from './Bloc_article';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
-import { ThemeProvider } from './ThemeContext';
+
+import { useTheme, ThemeProvider } from './ThemeContext';
+
+
+const AvCreation = () => {
+    return (
+      <ThemeProvider>
+        <ArticleForm />
+      </ThemeProvider>
+    );
+  };
 
 const ArticleForm = () => {
+  const { theme } = useTheme();
   const [selectedTheme, setSelectedTheme] = useState('default'); // Default theme
   const themeKey = 'selectedTheme';
 
@@ -133,13 +144,14 @@ const ArticleForm = () => {
     }
   };
   return (
+    <div className={`w-screen h-screen ${theme === 'dark' ? 'bg-gray-800' : theme === 'theme1' ? 'bg-blue-500' : 'bg-green-500'} md:shadow-lg`}>
     <div className="min-h-screen flex">
       {/* Sidebar */}
-      <ThemeProvider>
+      
 
       <Sidebar/>
 
-      </ThemeProvider>
+      
 
       {/* Main Content */}
       <main className="flex-1 p-6">
@@ -151,7 +163,7 @@ const ArticleForm = () => {
             <h1 className="text-4xl font-bold mb-8">Création d'article</h1>
             {/* Article Title */}
             <div className="mb-6">
-              <label htmlFor="Titre" className="block text-sm font-medium text-gray-600">
+              <label htmlFor="Titre" className="block text-sm font-medium ">
                 Titre de l'article
               </label>
               <input
@@ -167,7 +179,7 @@ const ArticleForm = () => {
 
             {/* Article Summary */}
             <div className="mb-6">
-              <label htmlFor="Resume" className="block text-sm font-medium text-gray-600">
+              <label htmlFor="Resume" className="block text-sm font-medium ">
                 Résumé de l'article
               </label>
               <textarea
@@ -218,7 +230,8 @@ const ArticleForm = () => {
         </div>
       </main>
     </div>
+    </div>
   );
 };
 
-export default ArticleForm;
+export default AvCreation;

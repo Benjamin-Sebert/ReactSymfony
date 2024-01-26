@@ -3,9 +3,18 @@ import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import axios from 'axios';
 import UserEmailFetcher from './UserEmailFetcher'; // Assurez-vous d'ajuster le chemin du fichier si nécessaire
-import { ThemeProvider } from './ThemeContext';
+import { useTheme, ThemeProvider } from './ThemeContext';
 
+
+const AvCreation = () => {
+    return (
+      <ThemeProvider>
+        <Article />
+      </ThemeProvider>
+    );
+  };
 const Article = (props) => {
+    const { theme } = useTheme();
     const userEmail = UserEmailFetcher();
     const [resourceName, setResourceName] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
@@ -26,11 +35,11 @@ const Article = (props) => {
     }, []);
 
     return (
-        <div className="w-screen h-screen">
+        <div className={`w-screen h-screen ${theme} md:shadow-lg`}>
             <div className="flex flex-col md:flex-row h-screen">
-                <ThemeProvider>
+            
                     <Sidebar />
-                </ThemeProvider>             
+                        
                 <main className="flex-1 p-6">
                     <Navbar />
 
@@ -38,10 +47,10 @@ const Article = (props) => {
                         <h2 className="text-2xl font-semibold mb-4">Les articles disponibles</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {articles.map((article) => (
-                                <div key={article.id} className="p-4 bg-white rounded-md shadow-md">
-                                    <p className="text-gray-700 font-semibold">Titre: {article.titre}</p>
-                                    <p className="text-gray-600">Résumé: {article.resume}</p>
-                                    <p className="text-gray-600">Créateur: {article.createur}</p>
+                                <div key={article.id} className="p-4 rounded-md shadow-md">
+                                    <p>Titre: {article.titre}</p>
+                                    <p>Résumé: {article.resume}</p>
+                                    <p>Créateur: {article.createur}</p>
                                     <a 
                                         className="flex items-center justify-center bg-blue-500 text-white hover:bg-blue-700 rounded-md transition mt-2 p-2"
                                         href={`articles/${article.id}`}
@@ -58,4 +67,4 @@ const Article = (props) => {
     );
 };
 
-export default Article;
+export default AvCreation;

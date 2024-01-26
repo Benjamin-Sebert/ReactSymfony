@@ -2,10 +2,11 @@ import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
-import UserEmailFetcher from './UserEmailFetcher';
+import axios from 'axios';
+import UserEmailFetcher from './UserEmailFetcher'; // Assurez-vous d'ajuster le chemin du fichier si nécessaire
 import { ThemeProvider } from './ThemeContext';
 
-const image = (props) => {
+const media = (props) => {
     const userEmail = UserEmailFetcher();
     const [resourceName, setResourceName] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
@@ -78,11 +79,11 @@ const image = (props) => {
     }, []);
 
     return (
-        <div className="w-screen h-screen">
+        <div className={`w-screen h-screen ${theme} md:shadow-lg`}>
             <div className="flex flex-col md:flex-row h-screen">
-                <ThemeProvider>
+              
                     <Sidebar />
-                </ThemeProvider>
+                
                 <main className="flex-1 p-6">
                     <Navbar />
 
@@ -90,8 +91,8 @@ const image = (props) => {
                         <div className="w-full h-full flex items-center justify-center">
                             <div className="w-full">
                                 <div className="mb-6">
-                                    <h1 className="text-2xl font-semibold mb-2">Formulaire de Ressource image</h1>
-                                    <p className="text-gray-600">Ajoutez une nouvelle ressource image à Stare It</p>
+                                    <h1 className="text-2xl font-semibold mb-2">Formulaire de Ressource</h1>
+                                    <p className="text-gray-600">Ajoutez une nouvelle ressource à Stare It</p>
                                 </div>
 
                                 {confirmationMessage && (
@@ -100,7 +101,7 @@ const image = (props) => {
 
                                 <form className="space-y-4">
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-600">Sélectionner un fichier image</label>
+                                        <label className="block text-sm font-medium text-gray-600">Sélectionner un fichier</label>
                                         <input
                                             type="file"
                                             accept=".images, image/*"
@@ -110,7 +111,7 @@ const image = (props) => {
                                     </div>
 
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-600">Nom de la ressource</label>
+                                        <label className="block text-sm font-medium">Nom de la ressource</label>
                                         <input
                                             type="text"
                                             placeholder="Nom de la ressource"
@@ -193,4 +194,4 @@ const image = (props) => {
     );
 };
 
-export default image;
+export default media;
