@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { useTheme } from './ThemeContext';
+import UserEmailFetcher from './UserEmailFetcher'; // Assurez-vous d'ajuster le chemin du fichier si nécessaire
 
 const ContactForm = () => {
   const { theme } = useTheme();
+  const userEmail = UserEmailFetcher();
+
   const [formData, setFormData] = useState({
     nom: '',
     prenom: '',
@@ -69,7 +72,7 @@ const ContactForm = () => {
           <input
             type="text"
             name="email"
-            value={formData.email}
+            value={userEmail}
             onChange={handleChange}
             className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />

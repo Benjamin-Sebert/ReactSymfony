@@ -48,7 +48,12 @@ security:
     access_control:
         # - { path: ^/article, roles: ROLE_ADMIN }
         # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        # - { path: ^/lesarticles, roles: ROLE_USER }
+        # - { path: ^/lesarticles, roles: ROLE_ABONNE }
+        # - { path: ^/lesarticles, ^/Creation_article, roles: ROLE_EDITEUR }
+        # - { path: ^/lesarticles, ^/Creation_article, roles: ROLE_AUTEUR }
+
+        # - { path: ^/lesarticles, ^/ajout_csv, ^/ajout_media roles: ROLE_FOURNISSEUR }
 
 when@test:
     security:
