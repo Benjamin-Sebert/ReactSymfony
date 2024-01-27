@@ -56,7 +56,7 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
-   #[Route('/articles/{id}', name: 'app_articleid')]
+    #[Route('/articles/{id}', name: 'app_articleid')]
     public function article($id): Response
     {
         return $this->render('home/article.html.twig', [
@@ -76,6 +76,14 @@ class HomeController extends AbstractController
     public function themes(): Response
     {
         return $this->render('home/themes.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
+
+    #[Route('/aframe', name: 'aframe')]
+    public function Aframe(): Response
+    {
+        return $this->render('home/a-frame.html.twig', [
             'controller_name' => 'HomeController',
         ]);
     }

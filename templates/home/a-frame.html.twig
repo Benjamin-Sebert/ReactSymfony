@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <a-scene physics>
+
+        <a-box position="0 0 0" width="20" height="0.1" depth="20" static-body class="collidable" material="color:#333"></a-box>
+
+        <a-box position="0 1 8" width="2" height="2" depth="2" static-body clique-lien material="color:blue"></a-box>
+
+        <a-box position="0 2.5 9" width="20" height="7" depth="0.1" static-body class="collidable" material="color:#666"></a-box>
+        <a-box position="-5 2.5 0" width="0.1" height="7" depth="20" static-body class="collidable" material="color:#666"></a-box>
+        <a-box position="5 2.5 0" width="0.1" height="7" depth="20" static-body class="collidable" material="color:#666"></a-box>
+
+        <a-box position="0 5 0" width="20" height="0.1" depth="20" color="gray" static-body class="collidable" material="color:#555"></a-box>
+
+        <!-- Écran cinéma -->
+        <a-plane position="0 2.5 -9.95" width="10" height="5" color="white" shadow="receive: false" material="src: {{ asset('images/fond3.jpg') }}; shader: flat;" static-body>
+
+            <a-text value="Stare it" align="center" position="0 1.5 0.1" color="white" scale="2 2 2"></a-text>
+            <a-text value="Bienvenue sur notre CMS" align="center" position="0 0.75 0.1" color="white" scale="2 2 2"></a-text>
+
+            <a-box position="-2 -0.5 0.1" width="2" height="0.5" depth="0.1" static-body clique-connexion material="shader: flat" color="blue" rounded="radius: 1"></a-box>
+            <a-text value="Connectez-vous" align="center" position="-2 -0.5 0.2" color="#fff"></a-text>
+
+            <a-box position="2 -0.5 0.1" width="2" height="0.5" depth="0.1" static-body clique-inscription color="green" material="shader: flat" rounded="radius: 0.1"></a-box>
+            <a-text value="Inscrivez-vous" align="center" position="2 -0.5 0.2" color="#fff"></a-text>
+
+        </a-plane>
+
+        <a-light type="point" color="blue" position="0 4 -3" intensity="1" target="#lumiere"></a-light>
+
+        <a-entity id="player" movement-controls>
+            <a-entity camera position="0 1.6 0" look-controls="pointerLockEnabled: true">
+                <a-cursor material="color: red"></a-cursor>
+            </a-entity>
+        </a-entity>
+
+        <a-obj-model src="#canape-obj" mtl="#canape-mtl" position="0 0 2" scale="1 1 1" rotation="0 180 0"></a-obj-model>
+
+        <a-obj-model id="lumiere" src="#lumiere-obj" mtl="#lumiere-mtl" position="0 2.6 -3" scale="0.1 0.1 0.1"></a-obj-model>
+
+        <a-assets>
+            <a-asset-item id="canape-obj" src="{{ asset('models/DesignSofa/3D models/DesignSofa1.obj') }}"></a-asset-item>
+            <a-asset-item id="canape-mtl" src="{{ asset('models/DesignSofa/3D models/DesignSofa1.mtl') }}"></a-asset-item>
+
+            <a-asset-item id="lumiere-obj" src="{{ asset('models/lumiere/Hanging Light.obj') }}"></a-asset-item>
+            <a-asset-item id="lumiere-mtl" src="{{ asset('models/lumiere/Hanging Light.mtl') }}"></a-asset-item>
+        </a-assets>
+    </a-scene>
+
+    <script>
+        AFRAME.registerComponent('clique-connexion', {
+            init: function () {
+                var url = "{{ path('app_login') }}"; // Remplacez 'nom_de_votre_route' par le nom de la route Symfony que vous souhaitez lier
+
+                this.el.addEventListener('click', function () {
+                    window.location.href = url;
+                });
+            }
+        });
+
+         AFRAME.registerComponent('clique-inscription', {
+            init: function () {
+                var url = "{{ path('app_register') }}"; // Remplacez 'nom_de_votre_route' par le nom de la route Symfony que vous souhaitez lier
+
+                this.el.addEventListener('click', function () {
+                    window.location.href = url;
+                });
+            }
+        });
+    </script>
+{% endblock %}

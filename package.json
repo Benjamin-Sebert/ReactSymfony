@@ -39,6 +39,7 @@
         "@react-three/fiber": "^8.15.14",
         "@types/three": "^0.160.0",
         "@vscode/codicons": "^0.0.35",
+        "aframe": "^1.5.0",
         "axios": "^1.6.5",
         "lucide-react": "^0.312.0",
         "react-dropzone": "^14.2.3",

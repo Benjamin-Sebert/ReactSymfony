@@ -3,7 +3,7 @@ import axios from 'axios';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import UserEmailFetcher from './UserEmailFetcher'; // Assurez-vous d'ajuster le chemin du fichier si nécessaire
-import { ThemeProvider,useTheme } from './ThemeContext';
+import { ThemeProvider, useTheme } from './ThemeContext';
 
 const Media = (props) => {
     const { theme } = useTheme();
@@ -82,9 +82,9 @@ const Media = (props) => {
     return (
         <div className={`w-screen h-screen ${theme} md:shadow-lg`}>
             <div className="flex flex-col md:flex-row h-screen">
-              
-                    <Sidebar />
-                
+
+                <Sidebar />
+
                 <main className="flex-1 p-6">
                     <Navbar />
 
@@ -92,8 +92,8 @@ const Media = (props) => {
                         <div className="w-full h-full flex items-center justify-center">
                             <div className="w-full">
                                 <div className="mb-6">
-                                <h1 className="text-2xl font-semibold mb-2 text-white">Formulaire de Ressource (images)</h1>
-                                <p>Ajoutez une nouvelle ressource CSV à Stare It</p>
+                                    <h1 className="text-2xl font-semibold mb-2 text-white">Formulaire de Ressource (images)</h1>
+                                    <p>Ajoutez une nouvelle ressource CSV à Stare It</p>
                                 </div>
 
                                 {confirmationMessage && (
@@ -112,7 +112,7 @@ const Media = (props) => {
                                     </div>
 
                                     <div>
-                                    <label className="block text-xl font-semibold">Nom de la ressource</label>
+                                        <label className="block text-xl font-semibold">Nom de la ressource</label>
                                         <input
                                             type="text"
                                             placeholder="Nom de la ressource"
@@ -149,12 +149,12 @@ const Media = (props) => {
                             {imageResources.map((imageResource) => (
                                 <div key={imageResource.id} className="p-4 bg-white rounded-md shadow-md">
                                     {/* Afficher la miniature de l'image */}
-                                        <img
-                                            src={`http://localhost:8000/images/${imageResource.filePath}`}
-                                            alt={`Miniature de ${imageResource.nom_ressource}`}
-                                            className="w-full h-40 object-cover mb-2 rounded-md"
-                                        />
-                                    
+                                    <img
+                                        src={`http://localhost:8000/images/${imageResource.filePath}`}
+                                        alt={`Miniature de ${imageResource.nom_ressource}`}
+                                        className="w-full h-40 object-cover mb-2 rounded-md"
+                                    />
+
                                     <p className="text-gray-700 font-semibold">Nom de la ressource : {imageResource.nom_ressource}</p>
                                     <p className="text-gray-600">Upload par : {imageResource.user}</p>
                                     <button
@@ -197,10 +197,10 @@ const Media = (props) => {
 
 const AvCreation = () => {
     return (
-      <ThemeProvider>
-        <Media />
-      </ThemeProvider>
+        <ThemeProvider>
+            <Media />
+        </ThemeProvider>
     );
-  };
+};
 
 export default AvCreation;
