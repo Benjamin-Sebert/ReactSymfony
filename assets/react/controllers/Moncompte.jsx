@@ -43,6 +43,9 @@ function UpdateUserForm({ id }) {
       .then((response) => response.json())
       .then((data) => {
         console.log('Utilisateur mis à jour avec succès :', data);
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       })
       .catch((error) => {
         console.error('Erreur lors de la mise à jour de l\'utilisateur :', error);

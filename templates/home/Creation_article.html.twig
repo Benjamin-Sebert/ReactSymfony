@@ -3,5 +3,7 @@
 {% block title %}home.html.twig{% endblock %}
 
 {% block body %}
-                <div {{ react_component('Creation_article') }}></div>
+    {% if is_granted('ROLE_AUTEUR') or is_granted('ROLE_ADMIN') or is_granted('ROLE_EDITEUR') %}
+        <div {{ react_component('Creation_article', {'Crea': app.user.email}) }}></div>
+    {% endif %}
 {% endblock %}

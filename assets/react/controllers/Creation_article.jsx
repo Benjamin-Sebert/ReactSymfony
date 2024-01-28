@@ -5,16 +5,15 @@ import Navbar from './Navbar';
 
 import { useTheme, ThemeProvider } from './ThemeContext';
 
-
-const AvCreation = () => {
+const AvCreation = ({ Crea }) => {
   return (
     <ThemeProvider>
-      <ArticleForm />
+      <ArticleForm Crea={Crea} />
     </ThemeProvider>
   );
 };
 
-const ArticleForm = () => {
+const ArticleForm = ({ Crea }) => {
   const { theme } = useTheme();
 
   let articleId = "";
@@ -92,7 +91,7 @@ const ArticleForm = () => {
       const articleData = {
         Titre: article.Titre,
         Resume: article.Resume,
-        Createur: "test",
+        Createur: Crea,
       };
       const jsonData_article = JSON.stringify(articleData);
 
