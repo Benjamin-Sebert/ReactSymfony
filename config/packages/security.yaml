@@ -18,7 +18,6 @@ security:
             provider: app_user_provider
             custom_authenticator:
                 - App\Security\AppCustomAuthenticator
-            
 
             logout:
                 path: /logout
@@ -53,6 +52,7 @@ security:
         - { path: ^/moncompte, roles: [ROLE_AUTEUR, ROLE_EDITEUR, ROLE_ADMIN, ROLE_FOURNISSEUR, ROLE_ABONNE, ROLE_USER] }
         - { path: ^/articles, roles: [ROLE_AUTEUR, ROLE_EDITEUR, ROLE_ADMIN, ROLE_FOURNISSEUR, ROLE_ABONNE, ROLE_USER] }
         - { path: ^/lesarticles, roles: [ROLE_AUTEUR, ROLE_EDITEUR, ROLE_ADMIN, ROLE_FOURNISSEUR, ROLE_ABONNE, ROLE_USER] }
+        - { path: ^/contact, roles: [ROLE_AUTEUR, ROLE_EDITEUR, ROLE_ADMIN, ROLE_FOURNISSEUR, ROLE_ABONNE, ROLE_USER] }
 
 when@test:
     security:
