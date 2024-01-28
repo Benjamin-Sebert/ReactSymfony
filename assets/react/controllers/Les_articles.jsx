@@ -53,12 +53,11 @@ const Article = (props) => {
   };
 
   return (
-    <div className={`w-full ${theme} md:shadow-lg`}>
-      <div className="flex flex-col md:flex-row">
+    <div className={`w-screen ${theme} md:shadow-lg`}>
+    <div className="flex flex-col md:flex-row h-screen">
         <Sidebar />
-
         <main className="flex-1 p-6">
-          <Navbar />
+            <Navbar />
 
           <div className="mt-8">
             <h2 className="text-3xl font-semibold mb-4">Les articles disponibles</h2>

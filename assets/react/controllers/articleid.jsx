@@ -38,15 +38,20 @@ const InfoItem = ({ label, value }) => (
 const BlocItem = ({ bloc }) => (
   <div className="mb-2 bg-white text-black p-2 rounded-lg shadow-md">
     <h2 className="text-3xl font-bold mb-4">{bloc.Titre}</h2>
-    {bloc.Urlimg && (
+    
+    {bloc.Urlimg !== "undefined" && bloc.Urlimg && (
       <img
         className="mb-4 max-w-full h-auto border-double border-4 border-black rounded-lg"
         src={`/images/${bloc.Urlimg}`}
         alt="Description de l'image"
       />
     )}
+    
     <p className="mb-4">{bloc.Texte}</p>
-    <ChartComponent csvUrl={`/csv/${bloc.Urlcsv}`} colonne={bloc.Colonne} className="w-full max-w-full" />
+    
+    {bloc.Urlcsv !== "undefined" && bloc.Urlcsv && (
+      <ChartComponent csvUrl={`/csv/${bloc.Urlcsv}`} colonne={bloc.Colonne} className="w-full max-w-full" />
+    )}
   </div>
 );
 

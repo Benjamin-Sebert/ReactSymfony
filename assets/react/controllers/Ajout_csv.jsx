@@ -80,7 +80,7 @@ const Csv = (props) => {
     }, []);
 
     return (
-        <div className={`w-screen h-screen ${theme} md:shadow-lg`}>
+        <div className={`w-screen ${theme} md:shadow-lg`}>
             <div className="flex flex-col md:flex-row h-screen">
 
                 <Sidebar />
