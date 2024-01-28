@@ -25,7 +25,7 @@ const ThreeScene = () => {
         bevelSize: 0.1,
         bevelSegments: 20,
       });
-      
+
       textGeometry.computeBoundingBox();
       const textWidth = textGeometry.boundingBox.max.x - textGeometry.boundingBox.min.x;
       textGeometry.translate(-textWidth / 2, 0, 0);

@@ -28,13 +28,6 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
-    #[Route('/test', name: 'app_stat')]
-    public function stat(): Response
-    {
-        return $this->render('home/stat.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
     #[Route('/ajout_csv', name: 'app_csv')]
     public function ajoutcsv(): Response
     {
@@ -45,14 +38,14 @@ class HomeController extends AbstractController
     #[Route('/Accueil', name: 'Accueil')]
     public function Acceuil(): Response
     {
-        return $this->render('home/Accueil.html.twig', [
+        return $this->render('home/a-frame.html.twig', [
             'controller_name' => 'HomeController',
         ]);
     }
     #[Route('/', name: 'Welcome')]
     public function Welcome(): Response
     {
-        return $this->render('home/Accueil.html.twig', [
+        return $this->render('home/a-frame.html.twig', [
             'controller_name' => 'HomeController',
         ]);
     }
@@ -64,7 +57,21 @@ class HomeController extends AbstractController
             'article_id' => $id,
         ]);
     }
-
+    #[Route('/articlesmodifs/{id}', name: 'app_articlesmodifs')]
+    public function articlesmodifs($id): Response
+    {
+        return $this->render('home/articlesmodifs.html.twig', [
+            'controller_name' => 'HomeController',
+            'article_id' => $id,
+        ]);
+    }
+    #[Route('/moncompte', name: 'app_moncompte')]
+    public function moncompte(): Response
+    {
+        return $this->render('home/moncompte.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
     #[Route('/lesarticles', name: 'app_lesarticles')]
     public function lesarticles(): Response
     {
@@ -72,14 +79,6 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
-    #[Route('/themes', name: 'app_lesthemes')]
-    public function themes(): Response
-    {
-        return $this->render('home/themes.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
-
     #[Route('/aframe', name: 'aframe')]
     public function Aframe(): Response
     {

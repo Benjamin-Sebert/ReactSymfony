@@ -49,8 +49,6 @@ class ThemeController extends AbstractController
     {
         $formData = $request->request->all();
 
-        // Enregistrez les options de personnalisation dans la session ou dans la base de données
-
         return new JsonResponse(['success' => true]);
     }
 

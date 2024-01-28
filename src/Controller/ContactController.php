@@ -30,7 +30,7 @@ class ContactController extends AbstractController
         $data = json_decode($request->getContent(), true);
 
         $contactMessage = new ContactMessage();
-        $contactMessage->setNom($data['nom'] ?? '');  // Assurez-vous que $data['nom'] n'est pas null
+        $contactMessage->setNom($data['nom'] ?? '');
         $contactMessage->setPrenom($data['prenom'] ?? '');
         $contactMessage->setEmail($data['email'] ?? '');
         $contactMessage->setMessage($data['message'] ?? '');

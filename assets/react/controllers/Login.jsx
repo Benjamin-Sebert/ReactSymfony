@@ -5,7 +5,6 @@ const Login = () => {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    // Ajoutez ici la logique de connexion avec Symfony (par exemple, une requête API)
   };
 
   return (

@@ -17,29 +17,15 @@ class ContactMessage
     #[ORM\Column]
     private ?int $id = null;
 
-     /**
-     * @Assert\NotBlank(message="Le champ Nom ne peut pas être vide.")
-     */
-
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    /**
-     * @Assert\NotBlank(message="Le champ Prénom ne peut pas être vide.")
-     */
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 
-    /**
-     * @Assert\NotBlank(message="Le champ Email ne peut pas être vide.")
-     * @Assert\Email(message="L'adresse email '{{ value }}' n'est pas valide.")
-     */
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
-     /**
-     * @Assert\NotBlank(message="Le champ Message ne peut pas être vide.")
-     */
     #[ORM\Column(type: Types::TEXT)]
     private ?string $message = null;
 
@@ -99,16 +85,4 @@ class ContactMessage
 
         return $this;
     }
-
-    // public function getRelation(): ?User
-    // {
-    //     return $this->relation;
-    // }
-
-    // public function setRelation(?User $relation): static
-    // {
-    //     $this->relation = $relation;
-
-    //     return $this;
-    // }
 }

@@ -1,5 +1,3 @@
-// assets/js/theme.js
-
 document.addEventListener('DOMContentLoaded', function () {
     function saveTheme() {
         const form = document.getElementById('themeCustomizationForm');
@@ -12,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                // Rafraîchissez la page pour appliquer le nouveau thème
                 window.location.reload();
             } else {
                 console.error('Erreur lors de l\'enregistrement du thème');

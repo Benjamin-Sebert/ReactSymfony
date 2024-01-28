@@ -39,11 +39,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
    /* #[ORM\OneToMany(mappedBy: 'relation', targetEntity: Article::class)]
     private Collection $articles;*/
 
-    public function __construct()
-    {
-        $this->articles = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;

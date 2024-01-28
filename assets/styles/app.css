@@ -1,10 +1,10 @@
-/* src/Resources/assets/css/app.css */
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Montserrat+Alternates:wght@600&family=Viga&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Montserrat+Alternates:wght@600&family=Viga&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Marko+One&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Orelega+One&family=Sorts+Mill+Goudy:ital@0;1&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Montserrat+Alternates:wght@600&family=Viga&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Montserrat+Alternates:wght@600&family=Viga&display=swap");
+
 html,
 body,
 #Visu {
@@ -15,35 +15,22 @@ body,
 
 :root {
   --font-family: "Montserrat", sans-serif;
-
-  /* Styles pour le thème clair */
   --background-light: #f0f4f8;
-  /* Couleur de fond pour le thème clair */
   --text-light: #1a202c;
-  /* Couleur du texte pour le thème clair */
   --sidebar-background-light: #f08080;
-  /* Couleur de fond de la barre latérale pour le thème clair */
   --body-background-light: #f8f9fa;
-  /* Couleur de fond du corps pour le thème clair */
   --hover-color-light: #f8f9fa;
-  /* Couleur de survol pour le thème clair */
   --sidebar-text-light: rgb(0, 0, 0);
   --hover-background-color-light: #38bdf8;
   --font-family-light: "Proxima Nova", system-ui, sans-serif;
 
-  /* Styles pour le thème sombre */
   --background-dark: #2d3748;
-  /* Couleur de fond pour le thème sombre */
   --text-dark: #ffffff;
-  /* Couleur du texte pour le thème sombre */
   --sidebar-background-dark: #000000;
-  /* Couleur de fond de la barre latérale pour le thème sombre */
   --body-background-dark: #343a40;
-  /* Couleur de fond du corps pour le thème sombre */
   --hover-color-dark: #000000;
   --sidebar-text-dark: #fafafa;
   --hover-background-color-dark: #f08080;
-
 }
 
 html,
@@ -51,7 +38,6 @@ body,
 main #Visu {
   height: 100%;
   margin: 0;
-  /* background-color: var(--background-light); */
   color: var(--text-light);
   font-family: var(--font-family);
 }
@@ -68,12 +54,6 @@ main {
 .break-words {
   overflow-wrap: break-word;
   word-wrap: break-word;
-}
-
-h1 {
-  font-family: "Righteous", sans-serif;
-  font-size: 57px;
-  color: var(--text-light);
 }
 
 body.light-theme {
@@ -101,7 +81,6 @@ body {
   color: var(--text);
 }
 
-/* Styles spécifiques à la barre latérale en fonction du thème */
 aside {
   background-color: var(--sidebar-background);
 }
@@ -110,8 +89,6 @@ aside a:hover {
   color: var(--hover-color);
   background-color: var(--hover-background-color);
 }
-
-/* styles.css */
 
 .dark {
   --background: var(--background-dark);
@@ -123,12 +100,11 @@ aside a:hover {
   --hover-background-color: var(--hover-background-color-dark);
   --font-family: "Montserrat", sans-serif;
   --text: var(--text-dark);
-
 }
 
 .dark {
-  color: white;
-  background-color: #3f3f3f;
+  color: #caa500;
+  background-color: #464646;
 }
 input::placeholder {
   color: red;
@@ -136,21 +112,19 @@ input::placeholder {
 .theme1 {
   background-color: #c1aaff;
   color: rgb(60, 0, 128);
-  font-family: 'Montserrat Alternates', sans-serif;
+  font-family: "Montserrat Alternates", sans-serif;
 }
 
 .forest {
-  background-color: #30705f;
-  color: rgb(28, 39, 28);
-  font-family: 'Cutive Mono', monospace;
-  font-size: large;
-  font-weight: bolder;
+  background-color: #95d3c2;
+  color: #004912;
+  font-family: "Orelega One", serif;
+  font-weight: 200;
+  font-style: normal;
 }
 
 .sidebar-icon {
   width: 1.5em;
-  /* ou n'importe quelle valeur que vous préférez */
   height: 1.5em;
-  /* ou n'importe quelle valeur que vous préférez */
   flex-shrink: 0;
 }

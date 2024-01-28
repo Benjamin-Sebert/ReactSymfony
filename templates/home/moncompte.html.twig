@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}home.html.twig{% endblock %}
+
+{% block body %}
+        {% if is_granted('ROLE_USER') %}
+        <div {{ react_component('Moncompte', {'id': app.user.id}) }}></div>
+        {% endif %}
+        {% endblock %}

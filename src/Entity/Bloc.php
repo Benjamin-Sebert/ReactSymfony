@@ -7,6 +7,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Put;
 use ApiPlatform\OpenApi\Model;
 use App\Controller\BlocController;
 use Doctrine\ORM\Mapping as ORM;
@@ -22,6 +23,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
         new GetCollection(normalizationContext: ['groups' => 'Bloc:list']),
         new GetCollection(),
         new Delete(),
+        new Put(),
         new Post(
         controller: BlocController::class,
         deserialize: false,
@@ -63,6 +65,10 @@ class Bloc
     #[ORM\Column(nullable: true)]
     #[Groups(['bloc_object:read'])]
     private ?string $Position = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Groups(['bloc_object:read'])]
+    private ?string $Colonne = null;
 
     #[ORM\Column(nullable: true)]
     #[Groups(['bloc_object:read'])]
@@ -135,11 +141,25 @@ class Bloc
 
         return $this;
     }
+
+    public function getColonne(): string
+    {
+        return $this->Colonne;
+    }
+
+    public function setColonne(?string $Colonne): static
+    {
+        $this->Colonne = $Colonne;
+
+        return $this;
+    }
+
     public function getPosition(): string
     {
         return $this->Position;
     }
 
+    
     public function setPosition(?string $Position): static
     {
         $this->Position = $Position;

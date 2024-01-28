@@ -2,8 +2,8 @@ import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
-import UserEmailFetcher from './UserEmailFetcher'; // Assurez-vous d'ajuster le chemin du fichier si nécessaire
-import { ThemeProvider,useTheme } from './ThemeContext';
+import UserEmailFetcher from './UserEmailFetcher';
+import { ThemeProvider, useTheme } from './ThemeContext';
 
 const Csv = (props) => {
     const { theme } = useTheme();
@@ -13,8 +13,8 @@ const Csv = (props) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [csvResources, setCsvResources] = useState([]);
     const [confirmationMessage, setConfirmationMessage] = useState('');
-    const [csvToDeleteId, setCsvToDeleteId] = useState(null); // Ajout de l'ID du CSV à supprimer
-    const [showConfirmationDialog, setShowConfirmationDialog] = useState(false); // Pour afficher la boîte de dialogue de confirmation
+    const [csvToDeleteId, setCsvToDeleteId] = useState(null);
+    const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -60,8 +60,8 @@ const Csv = (props) => {
     }, [selectedFile, resourceName, csvResources, userEmail]);
 
     const deleteCsv = useCallback(async (id) => {
-        setCsvToDeleteId(id); // Stocker l'ID du fichier CSV à supprimer
-        setShowConfirmationDialog(true); // Afficher la boîte de dialogue de confirmation
+        setCsvToDeleteId(id);
+        setShowConfirmationDialog(true);
     }, []);
 
     const confirmDeleteCsv = useCallback(async () => {
@@ -69,42 +69,42 @@ const Csv = (props) => {
             await axios.delete(`http://localhost:8000/api/csvs/${csvToDeleteId}`);
             setCsvResources(csvResources.filter(csvResource => csvResource.id !== csvToDeleteId));
             setConfirmationMessage('Le fichier CSV a été supprimé avec succès.');
-            setShowConfirmationDialog(false); // Cacher la boîte de dialogue après suppression
+            setShowConfirmationDialog(false);
         } catch (error) {
             console.error('Error deleting CSV resource:', error);
         }
     }, [csvResources, csvToDeleteId]);
 
     const cancelDeleteCsv = useCallback(() => {
-        setShowConfirmationDialog(false); // Cacher la boîte de dialogue d'annulation
+        setShowConfirmationDialog(false);
     }, []);
 
     return (
-            <div className={`w-screen h-screen ${theme} md:shadow-lg`}>
-                <div className="flex flex-col md:flex-row h-screen">
+        <div className={`w-screen h-screen ${theme} md:shadow-lg`}>
+            <div className="flex flex-col md:flex-row h-screen">
 
-                    <Sidebar />
+                <Sidebar />
 
-                    <main className="flex-1 p-6">
+                <main className="flex-1 p-6">
 
-                        <Navbar />
+                    <Navbar />
 
 
-                        <div className="gap-8 mt-6">
-                            <div className="w-full h-full flex items-center justify-center">
-                                <div className="w-full">
-                                    <div className="mb-6">
-                                        <h1 className="text-2xl font-semibold mb-2 text-white">Formulaire de Ressource CSV</h1>
-                                        <p>Ajoutez une nouvelle ressource CSV à Stare It</p>
-                                    </div>
+                    <div className="gap-8 mt-6">
+                        <div className="w-full h-full flex items-center justify-center">
+                            <div className="w-full">
+                                <div className="mb-6">
+                                    <h1 className="text-2xl font-semibold mb-2">Formulaire de Ressource (CSV)</h1>
+                                    <p>Ajoutez une nouvelle ressource CSV à Stare It</p>
+                                </div>
 
-                                    {confirmationMessage && (
-                                        <div className="text-green-500">{confirmationMessage}</div>
-                                    )}
+                                {confirmationMessage && (
+                                    <div className="text-green-500">{confirmationMessage}</div>
+                                )}
 
                                 <form className="space-y-4">
                                     <div>
-                                        <label className="block text-xl font-semibold">Sélectionner un fichier CSV</label>
+                                        <label className="block text-xl font-semibold">Sélectionner un fichier</label>
                                         <input
                                             type="file"
                                             accept=".csv"
@@ -113,36 +113,36 @@ const Csv = (props) => {
                                         />
                                     </div>
 
+                                    <div>
+                                        <label className="block text-xl font-semibold">Nom de la ressource</label>
+                                        <input
+                                            type="text"
+                                            placeholder="Nom de la ressource"
+                                            value={resourceName}
+                                            onChange={(e) => setResourceName(e.target.value)}
+                                            className="mt-1 p-2 block w-full border rounded-md"
+                                        />
+                                    </div>
+
+                                    {selectedFile && (
                                         <div>
-                                            <label className="block text-xl font-semibold">Nom de la ressource</label>
-                                            <input
-                                                type="text"
-                                                placeholder="Nom de la ressource"
-                                                value={resourceName}
-                                                onChange={(e) => setResourceName(e.target.value)}
-                                                className="mt-1 p-2 block w-full border rounded-md"
-                                            />
+                                            <p className="text-gray-700">{selectedFile.name}</p>
                                         </div>
+                                    )}
 
-                                        {selectedFile && (
-                                            <div>
-                                                <p className="text-gray-700">{selectedFile.name}</p>
-                                            </div>
-                                        )}
-
-                                        <div className="flex justify-between">
-                                            <button
-                                                type="button"
-                                                onClick={handleUpload}
-                                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                                            >
-                                                Upload
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
+                                    <div className="flex justify-between">
+                                        <button
+                                            type="button"
+                                            onClick={handleUpload}
+                                            className="bg-custom-blue text-white font-bold py-2 px-4 rounded"
+                                        >
+                                            Upload
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
+                    </div>
 
                     <div className="mt-8">
                         <h2 className="text-xl font-semibold mb-4">Ressources CSV disponibles</h2>
@@ -191,10 +191,10 @@ const Csv = (props) => {
 
 const AvCreation = () => {
     return (
-      <ThemeProvider>
-        <Csv />
-      </ThemeProvider>
+        <ThemeProvider>
+            <Csv />
+        </ThemeProvider>
     );
-  };
+};
 
 export default AvCreation;

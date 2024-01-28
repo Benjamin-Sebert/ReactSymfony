@@ -11,39 +11,39 @@ const Sidebar = () => {
   };
 
   return (
-    <nav className={`w-full md:w-2/12 p-5 ${theme} md:shadow-lg`}>
+    <nav className={`w-full h-screen md:w-2/12 p-5 ${theme} md:shadow-lg h-auto`}>
       <div className="md:block hidden">
         <ul className="space-y-4">
           <li>
-            <a className="flex items-center px-4 py-2 text-white hover:bg-gray-700 rounded-md transition" href="../lesarticles">
-              <View className="text-white" size={30} />
+            <a className="flex items-center px-4 py-2 hover:bg-gray-700 rounded-md transition" href="../lesarticles">
+              <View size={30} />
               <span className="mx-4 font-medium">Afficher les articles</span>
             </a>
           </li>
 
           <li>
-            <a className="flex items-center px-4 py-2 text-white hover:bg-gray-700 rounded-md transition" href="../Creation_article">
+            <a className="flex items-center px-4 py-2  hover:bg-gray-700 rounded-md transition" href="../Creation_article">
               <Newspaper className="sidebar-icon" size={30} />
               <span className="mx-4 font-medium">Créer mon article</span>
             </a>
           </li>
 
           <li>
-            <a className="flex items-center px-4 py-2 text-white hover:bg-gray-700 rounded-md transition" href="../ajout_media">
+            <a className="flex items-center px-4 py-2  hover:bg-gray-700 rounded-md transition" href="../ajout_media">
               <FileImage className="sidebar-icon" size={30} />
               <span className="mx-4 font-medium">+ Images</span>
             </a>
           </li>
 
           <li>
-            <a className="flex items-center px-4 py-2 text-white hover:bg-gray-700 rounded-md transition" href="../ajout_csv">
+            <a className="flex items-center px-4 py-2  hover:bg-gray-700 rounded-md transition" href="../ajout_csv">
               <FileBarChart2 className="sidebar-icon" size={30} />
               <span className="mx-4 font-medium">+ CSV</span>
             </a>
           </li>
 
           <li>
-            <a className="flex items-center px-4 py-2 text-white hover:bg-gray-700 rounded-md transition" href="../contact">
+            <a className="flex items-center px-4 py-2  hover:bg-gray-700 rounded-md transition" href="../contact">
               <Mail className="sidebar-icon" size={30} />
               <span className="mx-4 font-medium">Contact</span>
             </a>
@@ -51,7 +51,7 @@ const Sidebar = () => {
 
           <li>
             <button
-              className="flex items-center px-4 py-2 text-white hover:bg-gray-700 rounded-md transition"
+              className="flex items-center px-4 py-2  hover:bg-gray-700 rounded-md transition"
               onClick={() => changeTheme('dark')}
             >
               <Palette className="sidebar-icon" size={30} />
@@ -61,7 +61,7 @@ const Sidebar = () => {
 
           <li>
             <button
-              className="flex items-center px-4 py-2 text-white hover:bg-gray-700 rounded-md transition"
+              className="flex items-center px-4 py-2  hover:bg-gray-700 rounded-md transition"
               onClick={() => changeTheme('theme1')}
             >
               <Palette className="sidebar-icon" size={30} />
@@ -71,7 +71,7 @@ const Sidebar = () => {
 
           <li>
             <button
-              className="flex items-center px-4 py-2 text-white hover:bg-gray-700 rounded-md transition"
+              className="flex items-center px-4 py-2  hover:bg-gray-700 rounded-md transition"
               onClick={() => changeTheme('forest')}
             >
               <Palette className="sidebar-icon" size={30} />
@@ -83,7 +83,7 @@ const Sidebar = () => {
 
       <div className="md:hidden block">
         <button
-          className="flex items-center px-4 py-2 text-white hover:bg-gray-700 rounded-md transition"
+          className="flex items-center px-4 py-2  hover:bg-gray-700 rounded-md transition"
           onClick={toggleMobileNavbar}
         >
           <span className="font-medium">Menu</span>
@@ -91,35 +91,35 @@ const Sidebar = () => {
         {showMobileNavbar && (
           <ul className="mt-2 space-y-2">
             <li>
-              <a className="flex items-center text-white hover:bg-gray-700 rounded-md transition" href="../lesarticles">
-                <View className="text-white" size={30} />
+              <a className="flex items-center  hover:bg-gray-700 rounded-md transition" href="../lesarticles">
+                <View className="" size={30} />
                 <span className="mx-2 font-medium">Afficher les articles</span>
               </a>
             </li>
 
             <li>
-              <a className="flex items-center text-white hover:bg-gray-700 rounded-md transition" href="../Creation_article">
+              <a className="flex items-center  hover:bg-gray-700 rounded-md transition" href="../Creation_article">
                 <Newspaper className="sidebar-icon" size={30} />
                 <span className="mx-2 font-medium">Créer mon article</span>
               </a>
             </li>
 
             <li>
-              <a className="flex items-center text-white hover:bg-gray-700 rounded-md transition" href="../ajout_media">
+              <a className="flex items-center  hover:bg-gray-700 rounded-md transition" href="../ajout_media">
                 <FileImage className="sidebar-icon" size={30} />
                 <span className="mx-2 font-medium">+ Images</span>
               </a>
             </li>
 
             <li>
-              <a className="flex items-center text-white hover:bg-gray-700 rounded-md transition" href="../ajout_csv">
+              <a className="flex items-center  hover:bg-gray-700 rounded-md transition" href="../ajout_csv">
                 <FileBarChart2 className="sidebar-icon" size={30} />
                 <span className="mx-2 font-medium">+ CSV</span>
               </a>
             </li>
 
             <li>
-              <a className="flex items-center text-white hover:bg-gray-700 rounded-md transition" href="../contact">
+              <a className="flex items-center  hover:bg-gray-700 rounded-md transition" href="../contact">
                 <Mail className="sidebar-icon" size={30} />
                 <span className="mx-2 font-medium">Contact</span>
               </a>

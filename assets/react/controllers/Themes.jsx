@@ -30,7 +30,6 @@ const Themes = (props) => {
     };
 
     useEffect(() => {
-        // Apply theme styles to the body or any specific elements as needed
         document.body.className = themes[selectedTheme].background + ' ' + themes[selectedTheme].text;
     }, [selectedTheme]);
 
@@ -51,7 +50,6 @@ const Themes = (props) => {
                                         <button onClick={() => changeTheme('default')} className="px-4 py-2 mx-2 bg-gray-200 hover:bg-gray-300">Thème par défaut</button>
                                         <button onClick={() => changeTheme('theme1')} className="px-4 py-2 mx-2 bg-gray-200 hover:bg-gray-300">Thème 1</button>
                                         <button onClick={() => changeTheme('theme2')} className="px-4 py-2 mx-2 bg-gray-200 hover:bg-gray-300">Thème 2</button>
-                                        {/* Add more theme buttons as needed */}
                                     </div>
                                 </div>
                             </div>

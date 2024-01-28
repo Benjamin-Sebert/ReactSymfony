@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { useTheme } from './ThemeContext';
-import UserEmailFetcher from './UserEmailFetcher'; // Assurez-vous d'ajuster le chemin du fichier si nécessaire
 
-const ContactForm = () => {
+const ContactForm = ({ email }) => {
   const { theme } = useTheme();
-  const userEmail = UserEmailFetcher();
-
+  console.log(email);
   const [formData, setFormData] = useState({
     nom: '',
     prenom: '',
-    email: '',
+    email: email,
     message: '',
   });
 
@@ -24,7 +22,6 @@ const ContactForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Effectuer une requête POST vers votre backend Symfony
     fetch('/contact', {
       method: 'POST',
       headers: {
@@ -34,7 +31,6 @@ const ContactForm = () => {
     })
       .then(response => response.json())
       .then(data => {
-        // Traiter la réponse du backend, rediriger si nécessaire, etc.
         console.log(data);
         location.href = '/contact/merci';
       })
@@ -46,9 +42,9 @@ const ContactForm = () => {
   return (
     <div className={` ${theme} w-full`}>
       <h3 className="text-4xl font-bold mb-4">Contactez nous</h3>
-      <form action="http://localhost:8000/contact" onSubmit={handleSubmit} className="bg-gray-200 shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full">
+      <form action="http://localhost:8000/contact" onSubmit={handleSubmit} className="bg-gray-100 shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full">
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Nom</label>
+          <label className="block text-sm font-bold mb-2">Nom</label>
           <input
             type="text"
             name="nom"
@@ -58,7 +54,7 @@ const ContactForm = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Prenom</label>
+          <label className="block text-sm font-bold mb-2">Prenom</label>
           <input
             type="text"
             name="prenom"
@@ -68,17 +64,17 @@ const ContactForm = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Email</label>
+          <label className="block text-sm font-bold mb-2">Email</label>
           <input
             type="text"
             name="email"
-            value={userEmail}
+            value={email}
             onChange={handleChange}
             className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Votre message</label>
+          <label className="block text-sm font-bold mb-2">Votre message</label>
           <textarea
             name="message"
             value={formData.message}
@@ -91,7 +87,7 @@ const ContactForm = () => {
         </button>
       </form>
     </div>
-  );  
+  );
 };
 
 export default ContactForm;

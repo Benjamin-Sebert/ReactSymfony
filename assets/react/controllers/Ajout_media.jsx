@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
-import UserEmailFetcher from './UserEmailFetcher'; // Assurez-vous d'ajuster le chemin du fichier si nécessaire
+import UserEmailFetcher from './UserEmailFetcher';
 import { ThemeProvider, useTheme } from './ThemeContext';
 
 const Media = (props) => {
@@ -13,8 +13,8 @@ const Media = (props) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [imageResources, setimageResources] = useState([]);
     const [confirmationMessage, setConfirmationMessage] = useState('');
-    const [imageToDeleteId, setimageToDeleteId] = useState(null); // Ajout de l'ID du image à supprimer
-    const [showConfirmationDialog, setShowConfirmationDialog] = useState(false); // Pour afficher la boîte de dialogue de confirmation
+    const [imageToDeleteId, setimageToDeleteId] = useState(null);
+    const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -60,8 +60,8 @@ const Media = (props) => {
     }, [selectedFile, resourceName, imageResources, userEmail]);
 
     const deleteimage = useCallback(async (id) => {
-        setimageToDeleteId(id); // Stocker l'ID du fichier image à supprimer
-        setShowConfirmationDialog(true); // Afficher la boîte de dialogue de confirmation
+        setimageToDeleteId(id);
+        setShowConfirmationDialog(true);
     }, []);
 
     const confirmDeleteimage = useCallback(async () => {
@@ -69,14 +69,14 @@ const Media = (props) => {
             await axios.delete(`http://localhost:8000/api/images/${imageToDeleteId}`);
             setimageResources(imageResources.filter(imageResource => imageResource.id !== imageToDeleteId));
             setConfirmationMessage('Le fichier image a été supprimé avec succès.');
-            setShowConfirmationDialog(false); // Cacher la boîte de dialogue après suppression
+            setShowConfirmationDialog(false);
         } catch (error) {
             console.error('Error deleting image resource:', error);
         }
     }, [imageResources, imageToDeleteId]);
 
     const cancelDeleteimage = useCallback(() => {
-        setShowConfirmationDialog(false); // Cacher la boîte de dialogue d'annulation
+        setShowConfirmationDialog(false);
     }, []);
 
     return (
@@ -92,7 +92,7 @@ const Media = (props) => {
                         <div className="w-full h-full flex items-center justify-center">
                             <div className="w-full">
                                 <div className="mb-6">
-                                    <h1 className="text-2xl font-semibold mb-2 text-white">Formulaire de Ressource (images)</h1>
+                                    <h1 className="text-2xl font-semibold mb-2">Formulaire de Ressource (images)</h1>
                                     <p>Ajoutez une nouvelle ressource CSV à Stare It</p>
                                 </div>
 
@@ -102,7 +102,7 @@ const Media = (props) => {
 
                                 <form className="space-y-4">
                                     <div>
-                                        <label className="block text-sm font-xl">Sélectionner un fichier</label>
+                                        <label className="block text-xl font-xl">Sélectionner un fichier</label>
                                         <input
                                             type="file"
                                             accept=".images, image/*"
@@ -132,7 +132,7 @@ const Media = (props) => {
                                         <button
                                             type="button"
                                             onClick={handleUpload}
-                                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                            className="bg-custom-blue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                                         >
                                             Upload
                                         </button>
@@ -148,7 +148,6 @@ const Media = (props) => {
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {imageResources.map((imageResource) => (
                                 <div key={imageResource.id} className="p-4 bg-white rounded-md shadow-md">
-                                    {/* Afficher la miniature de l'image */}
                                     <img
                                         src={`http://localhost:8000/images/${imageResource.filePath}`}
                                         alt={`Miniature de ${imageResource.nom_ressource}`}

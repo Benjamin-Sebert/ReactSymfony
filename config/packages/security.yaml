@@ -46,14 +46,13 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/article, roles: ROLE_ADMIN }
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/lesarticles, roles: ROLE_USER }
-        # - { path: ^/lesarticles, roles: ROLE_ABONNE }
-        # - { path: ^/lesarticles, ^/Creation_article, roles: ROLE_EDITEUR }
-        # - { path: ^/lesarticles, ^/Creation_article, roles: ROLE_AUTEUR }
-
-        # - { path: ^/lesarticles, ^/ajout_csv, ^/ajout_media roles: ROLE_FOURNISSEUR }
+        - { path: ^/Creation_article, roles: [ROLE_AUTEUR, ROLE_EDITEUR, ROLE_ADMIN] }
+        - { path: ^/ajout_media, roles: [ROLE_FOURNISSEUR, ROLE_ADMIN] }
+        - { path: ^/ajout_csv, roles: [ROLE_FOURNISSEUR, ROLE_ADMIN] }
+        - { path: ^/articlesmodifs, roles: [ROLE_AUTEUR, ROLE_EDITEUR, ROLE_ADMIN] }
+        - { path: ^/moncompte, roles: [ROLE_AUTEUR, ROLE_EDITEUR, ROLE_ADMIN, ROLE_FOURNISSEUR, ROLE_ABONNE, ROLE_USER] }
+        - { path: ^/articles, roles: [ROLE_AUTEUR, ROLE_EDITEUR, ROLE_ADMIN, ROLE_FOURNISSEUR, ROLE_ABONNE, ROLE_USER] }
+        - { path: ^/lesarticles, roles: [ROLE_AUTEUR, ROLE_EDITEUR, ROLE_ADMIN, ROLE_FOURNISSEUR, ROLE_ABONNE, ROLE_USER] }
 
 when@test:
     security:

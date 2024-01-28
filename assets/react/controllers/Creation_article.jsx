@@ -1,4 +1,3 @@
-// ArticleForm.js
 import React, { useRef, useEffect, useState } from 'react';
 import ArticleBlock from './Bloc_article';
 import Sidebar from './Sidebar';
@@ -8,12 +7,12 @@ import { useTheme, ThemeProvider } from './ThemeContext';
 
 
 const AvCreation = () => {
-    return (
-      <ThemeProvider>
-        <ArticleForm />
-      </ThemeProvider>
-    );
-  };
+  return (
+    <ThemeProvider>
+      <ArticleForm />
+    </ThemeProvider>
+  );
+};
 
 const ArticleForm = () => {
   const { theme } = useTheme();
@@ -56,14 +55,15 @@ const ArticleForm = () => {
       const blocData = article.blocks.map((block, index) => {
         const formData = new FormData();
 
-        formData.append('Titre', block.Titre);  // Correction ici
-        formData.append('Texte', block.Texte);  // Correction ici
+        formData.append('Titre', block.Titre);
+        formData.append('Texte', block.Texte);
         formData.append('id_article', articleId);
         formData.append('position_bloc', index);
-        formData.append('Urlimg', block.imagePath);  // Correction ici
-        formData.append('Urlcsv', block.csvPath);  // Correction ici
+        formData.append('Urlimg', block.imagePath);
+        formData.append('Urlcsv', block.csvPath);
+        formData.append('Colonne', block.Colonne);
 
-        return formData; // Retourner l'objet FormData dans chaque itération
+        return formData;
       });
 
       await Promise.all(
@@ -115,102 +115,91 @@ const ArticleForm = () => {
       console.log(articleId);
       await submitBlocksToServer(article);
 
-      // Set confirmation message
       setConfirmationMessage('Article créé avec succès!');
-      // Reset error message
       setErrorMessage(null);
     } catch (error) {
       console.error('Erreur lors de l\'envoi de l\'article:', error);
-      // Set error message
       setErrorMessage('Erreur lors de la création de l\'article.');
-      // Reset confirmation message
       setConfirmationMessage(null);
     }
   };
+
   return (
     <div className={`w-screen ${theme} md:shadow-lg`}>
-    <div className="min-h-screen flex">      
+      <div className="min-h-screen flex">
 
-      <Sidebar/>
+        <Sidebar />
 
-      <main className="flex-1 p-6">
-        {/* Navbar */}
-        <Navbar />
-        {/* Article Creation Form */}
-        <div className="container mx-auto mt-8">
-          <form className="max-w-2xl mx-auto">
-            <h1 className="text-4xl font-bold mb-8 text-white">Création d'article</h1>
-            {/* Article Title */}
-            <div className="mb-6">
-              <label htmlFor="Titre" className="block text-xl font-medium ">
-                Titre de l'article
-              </label>
-              <input
-                type="text"
-                id="Titre"
-                name="Titre"
-                value={article.Titre}
-                onChange={(e) => setArticle({ ...article, Titre: e.target.value })}
-                className="mt-1 p-3 border rounded-md w-full focus:outline-none focus:ring focus:border-blue-300"
-                style={{ color: 'black' }}
-                required
-              />
-            </div>
+        <main className="flex-1 p-6">
+          <Navbar />
+          <div className="mx-auto mt-8">
+            <form className="max-w-2xl mx-auto">
+              <h1 className="text-4xl font-bold mb-8">Création d'article</h1>
+              <div className="mb-6">
+                <label htmlFor="Titre" className="block text-xl font-medium ">
+                  Titre de l'article
+                </label>
+                <input
+                  type="text"
+                  id="Titre"
+                  name="Titre"
+                  value={article.Titre}
+                  onChange={(e) => setArticle({ ...article, Titre: e.target.value })}
+                  className="mt-1 p-3 border rounded-md w-full focus:outline-none focus:ring focus:border-blue-300"
+                  style={{ color: 'black' }}
+                  required
+                />
+              </div>
 
-            {/* Article Summary */}
-            <div className="mb-6">
-              <label htmlFor="Resume" className="block text-xl font-medium ">
-                Résumé de l'article
-              </label>
-              <textarea
-                id="Resume"
-                name="Resume"
-                value={article.Resume}
-                onChange={(e) => setArticle({ ...article, Resume: e.target.value })}
-                className="mt-1 p-3 border rounded-md w-full h-32 focus:outline-none focus:ring focus:border-blue-300"
-                style={{ color: 'black' }}
-                required
-              ></textarea>
-            </div>
+              <div className="mb-6">
+                <label htmlFor="Resume" className="block text-xl font-medium ">
+                  Résumé de l'article
+                </label>
+                <textarea
+                  id="Resume"
+                  name="Resume"
+                  value={article.Resume}
+                  onChange={(e) => setArticle({ ...article, Resume: e.target.value })}
+                  className="mt-1 p-3 border rounded-md w-full h-32 focus:outline-none focus:ring focus:border-blue-300"
+                  style={{ color: 'black' }}
+                  required
+                ></textarea>
+              </div>
 
-            {/* Article Blocks */}
-            {article.blocks.map((block, index) => (
-              <ArticleBlock
-                key={index}
-                index={index}
-                block={block}
-                updateBlock={updateBlock}
-                removeBlock={removeBlock}
-              />
-            ))}
+              {article.blocks.map((block, index) => (
+                <ArticleBlock
+                  key={index}
+                  index={index}
+                  block={block}
+                  updateBlock={updateBlock}
+                  removeBlock={removeBlock}
+                />
+              ))}
 
-            {/* Add Block Button */}
-            <button
-              type="button"
-              onClick={addBlock}
-              className="bg-red-400	 text-white px-4 py-2 rounded-md mr-4 hover:bg-red-600 focus:outline-none focus:ring focus:border-black-300"
-            >
-              Ajouter un bloc
-            </button>
-            <button
-              type="button"
-              onClick={handleArticleSubmit}
-              className="bg-red-400 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:border-black-300"
-            >
-              Créer l'article
-            </button>
-            {/* Confirmation Message */}
-            {confirmationMessage && (
-              <div className="mt-4 text-green-500">{confirmationMessage}</div>
-            )}
-            {/* Error Message */}
-            {errorMessage && (
-              <div className="mt-4 text-red-500">{errorMessage}</div>
-            )}
-          </form>
-        </div>
-      </main>
-    </div>
+              <button
+                type="button"
+                onClick={addBlock}
+                className="bg-custom-blue	text-white px-4 py-2 rounded-md mr-4 focus:outline-none focus:ring focus:border-black-300"
+              >
+                Ajouter un bloc
+              </button>
+              <button
+                type="button"
+                onClick={handleArticleSubmit}
+                className="bg-custom-blue text-white px-4 py-2 rounded-md focus:outline-none focus:ring focus:border-black-300"
+              >
+                Créer l'article
+              </button>
+              {confirmationMessage && (
+                <div className="mt-4 text-custom-blue">{confirmationMessage}</div>
+              )}
+              {errorMessage && (
+                <div className="mt-4 text-red-500">{errorMessage}</div>
+              )}
+            </form>
+          </div>
+        </main>
+      </div>
     </div>
   );
 };
