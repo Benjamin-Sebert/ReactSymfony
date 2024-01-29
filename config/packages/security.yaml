@@ -53,6 +53,7 @@ security:
         - { path: ^/articles, roles: [ROLE_AUTEUR, ROLE_EDITEUR, ROLE_ADMIN, ROLE_FOURNISSEUR, ROLE_ABONNE, ROLE_USER] }
         - { path: ^/lesarticles, roles: [ROLE_AUTEUR, ROLE_EDITEUR, ROLE_ADMIN, ROLE_FOURNISSEUR, ROLE_ABONNE, ROLE_USER] }
         - { path: ^/contact, roles: [ROLE_AUTEUR, ROLE_EDITEUR, ROLE_ADMIN, ROLE_FOURNISSEUR, ROLE_ABONNE, ROLE_USER] }
+        - { path: ^/admin, roles: [ROLE_ADMIN] }
 
 when@test:
     security:

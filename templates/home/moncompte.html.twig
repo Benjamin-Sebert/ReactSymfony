@@ -1,9 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}home.html.twig{% endblock %}
+{% block title %}Mon espace{% endblock %}
 
 {% block body %}
-        {% if is_granted('ROLE_USER') %}
+    {% if is_granted('ROLE_USER') or is_granted('ROLE_AUTEUR') or is_granted('ROLE_EDITEUR') or is_granted('ROLE_FOURNISSEUR') or is_granted('ROLE_ABONNE') %}
         <div {{ react_component('Moncompte', {'id': app.user.id}) }}></div>
-        {% endif %}
-        {% endblock %}
+    {% elseif is_granted('ROLE_ADMIN') %}
+        <script type="text/javascript">
+            window.location.href = '/admin';
+        </script>
+    {% endif %}
+{% endblock %}

@@ -11,7 +11,7 @@ const Sidebar = () => {
   };
 
   return (
-    <nav className={`w-full md:w-2/12 p-5 ${theme} md:shadow-lg h-auto`}>
+    <nav className={`w-full md:w-2/12 p-5 ${theme} md:shadow-lg h-screen`}>
       <div className="md:block hidden">
         <ul className="space-y-4">
           <li>
