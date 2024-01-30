@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}home.html.twig{% endblock %}
+{% block title %}Les articles{% endblock %}
 
 {% block body %}
 {% if is_granted('ROLE_USER') or is_granted('ROLE_AUTEUR') or is_granted('ROLE_EDITEUR') or is_granted('ROLE_FOURNISSEUR') or is_granted('ROLE_ABONNE') or is_granted('ROLE_ADMIN') %}

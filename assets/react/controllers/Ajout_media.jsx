@@ -93,7 +93,7 @@ const Media = (props) => {
                             <div className="w-full">
                                 <div className="mb-6">
                                     <h1 className="text-2xl font-semibold mb-2">Formulaire de Ressource (images)</h1>
-                                    <p>Ajoutez une nouvelle ressource CSV à Stare It</p>
+                                    <p>Ajoutez une nouvelle ressource image à Stare It</p>
                                 </div>
 
                                 {confirmationMessage && (

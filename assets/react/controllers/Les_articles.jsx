@@ -77,7 +77,12 @@ const Article = ({ role, email }) => {
                     </h3>
                     <p className="text-gray-600">{article.resume}</p>
                     <div className="mt-4">
-                      <p className="text-sm text-gray-700">Créateur: {article.createur}</p>
+                      {email === article.createur ? (
+                          <p className="text-sm text-red bg-custom-blue">Vous êtes le créateur</p>
+                        ) : (
+                          <p className="text-sm text-grey-200">Créateur : {article.createur}</p>
+                        )
+                      }
                       <a
                         className="block mt-2 px-4 py-2 bg-custom-blue text-white rounded-md hover:bg-blue-600 transition"
                         href={`articles/${article.id}`}
@@ -85,7 +90,7 @@ const Article = ({ role, email }) => {
                         Voir plus
                       </a>
                       <div className="flex mt-2 space-x-2">
-                      {(role[0] === 'ROLE_EDITEUR' || role[0] === 'ROLE_ADMIN' || email === article.createur) && (
+                        {(role[0] === 'ROLE_EDITEUR' || role[0] === 'ROLE_ADMIN' || email === article.createur) && (
                           <>
                             <a
                               className="flex-1 px-4 py-2 bg-black text-white rounded-md hover:bg-gray-900 transition"
